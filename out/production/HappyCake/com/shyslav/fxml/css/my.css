@@ -1,0 +1,9 @@
+.VboxClasses:hover .imageShadow
+{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.VboxClasses:hover .personalText
+{
+    -fx-font-size: 14;
+    -fx-underline: true;
+}

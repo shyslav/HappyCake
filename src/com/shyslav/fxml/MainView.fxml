@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -13,6 +14,9 @@
       </ToolBar>
    </top>
    <bottom>
-      <Button fx:id="Home" mnemonicParsing="false" onAction="#HomeButton" text="Home" BorderPane.alignment="CENTER" />
+      <Button fx:id="Home" mnemonicParsing="false" onAction="#HomeButton" text="Home" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="15.0" />
+         </BorderPane.margin></Button>
    </bottom>
 </BorderPane>
