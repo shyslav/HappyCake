@@ -50,6 +50,13 @@ public class Main extends Application {
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
     }
+
+    public static void chooseScreenAdmin() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../fxml/Admin/AdminPane.fxml"));
+        BorderPane employeeItem = loader.load();
+        mainLayout.setCenter(employeeItem);
+    }
     public static void alertEnterDialog(String title, String message) throws IOException {
         enterDialogs eD = new enterDialogs(primaryStage, title, message);
     }

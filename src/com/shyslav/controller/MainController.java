@@ -1,5 +1,6 @@
 package com.shyslav.controller;
 
+import com.shyslav.server.Server;
 import com.shyslav.start.Main;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -55,12 +56,26 @@ public class MainController {
         ImageView mouseClicked = (ImageView) source;
         switch (mouseClicked.getId()) {
             case "imgAdmin":
-                main.alertEnterDialog("Entered Form" , "Enter your password and username please");
+                if (Server.emp == null) {
+                    main.alertEnterDialog("Admin Entered Form", "Enter your password and username please");
+                } else {
+                    Main.chooseScreenAdmin();
+                }
                 break;
             case "imgCook":
+                if (Server.emp == null) {
+                    main.alertEnterDialog("Cook Entered Form", "Enter your password and username please");
+                } else {
+
+                }
                 break;
             case "imgEmployee":
-                main.chooseScreenEmployee();
+                //main.chooseScreenEmployee();
+                if (Server.emp == null) {
+                    main.alertEnterDialog("Employee Entered Form", "Enter your password and username please");
+                } else {
+                    main.chooseScreenEmployee();
+                }
                 break;
         }
     }
