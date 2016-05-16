@@ -1,6 +1,7 @@
 package com.shyslav.controller.alert;
 
-import com.shyslav.server.Server;
+import com.shyslav.server.comands;
+import com.shyslav.server.serverConnection;
 import com.shyslav.start.enterDialogs;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
  * Created by Shyshkin Vladyslav on 07.03.2016.
  */
 public class enterDialogController {
-    public static volatile boolean isAvilable = false;
     private enterDialogs ed;
     @FXML
     private Button btnCancel;
@@ -43,13 +43,11 @@ public class enterDialogController {
         }
         else
         {
-            if(!isAvilable) {
-                Runnable runnable = new Server();
-                Thread tr = new Thread(runnable);
-                tr.start();
-                isAvilable=true;
+            if(serverConnection.connection==null)
+            {
+                serverConnection sc = new serverConnection();
             }
-            if(Server.login(txtFieldUsername.getText(), txtFieldPassword.getText()))
+            if(comands.login(txtFieldUsername.getText(), txtFieldPassword.getText()))
             {
                 actionCancel(event);
             }

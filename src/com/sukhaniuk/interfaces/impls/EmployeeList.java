@@ -1,45 +1,30 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.jEmployees;
-import com.sukhaniuk.interfaces.EmployeeInt;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.shyslav.models.employees;
+import com.shyslav.server.comands;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
- * Created by Shyshkin Vladyslav on 28.03.2016.
+ * Created by Shyshkin Vladyslav on 16.05.2016.
  */
-public class EmployeeList implements EmployeeInt{
-    private ObservableList<jEmployees> employeeList = FXCollections.observableArrayList();
+public class EmployeeList {
+    private ArrayList<employees> employees;
 
-    @Override
-    public void add(jEmployees Employee) {
-        employeeList.add(Employee);
+    public EmployeeList(int id) {
+        if(id == 0) {
+            employees = comands.getEmployees(null);
+        } else
+        {
+            employees = comands.getEmployees(String.valueOf(id));
+        }
     }
 
-    @Override
-    public void delete(jEmployees Employee) {
-        employeeList.remove(Employee);
+    public ArrayList<employees> getEmployees() {
+        return employees;
     }
 
-    @Override
-    public void update(jEmployees Employee) {
-
+    public void setEmployees(ArrayList<employees> employees) {
+        this.employees = employees;
     }
-
-    public ObservableList<jEmployees> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void initialTable() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        employeeList.add(new jEmployees(1,"position","cafe","name","lastName","address",new Date(2016,05,05)));
-        employeeList.add(new jEmployees(1,"position","cafe","name","lastName","address",null));
-        employeeList.add(new jEmployees(1,"position","cafe","name","lastName","address",null));
-    }
-
 }

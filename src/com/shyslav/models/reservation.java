@@ -1,30 +1,33 @@
 package com.shyslav.models;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 /**
  * Created by shyshkin_vlad on 22.04.16.
  */
-public class reservation {
+public class reservation implements Serializable {
     private int id;
     private int cafeId;
     private String clientName;
     private String clientPhone;
-    private Date rDate;
-    private Time rTime;
-    private boolean confirmORnot;
+    private Date date;
+    private Time time;
+    private String confirmORnot;
     private int amountPeople;
+    private String description;
 
-    public reservation(int id, int cafeId, String clientName, String clientPhone, Date rDate, Time rTime, boolean confirmORnot, int amountPeople) {
+    public reservation(int id, int cafeId, String clientName, String clientPhone, Date rDate, Time rTime, String confirmORnot, int amountPeople, String description) {
         this.id = id;
         this.cafeId = cafeId;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
-        this.rDate = rDate;
-        this.rTime = rTime;
+        this.date = rDate;
+        this.time = rTime;
         this.confirmORnot = confirmORnot;
         this.amountPeople = amountPeople;
+        this.description = description;
     }
 
     public int getId() {
@@ -59,27 +62,27 @@ public class reservation {
         this.clientPhone = clientPhone;
     }
 
-    public Date getrDate() {
-        return rDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setrDate(Date rDate) {
-        this.rDate = rDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Time getrTime() {
-        return rTime;
+    public Time getTime() {
+        return time;
     }
 
-    public void setrTime(Time rTime) {
-        this.rTime = rTime;
+    public void setTime(Time time) {
+        this.time = time;
     }
 
-    public boolean isConfirmORnot() {
+    public String getConfirmORnot() {
         return confirmORnot;
     }
 
-    public void setConfirmORnot(boolean confirmORnot) {
+    public void setConfirmORnot(String confirmORnot) {
         this.confirmORnot = confirmORnot;
     }
 
@@ -89,5 +92,13 @@ public class reservation {
 
     public void setAmountPeople(int amountPeople) {
         this.amountPeople = amountPeople;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

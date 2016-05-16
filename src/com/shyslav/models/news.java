@@ -1,11 +1,12 @@
 package com.shyslav.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Shyshkin Vladyslav on 28.03.2016.
  */
-public class news {
+public class news implements Serializable {
     private int id;
     private int authorID;
     private String name;

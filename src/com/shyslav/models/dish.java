@@ -1,9 +1,11 @@
 package com.shyslav.models;
 
+import java.io.Serializable;
+
 /**
  * Created by shyshkin_vlad on 22.04.16.
  */
-public class dish {
+public class dish implements Serializable {
     private int id;
     private int categoryId;
     private String name;
@@ -11,17 +13,27 @@ public class dish {
     private int amount;
     private double price;
     private String image;
-    private boolean readyORnot;
+    private String readyORnot;
+    private String sell;
 
-    public dish(String image, int id, int categoryId, String name, String description, int amount, double price, boolean readyORnot) {
-        this.image = image;
+    public dish(int id, int categoryId, String name, String description, int amount, double price, String image, String readyORnot, String sell) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.amount = amount;
         this.price = price;
+        this.image = image;
         this.readyORnot = readyORnot;
+        this.sell = sell;
+    }
+
+    public String getSell() {
+        return sell;
+    }
+
+    public void setSell(String sell) {
+        this.sell = sell;
     }
 
     public int getId() {
@@ -80,11 +92,11 @@ public class dish {
         this.image = image;
     }
 
-    public boolean isReadyORnot() {
+    public String getReadyORnot() {
         return readyORnot;
     }
 
-    public void setReadyORnot(boolean readyORnot) {
+    public void setReadyORnot(String readyORnot) {
         this.readyORnot = readyORnot;
     }
 }

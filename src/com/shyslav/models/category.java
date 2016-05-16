@@ -1,9 +1,11 @@
 package com.shyslav.models;
 
+import java.io.Serializable;
+
 /**
  * Created by shyshkin_vlad on 22.04.16.
  */
-public class category {
+public class category implements Serializable{
     private int id;
     private String name;
     private String description;

@@ -98,12 +98,12 @@
                                             <items>
                                               <AnchorPane maxHeight="300.0" minHeight="100.0" minWidth="0.0" prefHeight="100.0" prefWidth="130.0">
                                                    <children>
-                                                      <TableView prefHeight="154.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TableView fx:id="categoryTable" prefHeight="154.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="30.5390625" text="ID" />
-                                                          <TableColumn prefWidth="95.96875" text="Name" />
-                                                            <TableColumn prefWidth="145.279296875" text="Description" />
-                                                            <TableColumn prefWidth="182.125" text="Image" />
+                                                          <TableColumn fx:id="categoryId" prefWidth="30.5390625" text="ID" />
+                                                          <TableColumn fx:id="categoryName" prefWidth="95.96875" text="Name" />
+                                                            <TableColumn fx:id="categoryDescription" prefWidth="145.279296875" text="Description" />
+                                                            <TableColumn fx:id="categoryImage" prefWidth="182.125" text="Image" />
                                                         </columns>
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -113,16 +113,17 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="250.0" prefWidth="448.0">
                                                    <children>
-                                                      <TableView prefHeight="191.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TableView fx:id="dishTable" prefHeight="191.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="75.0" text="id" />
-                                                          <TableColumn prefWidth="75.0" text="categoryid" />
-                                                            <TableColumn prefWidth="75.0" text="name" />
-                                                            <TableColumn prefWidth="75.0" text="description" />
-                                                            <TableColumn prefWidth="75.0" text="amount" />
-                                                            <TableColumn prefWidth="75.0" text="readyornot" />
-                                                            <TableColumn prefWidth="75.0" text="price" />
-                                                            <TableColumn prefWidth="75.0" text="image" />
+                                                          <TableColumn fx:id="dishId" prefWidth="75.0" text="id" />
+                                                          <TableColumn fx:id="dishCategoryId" prefWidth="75.0" text="categoryid" />
+                                                            <TableColumn fx:id="dishName" prefWidth="75.0" text="name" />
+                                                            <TableColumn fx:id="dishDescription" prefWidth="75.0" text="description" />
+                                                            <TableColumn fx:id="dishAmount" prefWidth="75.0" text="amount" />
+                                                            <TableColumn fx:id="dishPrice" prefWidth="75.0" text="price" />
+                                                            <TableColumn fx:id="dishImage" prefWidth="75.0" text="image" />
+                                                            <TableColumn fx:id="dishReadyOrNot" prefWidth="75.0" text="readyornot" />
+                                                            <TableColumn fx:id="dishSell" prefWidth="75.0" text="sell" />
                                                         </columns>
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -200,21 +201,45 @@
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="400.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <TableView fx:id="newsTable1" prefHeight="351.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                             <columns>
-                                                <TableColumn fx:id="ncAuthorID1" prefWidth="75.0" text="ID" />
-                                                <TableColumn fx:id="ncNews1" prefWidth="75.0" text="cafeID" />
-                                                <TableColumn fx:id="ncText1" prefWidth="75.0" text="clientName" />
-                                                <TableColumn fx:id="ncDate1" prefWidth="75.0" text="clientPhone" />
-                                                <TableColumn fx:id="ncViews1" prefWidth="75.0" text="rDate" />
-                                                <TableColumn fx:id="ncTegs1" prefWidth="75.0" text="rTime" />
-                                                <TableColumn fx:id="ncImageView1" prefWidth="75.0" text="confirmOrNot" />
-                                                <TableColumn prefWidth="75.0" text="amountPeople" />
-                                             </columns>
-                                          </TableView>
+                                          <SplitPane dividerPositions="0.5" minWidth="300.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="150.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <TableView fx:id="reservationTable" onMouseClicked="#mouseReservationClick" prefHeight="351.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                         <columns>
+                                                            <TableColumn fx:id="reservationID" prefWidth="75.0" text="ID" />
+                                                            <TableColumn fx:id="reservationCafeID" prefWidth="75.0" text="cafeID" />
+                                                            <TableColumn fx:id="reservationClientName" prefWidth="75.0" text="clientName" />
+                                                            <TableColumn fx:id="reservationClientPhone" prefWidth="75.0" text="clientPhone" />
+                                                            <TableColumn fx:id="reservationDate" prefWidth="75.0" text="resDate" />
+                                                            <TableColumn fx:id="reservationTime" prefWidth="75.0" text="resTime" />
+                                                            <TableColumn fx:id="reservationStatus" prefWidth="75.0" text="resStatus" />
+                                                            <TableColumn fx:id="reservationAmountPeople" prefWidth="75.0" text="amountPeople" />
+                                                            <TableColumn fx:id="reservationDescription" prefWidth="75.0" text="desription" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="150.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <TableView fx:id="preorderTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                            <TableColumn fx:id="preOrderResID" prefWidth="75.0" text="reservID" />
+                                                          <TableColumn fx:id="preorderDishName" prefWidth="75.0" text="dishName" />
+                                                          <TableColumn fx:id="preorderAmount" prefWidth="75.0" text="Amount" />
+                                                            <TableColumn fx:id="preorderPrice" prefWidth="75.0" text="Price" />
+                                                        </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
@@ -283,20 +308,67 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="390.0" prefHeight="351.0" prefWidth="501.0">
                                        <children>
-                                          <TableView fx:id="tableEmployees" prefHeight="351.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                             <columns>
-                                                <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-                                                <TableColumn fx:id="positionID" prefWidth="75.0" text="Position" />
-                                                <TableColumn fx:id="cafeID" prefWidth="75.0" text="Cafe" />
-                                                <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-                                                <TableColumn fx:id="lastname" prefWidth="75.0" text="LastName" />
-                                                <TableColumn fx:id="address" prefWidth="75.0" text="Adress" />
-                                                <TableColumn fx:id="birthdayDay" prefWidth="75.0" text="Birthday" />
-                                             </columns>
-                                          </TableView>
+                                          <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <TableView fx:id="tableEmployees" prefHeight="351.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                         <columns>
+                                                            <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                                                            <TableColumn fx:id="positionID" prefWidth="75.0" text="Position" />
+                                                            <TableColumn fx:id="cafeID" prefWidth="75.0" text="Cafe" />
+                                                            <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+                                                            <TableColumn fx:id="lastname" prefWidth="75.0" text="LastName" />
+                                                            <TableColumn fx:id="address" prefWidth="75.0" text="Adress" />
+                                                            <TableColumn fx:id="birthdayDay" prefWidth="75.0" text="Birthday" />
+                                                            <TableColumn fx:id="empLogin" prefWidth="75.0" text="Login" />
+                                                            <TableColumn fx:id="empPass" prefWidth="75.0" text="Password" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.49222797927461137" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <TableView fx:id="cafeCoordinateTable" layoutX="-31.0" layoutY="-15.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <columns>
+                                                                      <TableColumn fx:id="coordId" prefWidth="75.0" text="id" />
+                                                                      <TableColumn fx:id="coordAdrs" prefWidth="75.0" text="adress" />
+                                                                        <TableColumn fx:id="coordPhone" prefWidth="75.0" text="Phone" />
+                                                                        <TableColumn fx:id="coordMail" prefWidth="75.0" text="email" />
+                                                                    </columns>
+                                                                     <columnResizePolicy>
+                                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                     </columnResizePolicy>
+                                                                  </TableView>
+                                                               </children>
+                                                            </AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <TableView fx:id="positionTable" layoutX="34.0" layoutY="-15.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <columns>
+                                                                      <TableColumn fx:id="posID" prefWidth="75.0" text="id" />
+                                                                      <TableColumn fx:id="posName" prefWidth="75.0" text="name" />
+                                                                        <TableColumn fx:id="posSalary" prefWidth="75.0" text="salary" />
+                                                                    </columns>
+                                                                     <columnResizePolicy>
+                                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                     </columnResizePolicy>
+                                                                  </TableView>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
@@ -352,17 +424,71 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView prefHeight="350.0" prefWidth="489.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TableColumn prefWidth="49.625" text="Id" />
-                                  <TableColumn prefWidth="298.21875" text="Description" />
-                                    <TableColumn prefWidth="122.5" text="Author" />
-                                    <TableColumn prefWidth="74.0" text="Vision" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
+                              <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <TableView fx:id="repTable" prefHeight="350.0" prefWidth="489.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn fx:id="repID" prefWidth="49.625" text="Id" />
+                                                <TableColumn fx:id="repAuthor" prefWidth="75.0" text="author" />
+                                              <TableColumn fx:id="repText" prefWidth="298.21875" text="rText" />
+                                                <TableColumn fx:id="repDate" prefWidth="75.0" text="rDate" />
+                                                <TableColumn fx:id="repMail" prefWidth="122.5" text="mail" />
+                                                <TableColumn fx:id="repPhone" prefWidth="74.0" text="phone" />
+                                                <TableColumn fx:id="repVision" prefWidth="75.0" text="vision" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <Button mnemonicParsing="false" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="22.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="22.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane GridPane.rowIndex="2">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" text="Удалить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="22.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
                            </children></AnchorPane>
                     </content>
                   </Tab>
