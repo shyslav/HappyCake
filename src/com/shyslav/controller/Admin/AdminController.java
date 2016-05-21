@@ -1,9 +1,15 @@
 package com.shyslav.controller.Admin;
 
+import com.shyslav.controller.alert.confirmAlert;
 import com.shyslav.controller.alert.sampleAlert;
+import com.shyslav.controller.alert.sampleEditUpdate;
 import com.shyslav.models.*;
+import com.shyslav.server.comands;
+import com.shyslav.start.Main;
 import com.sukhaniuk.interfaces.impls.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,6 +20,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -58,6 +65,8 @@ public class AdminController {
     private TableColumn<news, String> ncTegs;
     @FXML
     private TableColumn<news, String> ncImageView;
+    @FXML
+    private TableColumn<news, Integer> ncID;
     //*********Category tabs
     @FXML
     private TableView categoryTable;
@@ -159,6 +168,7 @@ public class AdminController {
         coordMail.setCellValueFactory(new PropertyValueFactory<>("cafeemail"));
         cafeCoordinateTable.setItems(FXCollections.observableList(cl.getCafeCoordinate()));
     }
+
     //*******Position
     @FXML
     private TableView positionTable;
@@ -170,24 +180,63 @@ public class AdminController {
     private TableColumn<position, Double> posSalary;
 
     private void positionInitialize() {
-        PositionList pl  = new PositionList(0);
+        PositionList pl = new PositionList(0);
         posID.setCellValueFactory(new PropertyValueFactory<>("id"));
         posName.setCellValueFactory(new PropertyValueFactory<>("name"));
         posSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         positionTable.setItems(FXCollections.observableList(pl.getPositionList()));
     }
-
     @FXML
     private void initialize() {
-        employeeInitialize();
-        newsInitialize();
-        categoryInitialize();
-        dishInitialize();
-        reservationInitialize();
-        preorderInitialize(new PreOrderList(0));
-        reportsInitialize();
-        cafeCoordinateInitialize();
-        positionInitialize();
+        Main.controllerMainItems.setBtnReinitializeAdmin(true);
+        ReInit();
+    }
+
+    private void CategoryDishHandler() {
+        categoryTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                dishTable.getSelectionModel().clearSelection();
+            }
+        }));
+        dishTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                categoryTable.getSelectionModel().clearSelection();
+            }
+        }));
+    }
+
+    private void EmployeeCafeeCoordinatePositionHandler() {
+        cafeCoordinateTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                tableEmployees.getSelectionModel().clearSelection();
+                positionTable.getSelectionModel().clearSelection();
+            }
+        }));
+        tableEmployees.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                cafeCoordinateTable.getSelectionModel().clearSelection();
+                positionTable.getSelectionModel().clearSelection();
+            }
+        }));
+        positionTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                tableEmployees.getSelectionModel().clearSelection();
+                cafeCoordinateTable.getSelectionModel().clearSelection();
+            }
+        }));
+    }
+    private void reservationHandler()
+    {
+        reservationTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                preorderTable.getSelectionModel().clearSelection();
+            }
+        }));
+        preorderTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                reservationTable.getSelectionModel().clearSelection();
+            }
+        }));
     }
 
     private void employeeInitialize() {
@@ -207,6 +256,7 @@ public class AdminController {
 
     private void newsInitialize() {
         NewsList nl = new NewsList();
+        ncID.setCellValueFactory(new PropertyValueFactory<news, Integer>("id"));
         ncAuthorID.setCellValueFactory(new PropertyValueFactory<news, Integer>("authorID"));
         ncNews.setCellValueFactory(new PropertyValueFactory<news, String>("name"));
         ncText.setCellValueFactory(new PropertyValueFactory<news, String>("text"));
@@ -226,8 +276,7 @@ public class AdminController {
         categoryTable.setItems(FXCollections.observableList(cl.getCategoryLists()));
     }
 
-    private void dishInitialize() {
-        DishList dl = new DishList();
+    private void dishInitialize(DishList dishList) {
         dishId.setCellValueFactory(new PropertyValueFactory<>("id"));
         dishCategoryId.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
         dishName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -237,7 +286,11 @@ public class AdminController {
         dishImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         dishReadyOrNot.setCellValueFactory(new PropertyValueFactory<>("readyORnot"));
         dishSell.setCellValueFactory(new PropertyValueFactory<>("sell"));
-        dishTable.setItems(FXCollections.observableList(dl.getDishList()));
+        if (dishList.getDishList() != null) {
+            dishTable.setItems(FXCollections.observableList(dishList.getDishList()));
+        } else {
+            sampleAlert sa = new sampleAlert("Внимание", "В данной категории нет блюд", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
+        }
     }
 
     private void reservationInitialize() {
@@ -265,6 +318,7 @@ public class AdminController {
             sampleAlert sa = new sampleAlert("Внимание", "В данном заказе нет предзаказа", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
         }
     }
+
     private void reportsInitialize() {
         ReportsList rl = new ReportsList(0);
         repID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -276,10 +330,137 @@ public class AdminController {
         repVision.setCellValueFactory(new PropertyValueFactory<>("vision"));
         repTable.setItems(FXCollections.observableList(rl.getReport()));
     }
+
     public void mouseReservationClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             reservation res = (reservation) reservationTable.getSelectionModel().getSelectedItem();
             preorderInitialize(new PreOrderList(res.getId()));
         }
+    }
+
+    public void mouseCategoryClick(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
+            dishInitialize(new DishList(cat.getId()));
+        }
+    }
+
+    public void MouseClickBtnAddDishCategory(Event event) {
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            Main.updateInsertDialog("Добавить Категорию", "category", "insert");
+        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            Main.updateInsertDialog("Добавить блюдо", "category", "insert");
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void MouseClickBtnEditDishCategory(Event event) {
+
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            Main.updateInsertDialog("Добавить Категорию", "category", "update");
+        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            Main.updateInsertDialog("Добавить блюдо", "category", "update");
+        }
+    }
+
+    public void btnEventReservationDelete(Event event) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<reservation> res = reservationTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("reservation",res.get(0).getId());
+                reservationInitialize();
+            }
+        }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            sampleAlert sa = new sampleAlert("Ошибка", null, "Удаление элемента предзаказа запрещена", Alert.AlertType.ERROR);
+        }
+        else {
+            alertNullValue();
+        }
+    }
+
+    public void btnEventEmployeeDelete(Event event) {
+        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<employees> tmp = tableEmployees.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("employees",tmp.get(0).getId());
+                cafeCoordinateInitialize();
+            }
+        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<positions> tmp = positionTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("positions",tmp.get(0).getId());
+                cafeCoordinateInitialize();
+            }
+        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<cafeCoordinate> tmp = cafeCoordinateTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("cafecoordinate",tmp.get(0).getId());
+                cafeCoordinateInitialize();
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void btnEventReviewDelete(Event event) {
+        if (repTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<reports> rep = repTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("reports",rep.get(0).getId());
+                reportsInitialize();
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void btnEventCategoryDishDelete(Event event) {
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<category> cat = categoryTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("category",cat.get(0).getId());
+                categoryInitialize();
+            }
+        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<dish> dish = dishTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("dish",dish.get(0).getId());
+                dishInitialize(new DishList(0));
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void btnEventNewsDelete(Event event) {
+        if (newsTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<news> news = newsTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("news",news.get(0).getId());
+                newsInitialize();
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    private void alertNullValue() {
+        sampleAlert sa = new sampleAlert("Ошибка", null, "Выберите элемент таблицы для добавления, правки или удаления", Alert.AlertType.WARNING);
+    }
+    public void ReInit()
+    {
+        employeeInitialize();
+        newsInitialize();
+        categoryInitialize();
+        dishInitialize(new DishList(0));
+        reservationInitialize();
+        preorderInitialize(new PreOrderList(0));
+        reportsInitialize();
+        cafeCoordinateInitialize();
+        positionInitialize();
+        CategoryDishHandler();
+        EmployeeCafeeCoordinatePositionHandler();
+        reservationHandler();
     }
 }

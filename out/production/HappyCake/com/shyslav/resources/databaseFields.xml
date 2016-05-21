@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--Категория-->
+    <category id ="categoryId">
+    <labelName>№ категории</labelName>
+        <type>text</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>1</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+    <category id ="name">
+        <labelName>Имя блюда</labelName>
+        <type>text</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>1</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+    <category id ="description">
+        <labelName>Описание</labelName>
+        <type>textArea</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>1</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+    <category id ="amount">
+        <labelName>Количество</labelName>
+        <type>text</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>1</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+    <category id ="readyORnot">
+        <labelName>Нужно ли готовить</labelName>
+        <type>text</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>1</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+    <category id ="image">
+        <labelName>Картинка</labelName>
+        <type>text</type>
+        <maxLenght>500</maxLenght>
+        <minLenght>20</minLenght>
+        <emptyOrNot>false</emptyOrNot>
+    </category>
+
+</configuration>

@@ -19,8 +19,13 @@ public class DishList {
         this.dishList = dishList;
     }
 
-    public DishList() {
-        dishList = comands.getDish(null);
+    public DishList(int id) {
+        if(id == 0) {
+            dishList = comands.getDish(null);
+        } else
+        {
+            dishList = comands.getDish(String.valueOf(id));
+        }
         System.out.println(dishList.size());
     }
 

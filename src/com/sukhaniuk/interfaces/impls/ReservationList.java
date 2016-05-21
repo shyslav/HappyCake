@@ -13,7 +13,6 @@ public class ReservationList {
 
     public ReservationList() {
         reservations = comands.getReservation(null);
-        System.out.println(reservations.size());
     }
 
     public ArrayList<reservation> getReservations() {

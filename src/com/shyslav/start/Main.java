@@ -1,5 +1,8 @@
 package com.shyslav.start;
 
+import com.shyslav.controller.Admin.AdminController;
+import com.shyslav.controller.MainItems;
+import com.shyslav.controller.alert.sampleEditUpdate;
 import com.sukhaniuk.controller.EmployeeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,8 @@ import java.io.IOException;
 public class Main extends Application {
     private static Stage primaryStage;
     private static BorderPane mainLayout;
+    public static MainItems controllerMainItems;
+    public static AdminController controllerAdminItems;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -29,7 +34,7 @@ public class Main extends Application {
         loader.setLocation(Main.class.getResource("../fxml/MainView.fxml"));
         mainLayout = loader.load();
         Scene scene = new Scene(mainLayout);
-        //scene.getStylesheets().add(0, String.valueOf(Main.class.getResource("../fxml/css/my.css")));
+        controllerMainItems = loader.getController();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -56,9 +61,14 @@ public class Main extends Application {
         loader.setLocation(Main.class.getResource("../fxml/Admin/AdminPane.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
+        controllerAdminItems = loader.getController();
     }
     public static void alertEnterDialog(String title, String message) throws IOException {
         enterDialogs eD = new enterDialogs(primaryStage, title, message);
+    }
+    public static void updateInsertDialog(String title, String tableName, String command)
+    {
+        sampleEditUpdate insertOrUpdate = new sampleEditUpdate(primaryStage, title , tableName, command);
     }
     public static void main(String[] args) {
         launch(args);

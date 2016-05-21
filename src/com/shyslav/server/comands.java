@@ -1,6 +1,8 @@
 package com.shyslav.server;
 
+import com.shyslav.controller.MainItems;
 import com.shyslav.models.*;
+import com.shyslav.start.Main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -277,6 +279,28 @@ public class comands {
             return position;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
+            System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public static String delete(String table,int id) {
+        serverConnection.printWriter.println("deleteFromTable:" +table+","+ id);
+        try {
+            if (serverConnection.objInputStream == null)
+                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Object object = serverConnection.objInputStream.readObject();
+            if (object.equals("not found")) {
+                return "Ошибка";
+            }
+            return "Удаление прошло успешно";
+        } catch (IOException e) {
             System.out.println(e);
         } catch (ClassNotFoundException e) {
             System.out.println(e);

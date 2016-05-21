@@ -37,6 +37,5 @@ public class NewsList implements newsInt {
 
     public NewsList() {
         newsList = comands.getNews(null);
-        System.out.println(newsList.size());
     }
 }
