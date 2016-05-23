@@ -52,7 +52,7 @@
                                              <children>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#NewsAddBtn" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -61,7 +61,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.rowIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#NewsEditBtn" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -218,6 +218,7 @@
                                                    <children>
                                                       <TableView fx:id="preorderTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
+                                                            <TableColumn fx:id="preOrderID" prefWidth="75.0" text="ID" />
                                                             <TableColumn fx:id="preOrderResID" prefWidth="75.0" text="reservID" />
                                                           <TableColumn fx:id="preorderDishName" prefWidth="75.0" text="dishName" />
                                                           <TableColumn fx:id="preorderAmount" prefWidth="75.0" text="Amount" />
@@ -239,7 +240,7 @@
                                              <children>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#ReservationPreOrderAddBtn" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -248,7 +249,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.rowIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#ReservationPreOrderEditBtn" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -358,7 +359,7 @@
                                              <children>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#EmployeeAddBtn" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -367,7 +368,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.rowIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#EmployeeEditBtn" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -431,7 +432,7 @@
                                              <children>
                                                 <AnchorPane>
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#ReviewAddBtn" text="Добавить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -440,7 +441,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.rowIndex="1">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
+                                                      <Button mnemonicParsing="false" onMouseClicked="#ReviewEditBtn" text="Изменить" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font size="22.0" />
                                                          </font>
@@ -473,6 +474,50 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
+                  <Tab text="Orders">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5" layoutX="220.0" layoutY="59.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <TableView fx:id="OrdersTable" onMouseClicked="#mouseOrdersClick" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn fx:id="ordID" prefWidth="75.0" text="id" />
+                                              <TableColumn fx:id="ordEmployeeId" prefWidth="75.0" text="employeeID" />
+                                                <TableColumn fx:id="orderFullPrice" prefWidth="75.0" text="fullPrice" />
+                                                <TableColumn fx:id="ordDate" prefWidth="75.0" text="orderDate" />
+                                                <TableColumn fx:id="ordCompliteORnot" prefWidth="75.0" text="compliteORnot" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <TableView fx:id="ordersOrderTable" layoutX="199.0" layoutY="-14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn fx:id="ordlistId" prefWidth="75.0" text="id" />
+                                              <TableColumn fx:id="ordlistOrdId" prefWidth="75.0" text="orderID" />
+                                                <TableColumn fx:id="ordlistDish" prefWidth="75.0" text="dish" />
+                                                <TableColumn fx:id="ordlistAmount" prefWidth="75.0" text="amount" />
+                                                <TableColumn fx:id="ordlistPrice" prefWidth="75.0" text="price" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
                 <Tab text="Report">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -485,7 +530,7 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BarChart prefHeight="230.0" prefWidth="307.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BarChart fx:id="barChartFirst" prefHeight="230.0" prefWidth="307.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -497,7 +542,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <LineChart prefHeight="216.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <LineChart fx:id="lineChart" prefHeight="216.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -517,7 +562,8 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="400.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <PieChart AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      <PieChart fx:id="pieChart" onMouseEntered="#pieChartMouseEntered" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      <Label fx:id="labelPercent" layoutX="358.0" layoutY="77.0" text="Label" AnchorPane.bottomAnchor="76.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="77.0" />
                                                    </children>
                                                 </AnchorPane>
                                               <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
@@ -528,25 +574,47 @@
                                                         </columnConstraints>
                                                         <rowConstraints>
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
                                                             <AnchorPane>
                                                                <children>
-                                                                  <Button mnemonicParsing="false" text="Очет за месяц" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <Button mnemonicParsing="false" onMouseClicked="#monthMouseClick" text="Очет за месяц" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <font>
                                                                         <Font size="22.0" />
                                                                      </font>
                                                                   </Button>
                                                                </children>
                                                             </AnchorPane>
-                                                            <AnchorPane GridPane.rowIndex="1">
+                                                            <AnchorPane GridPane.rowIndex="3">
                                                                <children>
-                                                                  <Button mnemonicParsing="false" text="Отчет за период" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <Button mnemonicParsing="false" onMouseClicked="#periodMouseClick" text="Отчет за период" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <font>
                                                                         <Font size="22.0" />
                                                                      </font>
                                                                   </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                                                                     <children>
+                                                                        <Label text="Начало Периода" />
+                                                                        <DatePicker fx:id="dataPickerStart" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <Label text="Конец периода" />
+                                                                        <DatePicker fx:id="dataPickerEnd" />
+                                                                     </children>
+                                                                  </HBox>
                                                                </children>
                                                             </AnchorPane>
                                                          </children>

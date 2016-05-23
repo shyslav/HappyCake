@@ -1,16 +1,33 @@
 package com.shyslav.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by shyshkin_vlad on 22.04.16.
  */
-public class orders {
+public class orders implements Serializable{
     private int id;
     private int employeeId;
     private double fullPrice;
-    private Date oData;
+    private String orderDate;
     private boolean compliteOrNot;
+
+    public orders(int id, int employeeId, double fullPrice, String orderDate, boolean compliteOrNot) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.fullPrice = fullPrice;
+        this.orderDate = orderDate;
+        this.compliteOrNot = compliteOrNot;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public int getId() {
         return id;
@@ -34,14 +51,6 @@ public class orders {
 
     public void setFullPrice(double fullPrice) {
         this.fullPrice = fullPrice;
-    }
-
-    public Date getoData() {
-        return oData;
-    }
-
-    public void setoData(Date oData) {
-        this.oData = oData;
     }
 
     public boolean isCompliteOrNot() {

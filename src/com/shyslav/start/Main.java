@@ -66,9 +66,9 @@ public class Main extends Application {
     public static void alertEnterDialog(String title, String message) throws IOException {
         enterDialogs eD = new enterDialogs(primaryStage, title, message);
     }
-    public static void updateInsertDialog(String title, String tableName, String command)
+    public static void updateInsertDialog(String title, String tableName, String command, int id)
     {
-        sampleEditUpdate insertOrUpdate = new sampleEditUpdate(primaryStage, title , tableName, command);
+        sampleEditUpdate insertOrUpdate = new sampleEditUpdate(primaryStage, title , tableName, command , id);
     }
     public static void main(String[] args) {
         launch(args);

@@ -30,7 +30,7 @@ public class MainItems {
     }
 
     public void mouseEventReinitialize(Event event) {
-            Main.controllerAdminItems.ReInit();
+        Main.controllerAdminItems.ReInit();
     }
 
     public void setBtnReinitializeAdmin(Boolean visiable) {

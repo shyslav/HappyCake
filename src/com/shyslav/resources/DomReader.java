@@ -2,6 +2,7 @@ package com.shyslav.resources;
 
 import com.shyslav.models.KeyValue;
 import com.shyslav.models.Roles;
+import com.shyslav.server.comands;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,13 +19,14 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
 public class DomReader {
-    public static ArrayList<Roles> parseFunc(String tableName) {
+    public static ArrayList<Roles> parseFunc(String tableName, String command, int id) {
         String labelName = null;
         String type = null;
         int maxLenght = 0;
         int minLenght = 0;
         Boolean emptyOrNot = null;
         String key = null;
+        String value = null;
         ArrayList<Roles> role = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
@@ -52,8 +54,14 @@ public class DomReader {
                     emptyOrNot = Boolean.valueOf(element.getElementsByTagName("emptyOrNot").item(0).getTextContent());
                     //Имя колонки
                     key = element.getAttribute("id"); //Имя колонки таблицы
+                    if(command.equals("update")) {
+                        value = comands.getValueToUpdate(tableName, element.getAttribute("id"), id);
+                    }else
+                    {
+                        value = "";
+                    }
                     //System.out.println(element.getElementsByTagName("labelName").item(0).getTextContent());
-                    role.add(new Roles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,"")));
+                    role.add(new Roles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,value)));
                 }
             }
         } catch (ParserConfigurationException e) {

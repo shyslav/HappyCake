@@ -11,17 +11,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Side;
+import javafx.scene.chart.*;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.DateFormatSymbols;
+import java.time.DateTimeException;
+import java.util.*;
 
 /**
  * Created by Shyshkin Vladyslav on 28.03.2016.
@@ -131,6 +134,8 @@ public class AdminController {
     private TableColumn<preOrderTable, Double> preorderPrice;
     @FXML
     private TableColumn<preOrderTable, Integer> preOrderResID;
+    @FXML
+    private TableColumn<preOrderTable,Integer> preOrderID;
     //**************************REPORTS TABS
     @FXML
     private TableView repTable;
@@ -186,8 +191,72 @@ public class AdminController {
         posSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         positionTable.setItems(FXCollections.observableList(pl.getPositionList()));
     }
+
+    //*************Orders
+    @FXML
+    private TableView OrdersTable;
+    @FXML
+    private TableColumn<orders, Integer> ordID;
+    @FXML
+    private TableColumn<orders, Integer> ordEmployeeId;
+    @FXML
+    private TableColumn<orders, Double> orderFullPrice;
+    @FXML
+    private TableColumn<orders, String> ordDate;
+    @FXML
+    private TableColumn<orders, Character> ordCompliteORnot;
+
+    private void ordersInitialize() {
+        OrderList order = new OrderList(0);
+        ordID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
+        orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
+        ordDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+        ordCompliteORnot.setCellValueFactory(new PropertyValueFactory<>("compliteOrNot"));
+        OrdersTable.setItems(FXCollections.observableList(order.getOrderList()));
+    }
+    //********OrdersList
+    @FXML
+    private TableView ordersOrderTable;
+    @FXML
+    private TableColumn<orderList, Integer> ordlistId;
+    @FXML
+    private TableColumn<orderList, Integer> ordlistOrdId;
+    @FXML
+    private TableColumn<orderList, String> ordlistDish;
+    @FXML
+    private TableColumn<orderList, Integer> ordlistAmount;
+    @FXML
+    private TableColumn<orderList, Double> ordlistPrice;
+
+    private void orderListInitialize(OrdersOrderList order )
+    {
+        ordlistId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ordlistOrdId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        ordlistDish.setCellValueFactory(new PropertyValueFactory<>("dishName"));
+        ordlistAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        ordlistPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ordersOrderTable.setItems(FXCollections.observableList(order.getOrdersOrderList()));
+    }
+
+    //**************Reports
+    @FXML
+    private BarChart barChartFirst;
+    @FXML
+    private LineChart lineChart;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private Label labelPercent;
+    @FXML
+    private DatePicker dataPickerStart;
+    @FXML
+    private DatePicker dataPickerEnd;
     @FXML
     private void initialize() {
+        labelPercent.setTextFill(Color.DARKORANGE);
+        labelPercent.setStyle("-fx-font: 24 arial;");
+        labelPercent.setVisible(false);
         Main.controllerMainItems.setBtnReinitializeAdmin(true);
         ReInit();
     }
@@ -201,6 +270,18 @@ public class AdminController {
         dishTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 categoryTable.getSelectionModel().clearSelection();
+            }
+        }));
+    }
+    private void OrderOrderListHandler() {
+        ordersOrderTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                OrdersTable.getSelectionModel().clearSelection();
+            }
+        }));
+        OrdersTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                ordersOrderTable.getSelectionModel().clearSelection();
             }
         }));
     }
@@ -312,6 +393,7 @@ public class AdminController {
         preorderDishName.setCellValueFactory(new PropertyValueFactory<>("dishName"));
         preorderAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         preorderPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        preOrderID.setCellValueFactory(new PropertyValueFactory<>("id"));
         if (preOrderList.getPreorder() != null) {
             preorderTable.setItems(FXCollections.observableList(preOrderList.getPreorder()));
         } else {
@@ -338,6 +420,13 @@ public class AdminController {
         }
     }
 
+    public void mouseOrdersClick(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            orders ord = (orders) OrdersTable.getSelectionModel().getSelectedItem();
+            orderListInitialize(new OrdersOrderList(ord.getId()));
+        }
+    }
+
     public void mouseCategoryClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
@@ -345,24 +434,6 @@ public class AdminController {
         }
     }
 
-    public void MouseClickBtnAddDishCategory(Event event) {
-        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Main.updateInsertDialog("Добавить Категорию", "category", "insert");
-        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Main.updateInsertDialog("Добавить блюдо", "category", "insert");
-        } else {
-            alertNullValue();
-        }
-    }
-
-    public void MouseClickBtnEditDishCategory(Event event) {
-
-        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Main.updateInsertDialog("Добавить Категорию", "category", "update");
-        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Main.updateInsertDialog("Добавить блюдо", "category", "update");
-        }
-    }
 
     public void btnEventReservationDelete(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
@@ -372,6 +443,11 @@ public class AdminController {
                 reservationInitialize();
             }
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<preOrderTable> preor = preorderTable.getSelectionModel().getSelectedItems();
+            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                comands.delete("preorder",preor.get(0).getId());
+                reservationInitialize();
+            }
             sampleAlert sa = new sampleAlert("Ошибка", null, "Удаление элемента предзаказа запрещена", Alert.AlertType.ERROR);
         }
         else {
@@ -462,5 +538,249 @@ public class AdminController {
         CategoryDishHandler();
         EmployeeCafeeCoordinatePositionHandler();
         reservationHandler();
+        ordersInitialize();
+        orderListInitialize(new OrdersOrderList(0));
+        OrderOrderListHandler();
+    }
+
+    public void periodMouseClick(Event event) {
+        clear();
+        if(lineChartInit(String.valueOf(dataPickerStart.getValue()),String.valueOf(dataPickerEnd.getValue())))
+        {
+            barChartInit(String.valueOf(dataPickerStart.getValue()),String.valueOf(dataPickerEnd.getValue()));
+            pieChartInit(String.valueOf(dataPickerStart.getValue()),String.valueOf(dataPickerEnd.getValue()));
+        }else
+        {
+            sampleAlert sa = new sampleAlert("Ошибка","За заданый период ничего не найдено","Введите другие данные", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    public void monthMouseClick(Event event) {
+        clear();
+        if(lineChartInit(null,null))
+        {
+            barChartInit(null,null);
+            pieChartInit(null,null);
+        }else {
+            sampleAlert.SystemError();
+        }
+    }
+    private void clear()
+    {
+        lineChart.getData().clear();
+        barChartFirst.getData().clear();
+        pieChart.getData().clear();
+    }
+    private boolean pieChartInit(String dateStart, String dateEnd) {
+        ArrayList<ReportsGraph> tmp = null;
+        tmp = comands.getReportsGraph("pie", dateStart, dateEnd);
+        if (tmp == null) {
+            return false;
+        }
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (int i = 0; i < tmp.size(); i++) {
+            pieChartData.add(new PieChart.Data(tmp.get(i).getName(), tmp.get(i).getAmount()));
+        }
+        if (dateStart == null || dateEnd == null) {
+            pieChart.setTitle("Количество проданых продуктов за месяц");
+        } else {
+            pieChart.setTitle("Количество проданых продуктов за период с "+dateStart+" по "+dateEnd);
+        }
+        pieChart.setLegendSide(Side.LEFT);
+        pieChart.setData(pieChartData);
+        return true;
+    }
+
+    private boolean lineChartInit(String dateStart, String dateEnd)
+    {
+        ArrayList<ReportsGraph> tmp = null;
+        tmp = comands.getReportsGraph("line",dateStart,dateEnd);
+        if(tmp == null)
+        {
+            return false;
+        }
+        final CategoryAxis xAxis = (CategoryAxis) lineChart.getXAxis();
+        final NumberAxis yAxis = (NumberAxis) lineChart.getYAxis();
+        xAxis.setLabel("Дата");
+        yAxis.setLabel("Количество");
+
+        XYChart.Series series = new XYChart.Series();
+        for (int i = 0 ; i <tmp.size();i++)
+        {
+            series.getData().add(new XYChart.Data(tmp.get(i).getName(), tmp.get(i).getAmount()));
+        }
+        series.setName("За текущий месяц");
+        if (dateStart == null || dateEnd == null) {
+            lineChart.setTitle("График продаж за месяц");
+        } else {
+            lineChart.setTitle("График продаж за период c "+dateStart+" по "+dateEnd);
+        }
+        lineChart.getData().add(series);
+        return true;
+    }
+
+    private boolean barChartInit(String dateStart, String dateEnd)
+    {
+        ArrayList<ReportsGraph>  tmp = null;
+        tmp = comands.getReportsGraph("bar",dateStart,dateEnd);
+        if(tmp == null)
+        {
+            return false;
+        }
+        final CategoryAxis xAxis = (CategoryAxis) barChartFirst.getXAxis();
+        final NumberAxis yAxis = (NumberAxis) barChartFirst.getYAxis();
+        xAxis.setLabel("Продукт");
+        yAxis.setLabel("Количество");
+        for(int i=0;i<tmp.size();i++)
+        {
+            XYChart.Series series = new XYChart.Series();
+            series.setName(tmp.get(i).getName());
+            series.getData().add(new XYChart.Data("Значение", tmp.get(i).getAmount()));
+            barChartFirst.getData().add(series);
+        }
+        if (dateStart == null || dateEnd == null)  {
+            barChartFirst.setTitle("Продажы за месяц топ продуктов");
+        } else {
+            barChartFirst.setTitle("Продажы за период с "+dateStart+" по "+dateEnd+" топ продуктов");
+        }
+        return true;
+    }
+
+    public void pieChartMouseEntered(Event event) {
+        for (final PieChart.Data data : pieChart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
+                    new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent e) {
+                            labelPercent.setVisible(true);
+                            labelPercent.setText(String.valueOf(data.getPieValue()) + " шт");
+                        }
+                    });
+            data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED,
+                    new EventHandler<MouseEvent>() {
+                        @Override public void handle(MouseEvent e) {
+                            labelPercent.setVisible(false);
+                        }
+                    });
+        }
+    }
+
+    public void MouseClickBtnAddDishCategory(Event event) {
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Категорию", "category", "insert",cat.getId());
+        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            dish dish = (dish) dishTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить блюдо", "dish", "insert",dish.getId());
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void MouseClickBtnEditDishCategory(Event event) {
+
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Категорию", "category", "update",cat.getId());
+        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            dish dish = (dish) dishTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить блюдо", "dish", "update",dish.getId());
+        }else
+        {
+            alertNullValue();
+        }
+    }
+    public void NewsEditBtn(Event event) {
+        if (newsTable.getSelectionModel().getSelectedItem() != null) {
+            news news = (news) newsTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Новость", "news", "update",news.getId());
+        } else
+        {
+            alertNullValue();
+        }
+    }
+
+    public void NewsAddBtn(Event event) {
+        if (newsTable.getSelectionModel().getSelectedItem() != null) {
+            news news = (news) newsTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Новость", "news", "insert",news.getId());
+        } else
+        {
+            alertNullValue();
+        }
+    }
+
+    public void ReservationPreOrderEditBtn(Event event) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            reservation tmp = (reservation) reservationTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить Резерв", "reservation", "update", tmp.getId());
+        }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            preOrderTable tmp = (preOrderTable) preorderTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить Предзаказ", "preorder", "update", tmp.getId());
+        }
+        else {
+            alertNullValue();
+        }
+    }
+
+    public void ReservationPreOrderAddBtn(Event event) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            reservation tmp = (reservation) reservationTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Резерв", "reservation", "insert", tmp.getId());
+        }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            preOrderTable tmp = (preOrderTable) preorderTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Предзаказ", "preorder", "insert", tmp.getId());
+        }
+        else {
+            alertNullValue();
+        }
+    }
+
+    public void EmployeeAddBtn(Event event) {
+        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+            employees tmp = (employees) tableEmployees.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить сотрудника", "employees", "insert", tmp.getId());
+        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
+            positions tmp = (positions) positionTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить вакансию", "positions", "insert", tmp.getId());
+        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
+            cafeCoordinate tmp = (cafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить новое кафе", "cafecoordinate", "insert", tmp.getId());
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void EmployeeEditBtn(Event event) {
+        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+            employees tmp = (employees) tableEmployees.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить сотрудника", "employees", "update", tmp.getId());
+        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
+            positions tmp = (positions) positionTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить вакансию", "positions", "update", tmp.getId());
+        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
+            cafeCoordinate tmp = (cafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить кафе", "cafecoordinate", "update", tmp.getId());
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void ReviewAddBtn(Event event) {
+        if (repTable.getSelectionModel().getSelectedItem() != null) {
+            reports tmp = (reports) repTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить отзыв", "reports", "insert", tmp.getId());
+        } else {
+            alertNullValue();
+        }
+    }
+
+    public void ReviewEditBtn(Event event) {
+        if (repTable.getSelectionModel().getSelectedItem() != null) {
+            reports tmp = (reports) repTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить отзыв", "reports", "update", tmp.getId());
+        } else {
+            alertNullValue();
+        }
     }
 }
+

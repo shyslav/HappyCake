@@ -13,4 +13,8 @@ public class sampleAlert {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    public static void SystemError()
+    {
+        sampleAlert sa = new sampleAlert("Системная ошибка","Возникла ошибка при работе сервера","Обратитесь к разработчикам", Alert.AlertType.ERROR);
+    }
 }
