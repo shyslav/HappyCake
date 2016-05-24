@@ -3,7 +3,7 @@ package com.shyslav.start;
 import com.shyslav.controller.Admin.AdminController;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.sampleEditUpdate;
-import com.sukhaniuk.controller.EmployeeController;
+import com.shyslav.controller.Employee.EmployeeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +17,7 @@ public class Main extends Application {
     private static BorderPane mainLayout;
     public static MainItems controllerMainItems;
     public static AdminController controllerAdminItems;
+    public static EmployeeController employeeController;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -51,9 +52,10 @@ public class Main extends Application {
     }
     public static void chooseScreenEmployee() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(EmployeeController.class.getResource("../fxml/Employee/EmployeeForm.fxml"));
+        loader.setLocation(Main.class.getResource("../fxml/Employee/EmployeeForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
+        employeeController = loader.getController();
     }
 
     public static void chooseScreenAdmin() throws IOException {

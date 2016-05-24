@@ -436,4 +436,28 @@ public class comands {
         }
         return null;
     }
+
+    public static ArrayList<_Cassir> getCassirData() {
+        serverConnection.printWriter.println("selectCassir:");
+        try {
+            if (serverConnection.objInputStream == null)
+                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Object object = serverConnection.objInputStream.readObject();
+            if (object.equals("not found")) {
+                return null;
+            }
+            ArrayList<_Cassir> cas = (ArrayList<_Cassir>) object;
+            return cas;
+        } catch (IOException e) {
+            System.out.println("Не правильно введенные данные");
+            System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
