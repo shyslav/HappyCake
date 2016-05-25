@@ -1,10 +1,12 @@
 package com.shyslav.controller.Employee;
 
 import com.shyslav.controller.alert.confirmAlert;
+import com.shyslav.controller.alert.sampleAlert;
 import com.shyslav.models._Cassir;
 import com.shyslav.models.dish;
 import com.shyslav.models.orderList;
 import com.shyslav.server.comands;
+import com.shyslav.server.serverConnection;
 import data.DataUpdater;
 import javafx.event.*;
 import javafx.event.Event;
@@ -30,7 +32,7 @@ import java.util.Map;
 
 
 public class EmployeeController {
-    private Map <dish, TextField> mapTextFields = new HashMap<>();
+    private Map<dish, TextField> mapTextFields = new HashMap<>();
     private ArrayList<_Cassir> cas = new ArrayList<>();
     private ArrayList<TreeItem> treeItems = new ArrayList<>();
     private ArrayList<orderList> orderLists = new ArrayList<>();
@@ -74,42 +76,40 @@ public class EmployeeController {
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    System.out.println(btn.getText());
+                    //System.out.println(btn.getText());
                     ArrayList<_Cassir> clone = new ArrayList<_Cassir>(cas);
                     ArrayList<_Cassir> tmp = new ArrayList<>();
-                    for (int i = 0; i < cas.size();i++)
-                    {
-                        if(cas.get(i).getName().equals(btn.getText()))
-                        {
+                    for (int i = 0; i < cas.size(); i++) {
+                        if (cas.get(i).getName().equals(btn.getText())) {
                             tmp.add(cas.get(i));
                         }
                     }
                     cas = tmp;
-                    mapTextFields.clear();
-                    gridPane.getChildren().clear();
-                    generateVbox(gridPane);
-                    scPane.setContent(gridPane);
+                    ReUse();
                     cas = clone;
                 }
             });
         }
     }
-
-    private void handlerTreeView()
+    private void ReUse()
     {
+        mapTextFields.clear();
+        gridPane.getChildren().clear();
+        generateVbox(gridPane);
+        scPane.setContent(gridPane);
+    }
+
+    private void handlerTreeView() {
         treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(event.getClickCount()==2)
-                {
+                if (event.getClickCount() == 2) {
                     TreeItem item = (TreeItem) treeView.getSelectionModel().getSelectedItem();
                     item.setExpanded(true);
-                    if(item.getValue().equals("Удалить блюдо")) {
-                        for (int i = 0 ; i < orderLists.size();i++)
-                        {
-                            if(orderLists.get(i).getDishName().equals(item.getParent().getValue()))
-                            {
-                                if(confirmAlert.confirmAlert("Удаление","Вы действиетельно хотите удалить "+item.getParent().getValue()+" из заказа","Действие не возвратимо")) {
+                    if (item.getValue().equals("Удалить блюдо")) {
+                        for (int i = 0; i < orderLists.size(); i++) {
+                            if (orderLists.get(i).getDishName().equals(item.getParent().getValue())) {
+                                if (confirmAlert.confirmAlert("Удаление", "Вы действиетельно хотите удалить " + item.getParent().getValue() + " из заказа", "Действие не возвратимо")) {
                                     orderLists.remove(i);
                                     addToTree();
                                 }
@@ -120,22 +120,20 @@ public class EmployeeController {
             }
         });
     }
-    private void addToTree()
-    {
-         //Node rootIcon = new ImageView(new Image(getClass().getResourceAsStream("img/5.jpg")));
+
+    private void addToTree() {
+        //Node rootIcon = new ImageView(new Image(getClass().getResourceAsStream("img/5.jpg")));
         treeItems.clear();
         TreeItem<String> root = new TreeItem<String>("Заказ");
-        for (int i = 0 ; i<orderLists.size();i++)
-        {
+        for (int i = 0; i < orderLists.size(); i++) {
             TreeItem<String> tempos = new TreeItem<String>(orderLists.get(i).getDishName()/*,rootIcon*/);
-            tempos.getChildren().addAll(new TreeItem<String>("Количество: "+ orderLists.get(i).getAmount()),
-                    new TreeItem<String>("Цена: " +orderLists.get(i).getPrice()),
+            tempos.getChildren().addAll(new TreeItem<String>("Количество: " + orderLists.get(i).getAmount()),
+                    new TreeItem<String>("Цена: " + orderLists.get(i).getPrice()),
                     new TreeItem<String>("Удалить блюдо"));
             tempos.setExpanded(true);
             treeItems.add(tempos);
         }
-        for (int i = 0; i<treeItems.size();i++)
-        {
+        for (int i = 0; i < treeItems.size(); i++) {
             root.getChildren().addAll(treeItems.get(i));
         }
         treeView.setShowRoot(false);
@@ -147,13 +145,13 @@ public class EmployeeController {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int vertical = 0;
         int horizontal = 0;
-        int columnSize = screenSize.width/320;
+        int columnSize = screenSize.width / 320;
         for (int i = 0; i < cas.size(); i++) {
             for (int j = 0; j < cas.get(i).getDish().size(); j++) {
                 VBox vBox = new VBox();
                 vBox.setStyle("-fx-background-color:white; -fx-background-radius: 5px;");
                 vBox.setPadding(new Insets(5, 5, 5, 5));
-                vBox.getChildren().addAll(generateLabel(cas.get(i).getDish().get(j).getName()), generateImageVew(cas.get(i).getDish().get(j).getImage()), generatePlusMinus(cas.get(i).getDish().get(j)), generateBtnAdd("Добавить",cas.get(i).getDish().get(j)));
+                vBox.getChildren().addAll(generateLabel(cas.get(i).getDish().get(j).getName()), generateImageVew(cas.get(i).getDish().get(j).getImage()), generatePlusMinus(cas.get(i).getDish().get(j)), generateBtnAdd("Добавить", cas.get(i).getDish().get(j)));
                 if (vertical == columnSize) {
                     horizontal++;
                     vertical = 0;
@@ -164,18 +162,7 @@ public class EmployeeController {
     }
 
     private void generateList() {
-//        ArrayList<dish> dishList1 = new ArrayList<>();
-//        ArrayList<dish> dishList2 = new ArrayList<>();
-//        dishList1.add(new dish(1, 1, "Грибний крем-суп", "Смачні та ситні гарячі страви. ", 600, 20, "/images/menu/1/1.jpg", "+", "-"));
-//        dishList1.add(new dish(2, 1, "Куриний суп", "Смачні та ситні гарячі страви. ", 600, 21, "/images/menu/1/2.jpg", "+", "-"));
-//        dishList1.add(new dish(3, 1, "Сирный суп з галушками", "Ми викоритовуємо тільки якісні свіжі овочі та фрукти для наших салатів.", 600, 19, "/images/menu/1/3.jpg", "+", "-"));
-//        dishList2.add(new dish(4, 2, "Салат Весняний", "Ми викоритовуємо тільки якісні свіжі овочі та фрукти для наших салатів.", 300, 45, "/images/menu/2/4.jpg", "+", "-"));
-//        dishList2.add(new dish(5, 2, "Салат Цезарь", "Ми викоритовуємо тільки якісні свіжі овочі та фрукти для наших салатів.", 300, 47, "/images/menu/2/5.jpg", "+", "-"));
-//
-//        cas.add(new _Cassir(1, "Гаряче", "Смачні та ситні гарячі страви. ", "/images/menu/1.jpg", dishList1));
-//        cas.add(new _Cassir(2, "Салати", "Ми викоритовуємо тільки якісні свіжі овочі та фрукти для наших салатів.", "/images/menu/2.jpg", dishList2));
-          cas = comands.getCassirData();
-
+         cas = comands.getCassirData();
     }
 
     private void addToAnhorPane(Node element) {
@@ -194,36 +181,34 @@ public class EmployeeController {
     }
 
     private ImageView generateImageVew(String path) {
-        path = path.replace("/images","img");
+        path = path.replace("/images", "img");
         ImageView imgView = new ImageView(new Image(String.valueOf(DataUpdater.class.getResource(path))));
         imgView.setFitWidth(210);
         imgView.setFitHeight(170);
         return imgView;
     }
 
-    private Button generateBtnAdd(String name,dish ds) {
+    private Button generateBtnAdd(String name, dish ds) {
         Button btnSubmit = new Button(name);
         btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(mapTextFields.get(ds).getText());
+                //System.out.println(mapTextFields.get(ds).getText());
                 double sum = Integer.parseInt(mapTextFields.get(ds).getText()) * ds.getPrice();
-                    for(orderList od : orderLists)
-                    {
-                        if(od.getDishID()==ds.getId())
-                        {
-                            //текущее кол-во + в текстовом поле
-                            od.setAmount(od.getAmount()+Integer.parseInt(mapTextFields.get(ds).getText()));
-                            //сумма = прайс * на новое кол-во
-                            sum = od.getAmount()*ds.getPrice();
-                            //изменить сумму
-                            od.setPrice(sum);
-                            addToTree();
-                            return;
-                        }
+                for (orderList od : orderLists) {
+                    if (od.getDishID() == ds.getId()) {
+                        //текущее кол-во + в текстовом поле
+                        od.setAmount(od.getAmount() + Integer.parseInt(mapTextFields.get(ds).getText()));
+                        //сумма = прайс * на новое кол-во
+                        sum = od.getAmount() * ds.getPrice();
+                        //изменить сумму
+                        od.setPrice(sum);
+                        addToTree();
+                        return;
                     }
-                    orderLists.add(new orderList(0, 0, ds.getId(), ds.getName(), Integer.parseInt(mapTextFields.get(ds).getText()), sum));
-                    addToTree();
+                }
+                orderLists.add(new orderList(0, 0, ds.getId(), ds.getName(), Integer.parseInt(mapTextFields.get(ds).getText()), sum));
+                addToTree();
             }
         });
         btnSubmit.setPrefHeight(30);
@@ -254,7 +239,7 @@ public class EmployeeController {
         amount.setPrefHeight(30);
         amount.setAlignment(Pos.CENTER);
 
-        mapTextFields.put(ds,amount);
+        mapTextFields.put(ds, amount);
 
         btnPlus.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -280,11 +265,34 @@ public class EmployeeController {
     }
 
     public void checkClose(Event event) {
+        if (orderLists.size() != 0) {
+            String message = "";
+            for (int i = 0 ; i < orderLists.size();i++)
+            {
+                message += orderLists.get(i).getDishName() + " - " + orderLists.get(i).getAmount() + " шт. - "+ orderLists.get(i).getPrice()+" грн.\n";
+            }
+            double summ = sum(orderLists);
+            if (confirmAlert.confirmAlert("Подтвердить заказ на сумму " + summ + " гривен", message, "Закрить заказ?")) {
+                String str = comands.cassirSent(orderLists, summ);
+                confirmAlert.fifthSecondAlert("Заказ принят",str);
+                orderLists.clear();
+                addToTree();
+                ReUse();
+            }
+        } else {
+            sampleAlert sa = new sampleAlert("Ошибка", "Чек пустой", "Чек не должен быть пустой, добавьте в заказ блюда", Alert.AlertType.ERROR);
+        }
     }
 
     public void btnALlClicked(Event event) {
-        gridPane.getChildren().clear();
-        generateVbox(gridPane);
-        scPane.setContent(gridPane);
+        ReUse();
+    }
+
+    private double sum(ArrayList<orderList> ord) {
+        double summ = 0.0;
+        for (int i = 0; i < ord.size(); i++) {
+            summ += ord.get(i).getPrice();
+        }
+        return summ;
     }
 }

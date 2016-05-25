@@ -204,7 +204,7 @@ public class AdminController {
     @FXML
     private TableColumn<orders, String> ordDate;
     @FXML
-    private TableColumn<orders, Character> ordCompliteORnot;
+    private TableColumn<orders, String> ordCompliteORnot;
 
     private void ordersInitialize() {
         OrderList order = new OrderList(0);

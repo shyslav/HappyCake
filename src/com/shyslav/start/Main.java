@@ -1,6 +1,7 @@
 package com.shyslav.start;
 
 import com.shyslav.controller.Admin.AdminController;
+import com.shyslav.controller.Cook.CookController;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.sampleEditUpdate;
 import com.shyslav.controller.Employee.EmployeeController;
@@ -18,6 +19,7 @@ public class Main extends Application {
     public static MainItems controllerMainItems;
     public static AdminController controllerAdminItems;
     public static EmployeeController employeeController;
+    public static CookController cookConroller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -57,7 +59,13 @@ public class Main extends Application {
         mainLayout.setCenter(employeeItem);
         employeeController = loader.getController();
     }
-
+    public static void chooseScreenCook() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../fxml/Cook/CookForm.fxml"));
+        BorderPane employeeItem = loader.load();
+        mainLayout.setCenter(employeeItem);
+        cookConroller = loader.getController();
+    }
     public static void chooseScreenAdmin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../fxml/Admin/AdminPane.fxml"));

@@ -22,6 +22,7 @@ public class serverConnection {
     public serverConnection() {
         try {
             this.connection = new Socket("127.0.0.1", 8189);
+            this.objOutputStream = new ObjectOutputStream(connection.getOutputStream());
             //входящий поток
             this.inputStream = connection.getInputStream();
             this.scanner = new Scanner(inputStream);

@@ -64,9 +64,9 @@ public class MainController {
                 break;
             case "imgCook":
                 if (serverConnection.emp == null) {
-                    main.alertEnterDialog("Cook Entered Form", "Enter your password and username please");
+                    main.alertEnterDialog("CookController Entered Form", "Enter your password and username please");
                 } else {
-
+                    main.chooseScreenCook();
                 }
                 break;
             case "imgEmployee":

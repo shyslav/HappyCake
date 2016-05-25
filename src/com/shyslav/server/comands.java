@@ -1,11 +1,13 @@
 package com.shyslav.server;
 
 import com.shyslav.controller.MainItems;
+import com.shyslav.controller.alert.sampleAlert;
 import com.shyslav.models.*;
 import com.shyslav.start.Main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -149,6 +151,7 @@ public class comands {
         }
         return null;
     }
+
     public static ArrayList<preOrderTable> getPreOrder(String id) {
         if (id == null) {
             serverConnection.printWriter.println("selectPreOrder:" + 0);
@@ -176,6 +179,7 @@ public class comands {
         }
         return null;
     }
+
     public static ArrayList<employees> getEmployees(String id) {
         if (id == null) {
             serverConnection.printWriter.println("selectEmployees:" + 0);
@@ -231,6 +235,7 @@ public class comands {
         }
         return null;
     }
+
     public static ArrayList<cafeCoordinate> getCafeCoordinate(String id) {
         if (id == null) {
             serverConnection.printWriter.println("selectCafeCoordinte:" + 0);
@@ -258,6 +263,7 @@ public class comands {
         }
         return null;
     }
+
     public static ArrayList<position> getPosition(String id) {
         if (id == null) {
             serverConnection.printWriter.println("selectPositions:" + 0);
@@ -341,8 +347,9 @@ public class comands {
         }
         return null;
     }
-    public static String delete(String table,int id) {
-        serverConnection.printWriter.println("deleteFromTable:" +table+","+ id);
+
+    public static String delete(String table, int id) {
+        serverConnection.printWriter.println("deleteFromTable:" + table + "," + id);
         try {
             if (serverConnection.objInputStream == null)
                 serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
@@ -362,8 +369,9 @@ public class comands {
         }
         return null;
     }
-    public static String getValueToUpdate(String table,String what,int id) {
-        serverConnection.printWriter.println("getValueToUpdate:" +table+","+what+","+ id);
+
+    public static String getValueToUpdate(String table, String what, int id) {
+        serverConnection.printWriter.println("getValueToUpdate:" + table + "," + what + "," + id);
         try {
             if (serverConnection.objInputStream == null)
                 serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
@@ -383,9 +391,9 @@ public class comands {
         }
         return null;
     }
+
     public static String executeComand(String comand) {
-        if(comand==null)
-        {
+        if (comand == null) {
             return "Ошибка";
         }
         serverConnection.printWriter.println(comand);
@@ -408,12 +416,12 @@ public class comands {
         }
         return null;
     }
-    public static ArrayList<ReportsGraph> getReportsGraph(String chart,String dateStart, String dateEnd) {
-        if(dateStart == null || dateEnd==null)
-        {
+
+    public static ArrayList<ReportsGraph> getReportsGraph(String chart, String dateStart, String dateEnd) {
+        if (dateStart == null || dateEnd == null) {
             serverConnection.printWriter.println("selectGrapgMonth:" + chart);
-        }else {
-            serverConnection.printWriter.println("selectGrapg:" + chart+","+dateStart+","+dateEnd);
+        } else {
+            serverConnection.printWriter.println("selectGrapg:" + chart + "," + dateStart + "," + dateEnd);
         }
         try {
             if (serverConnection.objInputStream == null)
@@ -459,5 +467,40 @@ public class comands {
             System.out.println(e);
         }
         return null;
+    }
+
+    public static String cassirSent(ArrayList<orderList> od, double price) {
+        int employeeID = serverConnection.emp.get(0).getId();
+        try {
+            if (serverConnection.objOutputStream == null) {
+                serverConnection.objOutputStream = new ObjectOutputStream(serverConnection.connection.getOutputStream());
+            }
+            serverConnection.printWriter.println("readObj:" + employeeID + "," + price);
+            sleep();
+            serverConnection.objOutputStream.writeUnshared(od);
+            Object object = null;
+            try {
+                object = serverConnection.objInputStream.readObject();
+            } catch (ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            if (object.equals("not found")) {
+                return null;
+            } else {
+                return (String) object;
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        sampleAlert.SystemError();
+        return "error";
+    }
+
+    private static void sleep() {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

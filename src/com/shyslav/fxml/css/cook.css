@@ -1,0 +1,8 @@
+.buttonClass
+{
+    -fx-background-color: #fec894;
+}
+.button:hover
+{
+    -fx-background-color: red;
+}

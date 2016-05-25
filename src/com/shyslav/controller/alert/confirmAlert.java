@@ -27,4 +27,12 @@ public class confirmAlert {
             return false;
         }
     }
+    public static void fifthSecondAlert(String title,String text)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
 }
