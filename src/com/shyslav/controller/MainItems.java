@@ -1,6 +1,7 @@
 package com.shyslav.controller;
 
 import com.shyslav.controller.Admin.AdminController;
+import com.shyslav.controller.Cook.CookModel;
 import com.shyslav.server.serverConnection;
 import com.shyslav.start.Main;
 import javafx.event.ActionEvent;

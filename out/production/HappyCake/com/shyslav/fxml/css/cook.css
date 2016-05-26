@@ -6,3 +6,11 @@
 {
     -fx-background-color: red;
 }
+.textareastyle
+{
+    -fx-background-color: #fec894;
+    -fx-backgorund: red;
+}
+.textareastyle .content{
+    -fx-background-color: red;
+}

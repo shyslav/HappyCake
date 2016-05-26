@@ -7,3 +7,9 @@
     -fx-font-size: 14;
     -fx-underline: true;
 }
+.toolBar
+{
+    -fx-background-image: url("/data/img/header.jpg");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}

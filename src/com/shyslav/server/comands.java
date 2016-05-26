@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by Shyshkin Vladyslav on 16.05.2016.
@@ -494,6 +495,41 @@ public class comands {
         }
         sampleAlert.SystemError();
         return "error";
+    }
+
+    public static LinkedList<CookOrder> getCookList() {
+        serverConnection.printWriter.println("getCookList:");
+        try {
+            if (serverConnection.objInputStream == null)
+                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            sleep();
+            Object object = serverConnection.objInputStream.readObject();
+            if (object.equals("not found")) {
+                return null;
+            }
+            LinkedList<CookOrder> cas = (LinkedList<CookOrder>) object;
+            return cas;
+        } catch (IOException e) {
+            System.out.println("Не правильно введенные данные");
+            System.out.println(e);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public static void cookCompliteOrder(int id)
+    {
+        serverConnection.printWriter.println("compliteCookOrder:"+id);
+        try {
+            if (serverConnection.objInputStream == null)
+                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void sleep() {

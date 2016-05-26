@@ -2,16 +2,22 @@ package com.shyslav.start;
 
 import com.shyslav.controller.Admin.AdminController;
 import com.shyslav.controller.Cook.CookController;
+import com.shyslav.controller.Cook.CookModel;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.sampleEditUpdate;
 import com.shyslav.controller.Employee.EmployeeController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class Main extends Application {
     private static Stage primaryStage;
@@ -27,6 +33,25 @@ public class Main extends Application {
         this.primaryStage.setTitle("EmployeeApp");
         showMainView();
         showMainItems();
+        Platform.setImplicitExit(false);
+        primaryStage.setOnCloseRequest((WindowEvent we) ->
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Подтверждение");
+            alert.setHeaderText("Вы дейстивительно хотите выйти из программы?");
+            Optional<ButtonType> closeResponse = alert.showAndWait();
+            if (!ButtonType.OK.equals(closeResponse.get())) {
+                System.out.println("cancel");
+                we.consume();
+            }else
+            {
+                if(CookModel.tr!=null) {
+                    CookModel.tr.interrupt();
+                }
+                System.out.println("ok");
+                System.exit(0);
+            }
+        });
     }
     /**
      * Загрузка меин панели
