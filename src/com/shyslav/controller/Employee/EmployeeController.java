@@ -72,7 +72,6 @@ public class EmployeeController {
 
         scPane.setContent(gridPane);
 
-        //Кнопка на категории, сделать сорт листа
         for (_Cassir cs : cas) {
             Button btn = generateBtnCategory(cs.getName());
             VboxButtons.getChildren().add(btn);
@@ -168,12 +167,6 @@ public class EmployeeController {
         cas = comands.getCassirData();
     }
 
-    private void addToAnhorPane(Node element) {
-        AnchorTest.getChildren().addAll(element);
-        AnchorTest.setRightAnchor(element, 0.0);
-        AnchorTest.setLeftAnchor(element, 0.0);
-        AnchorTest.setTopAnchor(element, 0.0);
-    }
 
     private Label generateLabel(String name) {
         Label label = new Label(name);
