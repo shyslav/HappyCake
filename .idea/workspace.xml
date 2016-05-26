@@ -2,27 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bccbba6-20a4-43d7-9e95-72baf0ec060e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/cookMusic.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/data/img/header.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/CookOrder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/orderListCook.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookController$1$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookController$1.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookController.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/MainItems.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/MainItems.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/server/comands.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/server/comands.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel$1.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel$2.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Cook/CookModel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$1.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$2.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$3.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$4.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$5.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/Employee/EmployeeController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/MainController.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/MainController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/alert/sampleAlert.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/alert/sampleAlert.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/alert/sampleEditUpdate.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/controller/alert/sampleEditUpdate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/server/serverConnection.class" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/server/serverConnection.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Cook/CookForm.fxml" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Cook/CookForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/MainView.fxml" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/MainView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/cook.css" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/cook.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/my.css" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/my.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/MainItems.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/MainItems.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/server/comands.java" afterPath="$PROJECT_DIR$/src/com/shyslav/server/comands.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/start/Main.java" afterPath="$PROJECT_DIR$/src/com/shyslav/start/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/MainController.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/MainController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" afterPath="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" />
     </list>
     <ignored path="HappyCake.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/start/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,51 +60,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CookController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32976446">
-              <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1565#1566#0" expanded="true" />
-                <element signature="e#1623#1624#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CookModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java">
+      <file leaf-file-name="serverConnection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/MainController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="enterDialogController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CookModel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7268519">
+              <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CookForm.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.0">
-              <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -110,7 +106,17 @@
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/comands.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="537" column="42" selection-start-line="537" selection-start-column="42" selection-end-line="537" selection-end-column="42" />
+              <caret line="417" column="0" selection-start-line="417" selection-start-column="0" selection-end-line="417" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sampleAlert.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -157,19 +163,15 @@
         <option value="$PROJECT_DIR$/src/com/sukhaniuk/interfaces/impls/OrdersOrderList.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/orderList.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/resources/DomReader.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/resources/databaseFields.xml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/preOrderTable.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/EmployeeController/EmployeeController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/Cassir.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Employee/EmployeeForm.fxml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/_Cassir.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/orders.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/Admin/AdminController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/confirmAlert.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/Cook.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Cook/my.css" />
         <option value="$PROJECT_DIR$/src/css/my.css" />
@@ -177,7 +179,6 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Cook/css/cook.css" />
         <option value="$PROJECT_DIR$/src/css/cook.css" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css" />
@@ -186,8 +187,13 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/models/CookOrder.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/server/comands.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/start/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java" />
       </list>
     </option>
   </component>
@@ -1441,12 +1447,12 @@
       <workItem from="1461323921916" duration="2976000" />
       <workItem from="1463394407439" duration="18000" />
       <workItem from="1463394449550" duration="81544000" />
-      <workItem from="1464007719332" duration="58528000" />
+      <workItem from="1464007719332" duration="69710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147339000" />
+    <option name="totallyTimeSpent" value="158521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
@@ -1459,7 +1465,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5025707" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32005495" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36813188" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1469,13 +1475,38 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39835164" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39697802" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32554945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5025707" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36942676" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31472492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.4974293" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39808917" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1492,19 +1523,25 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java</url>
-          <line>44</line>
+          <url>file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java</url>
+          <line>52</line>
           <properties />
-          <option name="timeStamp" value="59" />
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java</url>
-          <line>54</line>
+          <url>file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java</url>
+          <line>146</line>
           <properties />
-          <option name="timeStamp" value="60" />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java</url>
+          <line>164</line>
+          <properties />
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="61" />
+      <option name="time" value="86" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1513,73 +1550,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/javafx-src.zip!/javafx/stage/Stage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-          <folding>
-            <element signature="e#7520#7521#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../HappyCakeServer/src/com/shyslav/models/cafeCoordinate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33116883">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33256352">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#8916#8917#0" expanded="false" />
-            <element signature="e#8951#8952#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/preOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36796537">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/preOrderTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6991342">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="e#564#565#0" expanded="false" />
-            <element signature="e#589#590#0" expanded="false" />
-            <element signature="e#622#623#0" expanded="false" />
-            <element signature="e#650#651#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/ReportsGraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1595,14 +1565,6 @@
           <folding>
             <element signature="e#983#984#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1722,22 +1684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Admin/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17">
-          <caret line="310" column="52" selection-start-line="310" selection-start-column="52" selection-end-line="310" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51428574">
-          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5">
@@ -1769,33 +1715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23452158">
-          <caret line="17" column="33" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80243903">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33170733">
-          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2520#2529#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/src.zip!/java/net/SocketInputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33170733">
@@ -1816,14 +1735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45396146">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="100" selection-end-column="121" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1873,17 +1784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0">
-          <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1897,7 +1797,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="980" column="0" selection-start-line="980" selection-start-column="0" selection-end-line="980" selection-end-column="0" />
           <folding>
-            <element signature="e#42625#42626#0" expanded="true" />
+            <element signature="e#42625#42626#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1915,24 +1815,6 @@
         <state vertical-scroll-proportion="1.1804878">
           <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/comands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="537" column="42" selection-start-line="537" selection-start-column="42" selection-end-line="537" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/start/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1954,24 +1836,260 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java">
+    <entry file="uml://MODULES/mdl-HappyCake">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement>mdl-HappyCake</OriginalElement>
+          <nodes>
+            <node x="0.0" y="0.0">mdl-HappyCake</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-111.0" y="84.5" />
+          <SelectedNodes>
+            <node>mdl-HappyCake</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Libraries</Category>
+            <Category>Test dependencies</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="0.0" y="225.0">com</node>
+            <node x="0.0" y="0.0">META-INF</node>
+            <node x="0.0" y="375.0">jdk</node>
+            <node x="0.0" y="75.0">models</node>
+            <node x="181.0" y="0.0">netscape</node>
+            <node x="165.0" y="75.0">oracle</node>
+            <node x="0.0" y="300.0">java</node>
+            <node x="150.0" y="225.0">data</node>
+            <node x="156.0" y="150.0">javax</node>
+            <node x="292.0" y="300.0">org</node>
+            <node x="0.0" y="150.0">javafx</node>
+            <node x="147.0" y="300.0">sun</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.8023529411764706" x="-33.20234604105576" y="289.1202346041056" />
+          <SelectedNodes>
+            <node>com</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/com">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>com</OriginalElement>
+          <nodes>
+            <node x="0.0" y="75.0">com.shyslav</node>
+            <node x="0.0" y="150.0">com.oracle</node>
+            <node x="158.0" y="150.0">com.sun</node>
+            <node x="0.0" y="0.0">com.sukhaniuk</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-54.5" y="159.5" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/classDiagram.uml">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="0.0" y="0.0">com.shyslav.controller.Admin.AdminController</node>
+            <node x="0.0" y="75.0">data.DataUpdater</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="-1259.9999999999995" y="-155.0" />
+          <SelectedNodes>
+            <node>com.shyslav.controller.Admin.AdminController</node>
+            <node>data.DataUpdater</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/com.shyslav.controller.Admin.AdminController">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>com.shyslav.controller.Admin.AdminController</OriginalElement>
+          <nodes>
+            <node x="" y="">com.shyslav.controller.MainItems</node>
+            <node x="" y="">com.shyslav.controller.Admin.AdminController</node>
+            <node x="" y="">com.shyslav.controller.alert.enterDialogController</node>
+            <node x="" y="">com.shyslav.controller.alert.confirmAlert</node>
+            <node x="" y="">com.shyslav.controller.MainController</node>
+            <node x="" y="">com.shyslav.controller.Cook.CookController</node>
+            <node x="" y="">com.shyslav.controller.Cook.CookModel</node>
+            <node x="" y="">com.shyslav.controller.alert.sampleEditUpdate</node>
+            <node x="" y="">com.shyslav.controller.alert.sampleAlert</node>
+            <node x="" y="">com.shyslav.controller.Employee.EmployeeController</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="2814.666666666666" y="731.9999999999995" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Admin/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="260" column="0" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54433495">
+          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1458886">
+          <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/javafx-src.zip!/javafx/scene/input/MouseEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="628" column="0" selection-start-line="628" selection-start-column="0" selection-end-line="628" selection-end-column="0" />
+          <folding>
+            <element signature="e#26722#26723#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleAlert.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5578704">
+          <caret line="56" column="42" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1498#1499#0" expanded="true" />
+            <element signature="e#1547#1548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/start/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32976446">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.4513889">
+          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+          <folding>
+            <element signature="e#6288#6289#0" expanded="true" />
+            <element signature="e#6333#6334#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/comands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="417" column="0" selection-start-line="417" selection-start-column="0" selection-end-line="417" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21527778">
+          <caret line="180" column="17" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7268519">
+          <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1565#1566#0" expanded="true" />
-            <element signature="e#1623#1624#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -158,16 +158,7 @@ public class sampleEditUpdate {
                 com += "'"+roles.get(i).getKeyValue().getValue() + "',";
             }
         }
-        String result = comands.executeComand(com);
-        if(result.equals("done"))
-        {
-            Main.controllerAdminItems.ReInit();
-            WindowsClose();
-        }else
-        {
-            sampleAlert sa = new sampleAlert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам",result, Alert.AlertType.ERROR);
-        }
-        System.out.println(com);
+        comandEvent(com);
     }
 
     private void createUpdateCommand() {
@@ -185,8 +176,16 @@ public class sampleEditUpdate {
                 com += roles.get(i).getKeyValue().getKey() + " = '" + roles.get(i).getKeyValue().getValue() + "',";
             }
         }
+        comandEvent(com);
+    }
+    private void comandEvent(String com)
+    {
         String result = comands.executeComand(com);
-        if(result.equals("done"))
+        if(result == null)
+        {
+            sampleAlert.ConnectionError();
+        }
+        else if(result.equals("done"))
         {
             Main.controllerAdminItems.ReInit();
             WindowsClose();
@@ -196,7 +195,6 @@ public class sampleEditUpdate {
         }
         System.out.println(com);
     }
-
     private void WindowsClose()
     {
         updateStage.close();

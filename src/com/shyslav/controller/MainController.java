@@ -1,5 +1,6 @@
 package com.shyslav.controller;
 
+import com.shyslav.controller.alert.sampleAlert;
 import com.shyslav.server.serverConnection;
 import com.shyslav.start.Main;
 import javafx.event.Event;
@@ -59,7 +60,12 @@ public class MainController {
                 if (serverConnection.emp == null) {
                     main.alertEnterDialog("Admin Entered Form", "Enter your password and username please");
                 } else {
-                    Main.chooseScreenAdmin();
+                    if(serverConnection.emp.get(0).getPositionID()==1) {
+                        Main.chooseScreenAdmin();
+                    }else
+                    {
+                        sampleAlert.RuleError();
+                    }
                 }
                 break;
             case "imgCook":
@@ -74,7 +80,12 @@ public class MainController {
                 if (serverConnection.emp == null) {
                     main.alertEnterDialog("Employee Entered Form", "Enter your password and username please");
                 } else {
-                    main.chooseScreenEmployee();
+                    if(serverConnection.emp.get(0).getPositionID()==2||serverConnection.emp.get(0).getPositionID()==1) {
+                        main.chooseScreenEmployee();
+                    }else
+                    {
+                        sampleAlert.RuleError();
+                    }
                 }
                 break;
         }

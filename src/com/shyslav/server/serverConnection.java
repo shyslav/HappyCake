@@ -1,11 +1,15 @@
 package com.shyslav.server;
 
+import com.shyslav.controller.alert.sampleAlert;
 import com.shyslav.models.employees;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.jar.Pack200;
 
 /**
  * Created by Shyshkin Vladyslav on 16.05.2016.
@@ -30,8 +34,9 @@ public class serverConnection {
             this.outputStream = connection.getOutputStream();
             this.printWriter = new PrintWriter(outputStream, true);
             this.emp = new ArrayList<>();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.out.println(ex);
+            sampleAlert.ConnectionError();
         }
     }
 }

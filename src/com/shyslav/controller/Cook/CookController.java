@@ -1,10 +1,13 @@
 package com.shyslav.controller.Cook;
 
 import com.shyslav.controller.alert.confirmAlert;
+import com.shyslav.controller.alert.sampleAlert;
 import com.shyslav.server.comands;
+import com.shyslav.server.serverConnection;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -31,7 +34,6 @@ public class CookController {
     private WebView webView7;
     @FXML
     private WebView webView8;
-    private Thread mainThread;
     ArrayList<WebView> webViews = new ArrayList<>();
     String[] colors = {"#fa9994", "#ffb69e", "#ffd5b3", "#fce0cb", "#fff9c2", "#f6ffa9", "#d6ff8d", "#9bff7c"};
 
@@ -50,16 +52,10 @@ public class CookController {
         webViews.add(webView8);
         generate();
     }
-    Task<Void> task = new Task<Void>() {
-        @Override protected Void call() throws Exception {
-                Platform.runLater(new Runnable() {
-                    @Override public void run() {
-                        generate();
-                    }
-                });
-            return null;
-        }
-    };
+    public void updateOrders()
+    {
+        Platform.runLater(()->generate());
+    }
     public void generate() {
         int listSize = 0;
         String style = "<html><head>" +
@@ -115,13 +111,23 @@ public class CookController {
 
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            Object source = event.getSource();
-            WebView clicked = (WebView) source;
-            System.out.println(clicked.getId());
-            int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1"))-1;
-            System.out.println(firstNumber);
-            if(confirmAlert.confirmAlert("Подтверждение закрытия","Ваша зарплата не безгранична","Вы точно выполнили этот заказ?")) {
-                comands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
+            if (serverConnection.emp.get(0).getPositionID() == 3) {
+                Object source = event.getSource();
+                WebView clicked = (WebView) source;
+                System.out.println(clicked.getId());
+                int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
+                System.out.println(firstNumber);
+                if (confirmAlert.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                    if (CookModel.list.size() > firstNumber) {
+                        comands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
+                    } else {
+                        sampleAlert sa = new sampleAlert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
+                    }
+                }
+            }
+            else
+            {
+                sampleAlert.RuleError();
             }
         }
     }

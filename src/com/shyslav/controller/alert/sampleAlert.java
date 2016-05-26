@@ -17,4 +17,13 @@ public class sampleAlert {
     {
         sampleAlert sa = new sampleAlert("Системная ошибка","Возникла ошибка при работе сервера","Обратитесь к разработчикам", Alert.AlertType.ERROR);
     }
+    public static void RuleError()
+    {
+        sampleAlert sa = new sampleAlert("Ошибка доступа","Данный раздел для вас закрыт","Обратитесь к администратору для выдачи прав", Alert.AlertType.ERROR);
+    }
+    public static void ConnectionError()
+    {
+        sampleAlert sa = new sampleAlert("Ошибка","Сервер не отвечает, попробуйте позже","Обратитесь к администратору или разработчикам", Alert.AlertType.ERROR);
+        System.exit(0);
+    }
 }

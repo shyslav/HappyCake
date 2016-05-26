@@ -54,6 +54,9 @@ public class EmployeeController {
     private void initialize() {
         handlerTreeView();
         generateList();
+        if (cas.size() == 0) {
+            sampleAlert.ConnectionError();
+        }
         gridPane.setPadding(new Insets(5));
         gridPane.setHgap(5);
         gridPane.setVgap(5);
@@ -91,8 +94,8 @@ public class EmployeeController {
             });
         }
     }
-    private void ReUse()
-    {
+
+    private void ReUse() {
         mapTextFields.clear();
         gridPane.getChildren().clear();
         generateVbox(gridPane);
@@ -162,7 +165,7 @@ public class EmployeeController {
     }
 
     private void generateList() {
-         cas = comands.getCassirData();
+        cas = comands.getCassirData();
     }
 
     private void addToAnhorPane(Node element) {
@@ -267,14 +270,13 @@ public class EmployeeController {
     public void checkClose(Event event) {
         if (orderLists.size() != 0) {
             String message = "";
-            for (int i = 0 ; i < orderLists.size();i++)
-            {
-                message += orderLists.get(i).getDishName() + " - " + orderLists.get(i).getAmount() + " шт. - "+ orderLists.get(i).getPrice()+" грн.\n";
+            for (int i = 0; i < orderLists.size(); i++) {
+                message += orderLists.get(i).getDishName() + " - " + orderLists.get(i).getAmount() + " шт. - " + orderLists.get(i).getPrice() + " грн.\n";
             }
             double summ = sum(orderLists);
             if (confirmAlert.confirmAlert("Подтвердить заказ на сумму " + summ + " гривен", message, "Закрить заказ?")) {
                 String str = comands.cassirSent(orderLists, summ);
-                confirmAlert.fifthSecondAlert("Заказ принят",str);
+                confirmAlert.fifthSecondAlert("Заказ принят", str);
                 orderLists.clear();
                 addToTree();
                 ReUse();
