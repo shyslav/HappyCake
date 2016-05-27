@@ -2,6 +2,7 @@ package com.shyslav.controller.alert;
 
 import com.shyslav.server.comands;
 import com.shyslav.server.serverConnection;
+import com.shyslav.start.Main;
 import com.shyslav.start.enterDialogs;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -49,6 +50,7 @@ public class enterDialogController {
             }
             if(comands.login(txtFieldUsername.getText(), txtFieldPassword.getText()))
             {
+                Main.controllerMainItems.setBtnExit(true);
                 actionCancel(event);
             }
             else

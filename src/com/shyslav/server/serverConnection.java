@@ -39,5 +39,12 @@ public class serverConnection {
             sampleAlert.ConnectionError();
         }
     }
+    public static void dispatcher()
+    {
+        connection = null;
+        objOutputStream = null;
+        objInputStream = null;
+        emp=null;
+    }
 }
 

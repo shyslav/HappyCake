@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@css/tabpane.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.Admin.AdminController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/my.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.Admin.AdminController">
    <center>
       <AnchorPane>
          <children>
@@ -530,7 +530,7 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <BarChart fx:id="barChartFirst" prefHeight="230.0" prefWidth="307.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <BarChart fx:id="barChartFirst" prefHeight="230.0" prefWidth="307.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -542,7 +542,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <LineChart fx:id="lineChart" prefHeight="216.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <LineChart fx:id="lineChart" prefHeight="216.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
@@ -562,7 +562,7 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="400.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <PieChart fx:id="pieChart" onMouseEntered="#pieChartMouseEntered" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      <PieChart fx:id="pieChart" onMouseEntered="#pieChartMouseEntered" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                       <Label fx:id="labelPercent" layoutX="358.0" layoutY="77.0" text="Label" AnchorPane.bottomAnchor="76.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="77.0" />
                                                    </children>
                                                 </AnchorPane>
@@ -588,7 +588,7 @@
                                                                   </Button>
                                                                </children>
                                                             </AnchorPane>
-                                                            <AnchorPane GridPane.rowIndex="3">
+                                                            <AnchorPane style="-fx-background-color: white;" GridPane.rowIndex="3">
                                                                <children>
                                                                   <Button mnemonicParsing="false" onMouseClicked="#periodMouseClick" text="Отчет за период" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <font>
@@ -597,7 +597,7 @@
                                                                   </Button>
                                                                </children>
                                                             </AnchorPane>
-                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
                                                                <children>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                                                                      <children>
@@ -607,9 +607,9 @@
                                                                   </HBox>
                                                                </children>
                                                             </AnchorPane>
-                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <children>
                                                                         <Label text="Конец периода" />
                                                                         <DatePicker fx:id="dataPickerEnd" />

@@ -22,18 +22,18 @@
                <children>
                   <StackPane>
                      <children>
-                        <ImageView fx:id="imgAdmin" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" BorderPane.alignment="CENTER">
+                        <ImageView fx:id="imgAdmin" fitHeight="180.0" fitWidth="180.0" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" BorderPane.alignment="CENTER">
                            <image>
-                              <Image url="@../../../data/img/LoginImages/admin.jpg" />
+                              <Image url="@../../../data/img/LoginImages/admin.png" />
                            </image>
                            <BorderPane.margin>
                               <Insets left="25.0" />
                            </BorderPane.margin>
                            <StackPane.margin>
-                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                              <Insets bottom="25.0" right="25.0" top="25.0" />
                            </StackPane.margin>
                         </ImageView>
-                        <Label styleClass="personalText" text="Administrator" StackPane.alignment="TOP_CENTER" />
+                        <Label prefHeight="30.0" prefWidth="157.0" styleClass="personalText" text="Administrator" StackPane.alignment="TOP_CENTER" />
                      </children>
                   </StackPane>
                </children>
@@ -45,7 +45,7 @@
                <children>
                   <StackPane GridPane.columnIndex="1">
                      <children>
-                        <ImageView fx:id="imgEmployee" fitHeight="150.0" fitWidth="200.0" nodeOrientation="INHERIT" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" BorderPane.alignment="CENTER">
+                        <ImageView fx:id="imgEmployee" fitHeight="180.0" fitWidth="180.0" nodeOrientation="INHERIT" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@../../../data/img/LoginImages/employee.png" />
                            </image>
@@ -53,10 +53,10 @@
                               <Insets right="25.0" />
                            </BorderPane.margin>
                            <StackPane.margin>
-                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                              <Insets bottom="25.0" right="25.0" top="25.0" />
                            </StackPane.margin>
                         </ImageView>
-                        <Label styleClass="personalText" text="Employee" StackPane.alignment="TOP_CENTER" />
+                        <Label prefHeight="30.0" prefWidth="109.0" styleClass="personalText" text="Employee" StackPane.alignment="TOP_CENTER" />
                      </children>
                   </StackPane>
                </children>
@@ -68,7 +68,7 @@
                <children>
                   <StackPane GridPane.columnIndex="2">
                      <children>
-                        <ImageView fx:id="imgCook" fitHeight="150.0" fitWidth="200.0" layoutX="364.0" layoutY="14.0" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ImageView fx:id="imgCook" fitHeight="180.0" fitWidth="180.0" layoutX="364.0" layoutY="14.0" onMouseClicked="#enterMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="imageShadow" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <image>
                               <Image url="@../../../data/img/LoginImages/cook.png" />
                            </image>
@@ -76,10 +76,10 @@
                               <Insets left="25.0" right="25.0" />
                            </BorderPane.margin>
                            <StackPane.margin>
-                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                              <Insets bottom="25.0" right="25.0" top="25.0" />
                            </StackPane.margin>
                         </ImageView>
-                        <Label styleClass="personalText" text="Cook" StackPane.alignment="TOP_CENTER" />
+                        <Label prefHeight="30.0" prefWidth="73.0" styleClass="personalText" text="Cook" StackPane.alignment="TOP_CENTER" />
                      </children>
                   </StackPane>
                </children>
