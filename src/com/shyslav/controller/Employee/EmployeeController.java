@@ -49,9 +49,13 @@ public class EmployeeController {
     private ScrollPane scPane;
     @FXML
     private Button btnAll;
+    @FXML
+    private ScrollPane scrollTest;
 
     @FXML
     private void initialize() {
+        //Авторазширение ScrollPane
+        scrollTest.setFitToWidth(true);
         handlerTreeView();
         generateList();
         if (cas.size() == 0) {

@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6bccbba6-20a4-43d7-9e95-72baf0ec060e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/data/img/LoginImages/admin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/data/img/logo_cup.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/data/img/LoginImages/admin.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/data/img/LoginImages/cook.png" afterPath="$PROJECT_DIR$/out/production/HappyCake/data/img/LoginImages/cook.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/data/img/LoginImages/employee.png" afterPath="$PROJECT_DIR$/out/production/HappyCake/data/img/LoginImages/employee.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/img/LoginImages/cook.png" afterPath="$PROJECT_DIR$/src/data/img/LoginImages/cook.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/img/LoginImages/employee.png" afterPath="$PROJECT_DIR$/src/data/img/LoginImages/employee.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Admin/AdminPane.fxml" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Admin/AdminPane.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Employee/EmployeeForm.fxml" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/Employee/EmployeeForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/LoginForm.fxml" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/LoginForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/cook.css" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/cook.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/my.css" afterPath="$PROJECT_DIR$/out/production/HappyCake/com/shyslav/fxml/css/my.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/MainItems.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/MainItems.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/Employee/EmployeeForm.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/Employee/EmployeeForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/LoginForm.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/LoginForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css" afterPath="$PROJECT_DIR$/src/com/shyslav/fxml/css/my.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" afterPath="$PROJECT_DIR$/src/com/shyslav/server/serverConnection.java" />
-    </list>
+    <list default="true" id="6bccbba6-20a4-43d7-9e95-72baf0ec060e" name="Default" comment="" />
     <ignored path="HappyCake.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -52,7 +29,8 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="101" column="34" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4284#4285#0" expanded="false" />
+                <element signature="e#4312#4313#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -63,7 +41,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1404#1405#0" expanded="false" />
+                <element signature="e#1452#1453#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,20 +54,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminPane.fxml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2122016">
-              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -93,14 +62,14 @@
       </file>
       <file leaf-file-name="LoginForm.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/LoginForm.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.5952382">
+            <state vertical-scroll-proportion="0.0">
               <caret line="72" column="37" selection-start-line="72" selection-start-column="37" selection-end-line="72" selection-end-column="82" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
           </provider>
         </entry>
       </file>
@@ -109,32 +78,34 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="MainView.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.0238094">
+            <state vertical-scroll-proportion="0.0">
               <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmployeeController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmployeeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.206897">
-              <caret line="282" column="16" selection-start-line="282" selection-start-column="16" selection-end-line="282" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.8075">
+              <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
               <folding>
-                <element signature="e#10656#10657#0" expanded="true" />
-                <element signature="e#10679#10680#0" expanded="true" />
+                <element signature="e#10777#10778#0" expanded="true" />
+                <element signature="e#10800#10801#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,10 +117,11 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
               <folding>
-                <element signature="e#1141#1142#0" expanded="true" />
-                <element signature="e#1171#1172#0" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-                <element signature="e#1268#1269#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#934#935#0" expanded="false" />
+                <element signature="e#984#985#0" expanded="false" />
+                <element signature="e#1045#1046#0" expanded="false" />
+                <element signature="e#1107#1108#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -160,7 +132,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="41" column="33" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="33" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,7 +201,6 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/Cook/CookModel.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/sampleEditUpdate.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/LoginForm.fxml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Employee/EmployeeForm.fxml" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css" />
@@ -237,6 +210,7 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/MainItems.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java" />
       </list>
     </option>
   </component>
@@ -255,8 +229,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="886" />
+    <option name="width" value="1296" />
+    <option name="height" value="786" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -284,7 +258,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -829,12 +803,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="P:/java/happyCakeCasirTest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HappyCakeServer" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
@@ -1323,14 +1297,15 @@
       <workItem from="1463394407439" duration="18000" />
       <workItem from="1463394449550" duration="81544000" />
       <workItem from="1464007719332" duration="94439000" />
+      <workItem from="1464673930586" duration="2943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183250000" />
+    <option name="totallyTimeSpent" value="186193000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="786" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1340,12 +1315,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5025707" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36813188" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3677991" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.4974293" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1356,6 +1330,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.4974293" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1462,14 +1437,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/alerts/enterDialogForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.026726058">
           <caret line="43" column="20" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="20" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data/img/header.jpg">
@@ -1491,7 +1466,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33170733">
           <caret line="93" column="23" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1499,7 +1473,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45396146">
           <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="100" selection-end-column="121" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1515,7 +1488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6959315">
           <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1523,7 +1495,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.62682927">
           <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1531,9 +1502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33190578">
           <caret line="1173" column="0" selection-start-line="1173" selection-start-column="0" selection-end-line="1173" selection-end-column="0" />
-          <folding>
-            <element signature="e#40021#40022#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1541,7 +1509,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1549,7 +1516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33170733">
           <caret line="1768" column="0" selection-start-line="1768" selection-start-column="0" selection-end-line="1768" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1575,7 +1541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33170733">
           <caret line="1422" column="0" selection-start-line="1422" selection-start-column="0" selection-end-line="1422" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1589,14 +1554,15 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-111.0" y="84.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-111.0" y="85.0" />
           <SelectedNodes>
             <node>mdl-HappyCake</node>
           </SelectedNodes>
           <Categories>
-            <Category>Libraries</Category>
             <Category>Test dependencies</Category>
+            <Category>Libraries</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
@@ -1621,7 +1587,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.8023529411764706" x="-33.20234604105576" y="289.1202346041056" />
+          <settings layout="Hierarchic Group" zoom="0.8023529411764706" x="-33.0" y="289.0" />
           <SelectedNodes>
             <node>com</node>
           </SelectedNodes>
@@ -1644,14 +1610,14 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-54.5" y="159.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-54.0" y="160.0" />
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
-            <Category>Constructors</Category>
-            <Category>Methods</Category>
-            <Category>Properties</Category>
             <Category>Inner Classes</Category>
+            <Category>Constructors</Category>
+            <Category>Properties</Category>
+            <Category>Methods</Category>
           </Categories>
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
@@ -1669,7 +1635,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="-1259.9999999999995" y="-155.0" />
+          <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="-1260.0" y="-155.0" />
           <SelectedNodes>
             <node>com.shyslav.controller.Admin.AdminController</node>
             <node>data.DataUpdater</node>
@@ -1699,7 +1665,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="2814.666666666666" y="731.9999999999995" />
+          <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="2815.0" y="732.0" />
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
@@ -1732,9 +1698,9 @@
         <state vertical-scroll-proportion="0.5578704">
           <caret line="56" column="42" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1498#1499#0" expanded="true" />
-            <element signature="e#1547#1548#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1498#1499#0" expanded="false" />
+            <element signature="e#1547#1548#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1778,7 +1744,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1792,32 +1758,31 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminBorder.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3809524">
           <caret line="20" column="65" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="65" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Cook/CookForm.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="15" column="79" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="79" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/javafx-src.zip!/javafx/beans/property/ObjectProperty.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1830,14 +1795,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Employee/EmployeeForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6190476">
           <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/css/cook.css">
@@ -1860,7 +1825,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="33" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="33" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1873,14 +1840,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/LoginForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5952382">
+        <state vertical-scroll-proportion="0.0">
           <caret line="72" column="37" selection-start-line="72" selection-start-column="37" selection-end-line="72" selection-end-column="82" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/start/Main.java">
@@ -1888,46 +1855,32 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="101" column="34" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.206897">
-          <caret line="282" column="16" selection-start-line="282" selection-start-column="16" selection-end-line="282" selection-end-column="16" />
-          <folding>
-            <element signature="e#10656#10657#0" expanded="true" />
-            <element signature="e#10679#10680#0" expanded="true" />
+            <element signature="e#4284#4285#0" expanded="false" />
+            <element signature="e#4312#4313#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/MainView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0238094">
+        <state vertical-scroll-proportion="0.0">
           <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/start/enterDialogs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1404#1405#0" expanded="false" />
+            <element signature="e#1452#1453#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1935,7 +1888,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1944,22 +1899,42 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
           <folding>
-            <element signature="e#1141#1142#0" expanded="true" />
-            <element signature="e#1171#1172#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1268#1269#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#934#935#0" expanded="false" />
+            <element signature="e#984#985#0" expanded="false" />
+            <element signature="e#1045#1046#0" expanded="false" />
+            <element signature="e#1107#1108#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/fxml/Admin/AdminPane.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5">
+          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/alert/enterDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2122016">
-          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Employee/EmployeeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8075">
+          <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
+          <folding>
+            <element signature="e#10777#10778#0" expanded="true" />
+            <element signature="e#10800#10801#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
