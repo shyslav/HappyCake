@@ -1,20 +1,93 @@
 package com.shyslav.controller;
 
-import javafx.event.ActionEvent;
+import com.shyslav.controller.alert.sampleAlert;
+import com.shyslav.server.serverConnection;
+import com.shyslav.start.Main;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 
 public class MainController {
+    private Main main;
     @FXML
     private Button btnEmployee;
     @FXML
     private Button btnAdmin;
+    @FXML
+    private ImageView imgAdmin;
+    @FXML
+    private ImageView imgCook;
+    @FXML
+    private ImageView imgEmployee;
 
-    public void btnEmployeeAction(ActionEvent actionEvent) {
 
+    public void mouseEntered(Event event) {
+//        Object source = event.getSource();
+//        if (!(source instanceof ImageView)) {
+//            return;
+//        }
+//        ImageView MouseEntered = (ImageView) source;
+//        switch (MouseEntered.getId()) {
+//            case "imgAdmin":
+//                imgAdmin.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
+//                break;
+//            case "imgCook":
+//                imgCook.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
+//                break;
+//            case "imgEmployee":
+//                imgEmployee.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
+//                break;
+//        }
     }
 
-    public void btnAdminAction(ActionEvent actionEvent) {
-        
+    public void mouseExited(Event event) {
+//        imgAdmin.setStyle("");
+//        imgCook.setStyle("");
+//        imgEmployee.setStyle("");
+    }
+
+    public void enterMouseClicked(Event event) throws IOException {
+        Object source = event.getSource();
+        if (!(source instanceof ImageView)) {
+            return;
+        }
+        ImageView mouseClicked = (ImageView) source;
+        switch (mouseClicked.getId()) {
+            case "imgAdmin":
+                if (serverConnection.emp == null) {
+                    main.alertEnterDialog("Admin Entered Form", "Enter your password and username please");
+                } else {
+                    if(serverConnection.emp.get(0).getPositionID()==1) {
+                        Main.chooseScreenAdmin();
+                    }else
+                    {
+                        sampleAlert.RuleError();
+                    }
+                }
+                break;
+            case "imgCook":
+                if (serverConnection.emp == null) {
+                    main.alertEnterDialog("CookController Entered Form", "Enter your password and username please");
+                } else {
+                    main.chooseScreenCook();
+                }
+                break;
+            case "imgEmployee":
+                //main.chooseScreenEmployee();
+                if (serverConnection.emp == null) {
+                    main.alertEnterDialog("Employee Entered Form", "Enter your password and username please");
+                } else {
+                    if(serverConnection.emp.get(0).getPositionID()==2||serverConnection.emp.get(0).getPositionID()==1) {
+                        main.chooseScreenEmployee();
+                    }else
+                    {
+                        sampleAlert.RuleError();
+                    }
+                }
+                break;
+        }
     }
 }
