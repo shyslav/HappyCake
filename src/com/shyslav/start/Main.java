@@ -6,6 +6,7 @@ import com.shyslav.controller.Cook.CookModel;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.sampleEditUpdate;
 import com.shyslav.controller.Employee.EmployeeController;
+import com.shyslav.fxml.TESTFXML;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -59,7 +60,7 @@ public class Main extends Application {
      */
     private void showMainView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/MainView.fxml"));
+        loader.setLocation(Main.class.getClass().getResource("/com/shyslav/fxml/MainView.fxml"));
         mainLayout = loader.load();
         Scene scene = new Scene(mainLayout);
         controllerMainItems = loader.getController();
@@ -73,27 +74,27 @@ public class Main extends Application {
      */
     public static void showMainItems() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/LoginForm.fxml"));
+        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/LoginForm.fxml"));
         BorderPane mainItem = loader.load();
         mainLayout.setCenter(mainItem);
     }
     public static void chooseScreenEmployee() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/Employee/EmployeeForm.fxml"));
+        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/Employee/EmployeeForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         employeeController = loader.getController();
     }
     public static void chooseScreenCook() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/Cook/CookForm.fxml"));
+        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/Cook/CookForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         cookConroller = loader.getController();
     }
     public static void chooseScreenAdmin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/Admin/AdminPane.fxml"));
+        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/Admin/AdminPane.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         controllerAdminItems = loader.getController();

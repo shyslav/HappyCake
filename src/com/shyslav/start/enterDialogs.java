@@ -26,7 +26,7 @@ public class enterDialogs {
 
     public void start() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../fxml/alerts/enterDialogForm.fxml"));
+        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/alerts/enterDialogForm.fxml"));
         VBox passwordAlert = loader.load();
         enterDialogController controller = loader.getController();
         Stage enterFormStage = new Stage();
