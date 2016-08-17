@@ -34,6 +34,7 @@ public class Main extends Application {
         showMainView();
         showMainItems();
         Platform.setImplicitExit(false);
+        //confirm dialog to exit action
         primaryStage.setOnCloseRequest((WindowEvent we) ->
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
