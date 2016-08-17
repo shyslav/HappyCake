@@ -25,7 +25,7 @@ public class serverConnection {
     public static ObjectOutputStream objOutputStream;
     public serverConnection() {
         try {
-            this.connection = new Socket("109.197.223.224", 2777);
+            this.connection = new Socket("127.0.0.1", 8189);
             this.objOutputStream = new ObjectOutputStream(connection.getOutputStream());
             //входящий поток
             this.inputStream = connection.getInputStream();
