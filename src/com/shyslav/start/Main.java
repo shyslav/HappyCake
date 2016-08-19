@@ -5,7 +5,7 @@ import com.shyslav.controller.Cook.CookController;
 import com.shyslav.controller.Cook.CookModel;
 import com.shyslav.controller.Employee.EmployeeController;
 import com.shyslav.controller.MainItems;
-import com.shyslav.controller.alert.sampleEditUpdate;
+import com.shyslav.controller.alert.LazyEditUpdate;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -100,11 +100,11 @@ public class Main extends Application {
         controllerAdminItems = loader.getController();
     }
     public static void alertEnterDialog(String title, String message) throws IOException {
-        enterDialogs eD = new enterDialogs(primaryStage, title, message);
+        EnterDialogStart eD = new EnterDialogStart(primaryStage, title, message);
     }
     public static void updateInsertDialog(String title, String tableName, String command, int id)
     {
-        sampleEditUpdate insertOrUpdate = new sampleEditUpdate(primaryStage, title , tableName, command , id);
+        LazyEditUpdate insertOrUpdate = new LazyEditUpdate(primaryStage, title , tableName, command , id);
     }
     public static void main(String[] args) {
         launch(args);

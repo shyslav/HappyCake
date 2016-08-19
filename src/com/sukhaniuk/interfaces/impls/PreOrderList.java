@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.preOrderTable;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ public class PreOrderList {
 
     public PreOrderList(int id) {
         if(id == 0) {
-            preorder = comands.getPreOrder(null);
+            preorder = ServerCommands.getPreOrder(null);
         } else
         {
-            preorder = comands.getPreOrder(String.valueOf(id));
+            preorder = ServerCommands.getPreOrder(String.valueOf(id));
         }
     }
 

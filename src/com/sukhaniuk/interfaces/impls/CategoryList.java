@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.category;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class CategoryList {
     }
 
     public CategoryList() {
-        categoryLists = comands.getCategory(null);
+        categoryLists = ServerCommands.getCategory(null);
         System.out.println(categoryLists.size());
     }
 }

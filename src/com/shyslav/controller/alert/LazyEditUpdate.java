@@ -1,21 +1,17 @@
 package com.shyslav.controller.alert;
 
-import com.shyslav.controller.Admin.AdminController;
 import com.shyslav.models.Roles;
 import com.shyslav.resources.DomReader;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 import com.shyslav.start.Main;
 import com.shyslav.validation.UpdateInsertValid;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,7 +22,7 @@ import java.util.Map;
 /**
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
-public class sampleEditUpdate {
+public class LazyEditUpdate {
 
     private ArrayList<Roles> roles = new ArrayList<>();
     private Stage updateStage = new Stage();
@@ -36,7 +32,7 @@ public class sampleEditUpdate {
     private String command;
     private int id;
 
-    public sampleEditUpdate(Stage primaryStage, String title, String tableName, String command, int id) {
+    public LazyEditUpdate(Stage primaryStage, String title, String tableName, String command, int id) {
         this.primaryStage = primaryStage;
         this.title = title;
         this.tableName = tableName;
@@ -119,7 +115,7 @@ public class sampleEditUpdate {
                             break;
                     }
                 } else {
-                    sampleAlert sa = new sampleAlert("Ошибка заполнения", "Дейтсвие не возможно, допущенны следующие ошибки", String.join("\n", list), Alert.AlertType.ERROR);
+                    LazyAlert sa = new LazyAlert("Ошибка заполнения", "Дейтсвие не возможно, допущенны следующие ошибки", String.join("\n", list), Alert.AlertType.ERROR);
                 }
             }
         });
@@ -180,10 +176,10 @@ public class sampleEditUpdate {
     }
     private void comandEvent(String com)
     {
-        String result = comands.executeComand(com);
+        String result = ServerCommands.executeComand(com);
         if(result == null)
         {
-            sampleAlert.ConnectionError();
+            LazyAlert.ConnectionError();
         }
         else if(result.equals("done"))
         {
@@ -191,7 +187,7 @@ public class sampleEditUpdate {
             WindowsClose();
         }else
         {
-            sampleAlert sa = new sampleAlert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам",result, Alert.AlertType.ERROR);
+            LazyAlert sa = new LazyAlert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам",result, Alert.AlertType.ERROR);
         }
         System.out.println(com);
     }

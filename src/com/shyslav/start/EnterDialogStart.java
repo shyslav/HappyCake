@@ -1,6 +1,6 @@
 package com.shyslav.start;
 
-import com.shyslav.controller.alert.enterDialogController;
+import com.shyslav.controller.alert.EnterFrameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -12,12 +12,12 @@ import java.io.IOException;
 /**
  * Created by Shyshkin Vladyslav on 07.03.2016.
  */
-public class enterDialogs {
+public class EnterDialogStart {
     private String title;
     private String message;
     private Stage primaryStage;
 
-    public enterDialogs(Stage primaryStage, String title, String message) throws IOException {
+    public EnterDialogStart(Stage primaryStage, String title, String message) throws IOException {
         this.primaryStage = primaryStage;
         this.title = title;
         this.message = message;
@@ -28,7 +28,7 @@ public class enterDialogs {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/com/shyslav/fxml/alerts/enterDialogForm.fxml"));
         VBox passwordAlert = loader.load();
-        enterDialogController controller = loader.getController();
+        EnterFrameController controller = loader.getController();
         Stage enterFormStage = new Stage();
         enterFormStage.setTitle(title);
         enterFormStage.initModality(Modality.WINDOW_MODAL);

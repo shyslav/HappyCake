@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.orders;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -21,10 +21,10 @@ public class OrderList {
 
     public OrderList(int id) {
         if(id == 0) {
-            orderList = comands.getOrders(null);
+            orderList = ServerCommands.getOrders(null);
         } else
         {
-            orderList = comands.getOrders(String.valueOf(id));
+            orderList = ServerCommands.getOrders(String.valueOf(id));
         }
     }
 }

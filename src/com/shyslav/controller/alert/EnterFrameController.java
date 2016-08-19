@@ -1,9 +1,9 @@
 package com.shyslav.controller.alert;
 
-import com.shyslav.server.comands;
-import com.shyslav.server.serverConnection;
+import com.shyslav.server.ServerCommands;
+import com.shyslav.server.ServerConnect;
 import com.shyslav.start.Main;
-import com.shyslav.start.enterDialogs;
+import com.shyslav.start.EnterDialogStart;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -13,8 +13,8 @@ import javafx.stage.Stage;
 /**
  * Created by Shyshkin Vladyslav on 07.03.2016.
  */
-public class enterDialogController {
-    private enterDialogs ed;
+public class EnterFrameController {
+    private EnterDialogStart ed;
     @FXML
     private Button btnCancel;
     @FXML
@@ -40,22 +40,22 @@ public class enterDialogController {
     public void actionEnter(Event event) {
         if(txtFieldPassword.getLength()<3||txtFieldUsername.getLength()<4)
         {
-            sampleAlert sa = new sampleAlert("Ошибка",null,"Все поля обязательны для ввода", Alert.AlertType.WARNING);
+            LazyAlert sa = new LazyAlert("Ошибка",null,"Все поля обязательны для ввода", Alert.AlertType.WARNING);
         }
         else
         {
-            if(serverConnection.connection==null)
+            if(ServerConnect.connection==null)
             {
-                serverConnection sc = new serverConnection();
+                ServerConnect sc = new ServerConnect();
             }
-            if(comands.login(txtFieldUsername.getText(), txtFieldPassword.getText()))
+            if(ServerCommands.login(txtFieldUsername.getText(), txtFieldPassword.getText()))
             {
                 Main.controllerMainItems.setBtnExit(true);
                 actionCancel(event);
             }
             else
             {
-                sampleAlert sa = new sampleAlert("Ошибка входа",null,"Не правильный пароль или логин", Alert.AlertType.ERROR);
+                LazyAlert sa = new LazyAlert("Ошибка входа",null,"Не правильный пароль или логин", Alert.AlertType.ERROR);
             }
         }
     }

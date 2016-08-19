@@ -1,9 +1,7 @@
 package com.shyslav.controller;
 
-import com.shyslav.controller.Admin.AdminController;
-import com.shyslav.controller.Cook.CookModel;
-import com.shyslav.controller.alert.confirmAlert;
-import com.shyslav.server.serverConnection;
+import com.shyslav.controller.alert.LazyConfirmDialog;
+import com.shyslav.server.ServerConnect;
 import com.shyslav.start.Main;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -51,10 +49,10 @@ public class MainItems {
     }
 
     public void mouseExitEvent(Event event) {
-        if(serverConnection.emp.size()!=0)
+        if(ServerConnect.emp.size()!=0)
         {
-            if(confirmAlert.confirmAlert("Вы хотите выйти?","Доступ ко всем разделам будет закрыт",null)) {
-                serverConnection.dispatcher();
+            if(LazyConfirmDialog.confirmAlert("Вы хотите выйти?","Доступ ко всем разделам будет закрыт",null)) {
+                ServerConnect.dispatcher();
                 Main.controllerMainItems.setBtnExit(false);
             }
         }

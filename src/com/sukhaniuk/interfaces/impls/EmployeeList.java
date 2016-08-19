@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.employees;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ public class EmployeeList {
 
     public EmployeeList(int id) {
         if(id == 0) {
-            employees = comands.getEmployees(null);
+            employees = ServerCommands.getEmployees(null);
         } else
         {
-            employees = comands.getEmployees(String.valueOf(id));
+            employees = ServerCommands.getEmployees(String.valueOf(id));
         }
     }
 

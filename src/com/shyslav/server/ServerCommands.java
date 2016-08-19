@@ -1,9 +1,7 @@
 package com.shyslav.server;
 
-import com.shyslav.controller.MainItems;
-import com.shyslav.controller.alert.sampleAlert;
+import com.shyslav.controller.alert.LazyAlert;
 import com.shyslav.models.*;
-import com.shyslav.start.Main;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,22 +12,22 @@ import java.util.LinkedList;
 /**
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
-public class comands {
+public class ServerCommands {
     public static boolean login(String user, String password) {
-        serverConnection.printWriter.println("login:" + user + ";" + password + ";");
+        ServerConnect.printWriter.println("login:" + user + ";" + password + ";");
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return false;
             }
-            serverConnection.emp = (ArrayList<employees>) object;
-            System.out.println(serverConnection.emp.get(0).getBirthdayDay());
+            ServerConnect.emp = (ArrayList<employees>) object;
+            System.out.println(ServerConnect.emp.get(0).getBirthdayDay());
             return true;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -42,18 +40,18 @@ public class comands {
 
     public static ArrayList<news> getNews(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectNews:" + 0);
+            ServerConnect.printWriter.println("selectNews:" + 0);
         } else {
-            serverConnection.printWriter.println("selectNews:" + id);
+            ServerConnect.printWriter.println("selectNews:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -70,18 +68,18 @@ public class comands {
 
     public static ArrayList<category> getCategory(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectCategory:" + 0);
+            ServerConnect.printWriter.println("selectCategory:" + 0);
         } else {
-            serverConnection.printWriter.println("selectCategory:" + id);
+            ServerConnect.printWriter.println("selectCategory:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -99,18 +97,18 @@ public class comands {
 
     public static ArrayList<dish> getDish(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectDish:" + 0);
+            ServerConnect.printWriter.println("selectDish:" + 0);
         } else {
-            serverConnection.printWriter.println("selectDish:" + id);
+            ServerConnect.printWriter.println("selectDish:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -127,18 +125,18 @@ public class comands {
 
     public static ArrayList<reservation> getReservation(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectReservation:" + 0);
+            ServerConnect.printWriter.println("selectReservation:" + 0);
         } else {
-            serverConnection.printWriter.println("selectReservation:" + id);
+            ServerConnect.printWriter.println("selectReservation:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -155,18 +153,18 @@ public class comands {
 
     public static ArrayList<preOrderTable> getPreOrder(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectPreOrder:" + 0);
+            ServerConnect.printWriter.println("selectPreOrder:" + 0);
         } else {
-            serverConnection.printWriter.println("selectPreOrder:" + id);
+            ServerConnect.printWriter.println("selectPreOrder:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -183,18 +181,18 @@ public class comands {
 
     public static ArrayList<employees> getEmployees(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectEmployees:" + 0);
+            ServerConnect.printWriter.println("selectEmployees:" + 0);
         } else {
-            serverConnection.printWriter.println("selectEmployees:" + id);
+            ServerConnect.printWriter.println("selectEmployees:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -211,18 +209,18 @@ public class comands {
 
     public static ArrayList<reports> getReport(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectReports:" + 0);
+            ServerConnect.printWriter.println("selectReports:" + 0);
         } else {
-            serverConnection.printWriter.println("selectReports:" + id);
+            ServerConnect.printWriter.println("selectReports:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -239,18 +237,18 @@ public class comands {
 
     public static ArrayList<cafeCoordinate> getCafeCoordinate(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectCafeCoordinte:" + 0);
+            ServerConnect.printWriter.println("selectCafeCoordinte:" + 0);
         } else {
-            serverConnection.printWriter.println("selectCafeCoordinte:" + id);
+            ServerConnect.printWriter.println("selectCafeCoordinte:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -267,18 +265,18 @@ public class comands {
 
     public static ArrayList<position> getPosition(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectPositions:" + 0);
+            ServerConnect.printWriter.println("selectPositions:" + 0);
         } else {
-            serverConnection.printWriter.println("selectPositions:" + id);
+            ServerConnect.printWriter.println("selectPositions:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -295,18 +293,18 @@ public class comands {
 
     public static ArrayList<orders> getOrders(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectOrders:" + 0);
+            ServerConnect.printWriter.println("selectOrders:" + 0);
         } else {
-            serverConnection.printWriter.println("selectOrders:" + id);
+            ServerConnect.printWriter.println("selectOrders:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -323,18 +321,18 @@ public class comands {
 
     public static ArrayList<orderList> getOrdersOrderList(String id) {
         if (id == null) {
-            serverConnection.printWriter.println("selectOrderList:" + 0);
+            ServerConnect.printWriter.println("selectOrderList:" + 0);
         } else {
-            serverConnection.printWriter.println("selectOrderList:" + id);
+            ServerConnect.printWriter.println("selectOrderList:" + id);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -350,15 +348,15 @@ public class comands {
     }
 
     public static String delete(String table, int id) {
-        serverConnection.printWriter.println("deleteFromTable:" + table + "," + id);
+        ServerConnect.printWriter.println("deleteFromTable:" + table + "," + id);
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return "Ошибка";
             }
@@ -372,15 +370,15 @@ public class comands {
     }
 
     public static String getValueToUpdate(String table, String what, int id) {
-        serverConnection.printWriter.println("getValueToUpdate:" + table + "," + what + "," + id);
+        ServerConnect.printWriter.println("getValueToUpdate:" + table + "," + what + "," + id);
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return "Ошибка";
             }
@@ -397,15 +395,15 @@ public class comands {
         if (comand == null) {
             return "Ошибка";
         }
-        serverConnection.printWriter.println(comand);
+        ServerConnect.printWriter.println(comand);
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return "Ошибка";
             }
@@ -420,18 +418,18 @@ public class comands {
 
     public static ArrayList<ReportsGraph> getReportsGraph(String chart, String dateStart, String dateEnd) {
         if (dateStart == null || dateEnd == null) {
-            serverConnection.printWriter.println("selectGrapgMonth:" + chart);
+            ServerConnect.printWriter.println("selectGrapgMonth:" + chart);
         } else {
-            serverConnection.printWriter.println("selectGrapg:" + chart + "," + dateStart + "," + dateEnd);
+            ServerConnect.printWriter.println("selectGrapg:" + chart + "," + dateStart + "," + dateEnd);
         }
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -447,15 +445,15 @@ public class comands {
     }
 
     public static ArrayList<_Cassir> getCassirData() {
-        serverConnection.printWriter.println("selectCassir:");
+        ServerConnect.printWriter.println("selectCassir:");
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -471,17 +469,17 @@ public class comands {
     }
 
     public static String cassirSent(ArrayList<orderList> od, double price) {
-        int employeeID = serverConnection.emp.get(0).getId();
+        int employeeID = ServerConnect.emp.get(0).getId();
         try {
-            if (serverConnection.objOutputStream == null) {
-                serverConnection.objOutputStream = new ObjectOutputStream(serverConnection.connection.getOutputStream());
+            if (ServerConnect.objOutputStream == null) {
+                ServerConnect.objOutputStream = new ObjectOutputStream(ServerConnect.connection.getOutputStream());
             }
-            serverConnection.printWriter.println("readObj:" + employeeID + "," + price);
+            ServerConnect.printWriter.println("readObj:" + employeeID + "," + price);
             sleep();
-            serverConnection.objOutputStream.writeUnshared(od);
+            ServerConnect.objOutputStream.writeUnshared(od);
             Object object = null;
             try {
-                object = serverConnection.objInputStream.readObject();
+                object = ServerConnect.objInputStream.readObject();
             } catch (ClassNotFoundException e) {
                 System.out.println(e);
             }
@@ -493,21 +491,21 @@ public class comands {
         } catch (IOException e) {
             System.out.println(e);
         }
-        sampleAlert.SystemError();
+        LazyAlert.SystemError();
         return "error";
     }
 
     public static LinkedList<CookOrder> getCookList() {
-        serverConnection.printWriter.println("getCookList:");
+        ServerConnect.printWriter.println("getCookList:");
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
             sleep();
-            Object object = serverConnection.objInputStream.readObject();
+            Object object = ServerConnect.objInputStream.readObject();
             if (object.equals("not found")) {
                 return null;
             }
@@ -523,10 +521,10 @@ public class comands {
     }
     public static void cookCompliteOrder(int id)
     {
-        serverConnection.printWriter.println("compliteCookOrder:"+id);
+        ServerConnect.printWriter.println("compliteCookOrder:"+id);
         try {
-            if (serverConnection.objInputStream == null)
-                serverConnection.objInputStream = new ObjectInputStream(serverConnection.connection.getInputStream());
+            if (ServerConnect.objInputStream == null)
+                ServerConnect.objInputStream = new ObjectInputStream(ServerConnect.connection.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }

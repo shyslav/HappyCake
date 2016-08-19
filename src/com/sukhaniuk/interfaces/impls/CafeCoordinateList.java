@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.cafeCoordinate;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ public class CafeCoordinateList {
 
     public CafeCoordinateList(int id) {
         if(id == 0) {
-            cafeCoordinate = comands.getCafeCoordinate(null);
+            cafeCoordinate = ServerCommands.getCafeCoordinate(null);
         } else
         {
-            cafeCoordinate = comands.getCafeCoordinate(String.valueOf(id));
+            cafeCoordinate = ServerCommands.getCafeCoordinate(String.valueOf(id));
         }
     }
 

@@ -1,7 +1,7 @@
 package com.shyslav.controller;
 
-import com.shyslav.controller.alert.sampleAlert;
-import com.shyslav.server.serverConnection;
+import com.shyslav.controller.alert.LazyAlert;
+import com.shyslav.server.ServerConnect;
 import com.shyslav.start.Main;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -57,19 +57,19 @@ public class MainController {
         ImageView mouseClicked = (ImageView) source;
         switch (mouseClicked.getId()) {
             case "imgAdmin":
-                if (serverConnection.emp == null) {
+                if (ServerConnect.emp == null) {
                     main.alertEnterDialog("Admin Entered Form", "Enter your password and username please");
                 } else {
-                    if(serverConnection.emp.get(0).getPositionID()==1) {
+                    if(ServerConnect.emp.get(0).getPositionID()==1) {
                         Main.chooseScreenAdmin();
                     }else
                     {
-                        sampleAlert.RuleError();
+                        LazyAlert.RuleError();
                     }
                 }
                 break;
             case "imgCook":
-                if (serverConnection.emp == null) {
+                if (ServerConnect.emp == null) {
                     main.alertEnterDialog("CookController Entered Form", "Enter your password and username please");
                 } else {
                     main.chooseScreenCook();
@@ -77,14 +77,14 @@ public class MainController {
                 break;
             case "imgEmployee":
                 //main.chooseScreenEmployee();
-                if (serverConnection.emp == null) {
+                if (ServerConnect.emp == null) {
                     main.alertEnterDialog("Employee Entered Form", "Enter your password and username please");
                 } else {
-                    if(serverConnection.emp.get(0).getPositionID()==2||serverConnection.emp.get(0).getPositionID()==1) {
+                    if(ServerConnect.emp.get(0).getPositionID()==2|| ServerConnect.emp.get(0).getPositionID()==1) {
                         main.chooseScreenEmployee();
                     }else
                     {
-                        sampleAlert.RuleError();
+                        LazyAlert.RuleError();
                     }
                 }
                 break;

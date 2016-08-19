@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.reports;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ public class ReportsList {
 
     public ReportsList(int id) {
         if(id == 0) {
-            report = comands.getReport(null);
+            report = ServerCommands.getReport(null);
         } else
         {
-            report = comands.getReport(String.valueOf(id));
+            report = ServerCommands.getReport(String.valueOf(id));
         }
     }
 

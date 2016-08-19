@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.reservation;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class ReservationList {
     private ArrayList<reservation> reservations;
 
     public ReservationList() {
-        reservations = comands.getReservation(null);
+        reservations = ServerCommands.getReservation(null);
     }
 
     public ArrayList<reservation> getReservations() {

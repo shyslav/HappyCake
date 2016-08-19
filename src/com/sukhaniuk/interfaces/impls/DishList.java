@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.dish;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -21,10 +21,10 @@ public class DishList {
 
     public DishList(int id) {
         if(id == 0) {
-            dishList = comands.getDish(null);
+            dishList = ServerCommands.getDish(null);
         } else
         {
-            dishList = comands.getDish(String.valueOf(id));
+            dishList = ServerCommands.getDish(String.valueOf(id));
         }
         System.out.println(dishList.size());
     }

@@ -2,7 +2,7 @@ package com.shyslav.resources;
 
 import com.shyslav.models.KeyValue;
 import com.shyslav.models.Roles;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -55,7 +55,7 @@ public class DomReader {
                     //Имя колонки
                     key = element.getAttribute("id"); //Имя колонки таблицы
                     if(command.equals("update")) {
-                        value = comands.getValueToUpdate(tableName, element.getAttribute("id"), id);
+                        value = ServerCommands.getValueToUpdate(tableName, element.getAttribute("id"), id);
                     }else
                     {
                         value = "";

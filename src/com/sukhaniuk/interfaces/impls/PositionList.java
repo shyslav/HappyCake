@@ -1,8 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.cafeCoordinate;
 import com.shyslav.models.position;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
@@ -14,10 +13,10 @@ public class PositionList {
 
     public PositionList(int id) {
         if(id == 0) {
-            positionList = comands.getPosition(null);
+            positionList = ServerCommands.getPosition(null);
         } else
         {
-            positionList = comands.getPosition(String.valueOf(id));
+            positionList = ServerCommands.getPosition(String.valueOf(id));
         }
     }
 

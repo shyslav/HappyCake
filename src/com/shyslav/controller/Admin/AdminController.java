@@ -1,14 +1,12 @@
 package com.shyslav.controller.Admin;
 
-import com.shyslav.controller.alert.confirmAlert;
-import com.shyslav.controller.alert.sampleAlert;
-import com.shyslav.controller.alert.sampleEditUpdate;
+import com.shyslav.controller.alert.LazyConfirmDialog;
+import com.shyslav.controller.alert.LazyAlert;
 import com.shyslav.models.*;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 import com.shyslav.start.Main;
 import com.sukhaniuk.interfaces.impls.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,13 +15,10 @@ import javafx.geometry.Side;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.sql.Time;
-import java.text.DateFormatSymbols;
-import java.time.DateTimeException;
 import java.util.*;
 
 /**
@@ -370,7 +365,7 @@ public class AdminController {
         if (dishList.getDishList() != null) {
             dishTable.setItems(FXCollections.observableList(dishList.getDishList()));
         } else {
-            sampleAlert sa = new sampleAlert("Внимание", "В данной категории нет блюд", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
+            LazyAlert sa = new LazyAlert("Внимание", "В данной категории нет блюд", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
         }
     }
 
@@ -397,7 +392,7 @@ public class AdminController {
         if (preOrderList.getPreorder() != null) {
             preorderTable.setItems(FXCollections.observableList(preOrderList.getPreorder()));
         } else {
-            sampleAlert sa = new sampleAlert("Внимание", "В данном заказе нет предзаказа", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
+            LazyAlert sa = new LazyAlert("Внимание", "В данном заказе нет предзаказа", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
         }
     }
 
@@ -438,17 +433,17 @@ public class AdminController {
     public void btnEventReservationDelete(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<reservation> res = reservationTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("reservation",res.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("reservation",res.get(0).getId());
                 reservationInitialize();
             }
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<preOrderTable> preor = preorderTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("preorder",preor.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("preorder",preor.get(0).getId());
                 reservationInitialize();
             }
-            sampleAlert sa = new sampleAlert("Ошибка", null, "Удаление элемента предзаказа запрещена", Alert.AlertType.ERROR);
+            LazyAlert sa = new LazyAlert("Ошибка", null, "Удаление элемента предзаказа запрещена", Alert.AlertType.ERROR);
         }
         else {
             alertNullValue();
@@ -458,20 +453,20 @@ public class AdminController {
     public void btnEventEmployeeDelete(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             ObservableList<employees> tmp = tableEmployees.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("employees",tmp.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("employees",tmp.get(0).getId());
                 cafeCoordinateInitialize();
             }
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<positions> tmp = positionTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("positions",tmp.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("positions",tmp.get(0).getId());
                 cafeCoordinateInitialize();
             }
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<cafeCoordinate> tmp = cafeCoordinateTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("cafecoordinate",tmp.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("cafecoordinate",tmp.get(0).getId());
                 cafeCoordinateInitialize();
             }
         } else {
@@ -482,8 +477,8 @@ public class AdminController {
     public void btnEventReviewDelete(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<reports> rep = repTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("reports",rep.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("reports",rep.get(0).getId());
                 reportsInitialize();
             }
         } else {
@@ -494,14 +489,14 @@ public class AdminController {
     public void btnEventCategoryDishDelete(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<category> cat = categoryTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("category",cat.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("category",cat.get(0).getId());
                 categoryInitialize();
             }
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<dish> dish = dishTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("dish",dish.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("dish",dish.get(0).getId());
                 dishInitialize(new DishList(0));
             }
         } else {
@@ -512,8 +507,8 @@ public class AdminController {
     public void btnEventNewsDelete(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             ObservableList<news> news = newsTable.getSelectionModel().getSelectedItems();
-            if (confirmAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                comands.delete("news",news.get(0).getId());
+            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                ServerCommands.delete("news",news.get(0).getId());
                 newsInitialize();
             }
         } else {
@@ -522,7 +517,7 @@ public class AdminController {
     }
 
     private void alertNullValue() {
-        sampleAlert sa = new sampleAlert("Ошибка", null, "Выберите элемент таблицы для добавления, правки или удаления", Alert.AlertType.WARNING);
+        LazyAlert sa = new LazyAlert("Ошибка", null, "Выберите элемент таблицы для добавления, правки или удаления", Alert.AlertType.WARNING);
     }
     public void ReInit()
     {
@@ -551,7 +546,7 @@ public class AdminController {
             pieChartInit(String.valueOf(dataPickerStart.getValue()),String.valueOf(dataPickerEnd.getValue()));
         }else
         {
-            sampleAlert sa = new sampleAlert("Ошибка","За заданый период ничего не найдено","Введите другие данные", Alert.AlertType.INFORMATION);
+            LazyAlert sa = new LazyAlert("Ошибка","За заданый период ничего не найдено","Введите другие данные", Alert.AlertType.INFORMATION);
         }
     }
 
@@ -562,7 +557,7 @@ public class AdminController {
             barChartInit(null,null);
             pieChartInit(null,null);
         }else {
-            sampleAlert.SystemError();
+            LazyAlert.SystemError();
         }
     }
     private void clear()
@@ -573,7 +568,7 @@ public class AdminController {
     }
     private boolean pieChartInit(String dateStart, String dateEnd) {
         ArrayList<ReportsGraph> tmp = null;
-        tmp = comands.getReportsGraph("pie", dateStart, dateEnd);
+        tmp = ServerCommands.getReportsGraph("pie", dateStart, dateEnd);
         if (tmp == null) {
             return false;
         }
@@ -594,7 +589,7 @@ public class AdminController {
     private boolean lineChartInit(String dateStart, String dateEnd)
     {
         ArrayList<ReportsGraph> tmp = null;
-        tmp = comands.getReportsGraph("line",dateStart,dateEnd);
+        tmp = ServerCommands.getReportsGraph("line",dateStart,dateEnd);
         if(tmp == null)
         {
             return false;
@@ -622,7 +617,7 @@ public class AdminController {
     private boolean barChartInit(String dateStart, String dateEnd)
     {
         ArrayList<ReportsGraph>  tmp = null;
-        tmp = comands.getReportsGraph("bar",dateStart,dateEnd);
+        tmp = ServerCommands.getReportsGraph("bar",dateStart,dateEnd);
         if(tmp == null)
         {
             return false;

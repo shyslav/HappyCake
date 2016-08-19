@@ -1,7 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
 import com.shyslav.models.news;
-import com.shyslav.server.comands;
+import com.shyslav.server.ServerCommands;
 import com.sukhaniuk.interfaces.newsInt;
 
 import java.util.ArrayList;
@@ -36,6 +36,6 @@ public class NewsList implements newsInt {
     }
 
     public NewsList() {
-        newsList = comands.getNews(null);
+        newsList = ServerCommands.getNews(null);
     }
 }

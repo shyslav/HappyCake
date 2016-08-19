@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
-public class confirmAlert {
+public class LazyConfirmDialog {
     private String title;
     private String headerText;
     private String question;

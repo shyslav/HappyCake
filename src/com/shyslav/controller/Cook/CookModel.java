@@ -1,9 +1,9 @@
 package com.shyslav.controller.Cook;
 
-import com.shyslav.controller.alert.sampleAlert;
+import com.shyslav.controller.alert.LazyAlert;
 import com.shyslav.models.CookOrder;
-import com.shyslav.server.comands;
-import com.shyslav.server.serverConnection;
+import com.shyslav.server.ServerCommands;
+import com.shyslav.server.ServerConnect;
 import com.shyslav.start.Main;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -13,9 +13,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * Created by Shyshkin Vladyslav on 25.05.2016.
@@ -29,21 +26,21 @@ public class CookModel {
     {
         if(tr == null)
         {
-            list = comands.getCookList();
+            list = ServerCommands.getCookList();
             newDishThread();
         }
     }
     private static void newDishThread()
     {
-        if(serverConnection.emp.get(0).getPositionID()==3) {
+        if(ServerConnect.emp.get(0).getPositionID()==3) {
             tr = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (!done && serverConnection.scanner.hasNextLine()) {
-                        String line = serverConnection.scanner.nextLine();
+                    while (!done && ServerConnect.scanner.hasNextLine()) {
+                        String line = ServerConnect.scanner.nextLine();
                         if (line.equals("updateCook")) {
                             try {
-                                Object o = serverConnection.objInputStream.readObject();
+                                Object o = ServerConnect.objInputStream.readObject();
                                 list = (LinkedList<CookOrder>) o;
                                 Main.cookConroller.updateOrders();
                                 playSound("cookMusic.wav");
@@ -54,13 +51,13 @@ public class CookModel {
                             }
                         }
                     }
-                    Platform.runLater(()->sampleAlert.ConnectionError());
+                    Platform.runLater(()-> LazyAlert.ConnectionError());
                 }
             });
             tr.start();
         }else
         {
-            sampleAlert sa = new sampleAlert("Предупреждение","Это не ваш раздел но вы имеете доступ к нему",
+            LazyAlert sa = new LazyAlert("Предупреждение","Это не ваш раздел но вы имеете доступ к нему",
                     "Вам не будут приходить новые уведомления, Вы видите только текущую загруженость данного раздела.", Alert.AlertType.INFORMATION);
         }
     }

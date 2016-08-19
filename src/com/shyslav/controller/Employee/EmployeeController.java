@@ -1,19 +1,17 @@
 package com.shyslav.controller.Employee;
 
-import com.shyslav.controller.alert.confirmAlert;
-import com.shyslav.controller.alert.sampleAlert;
+import com.shyslav.controller.alert.LazyConfirmDialog;
+import com.shyslav.controller.alert.LazyAlert;
 import com.shyslav.models._Cassir;
 import com.shyslav.models.dish;
 import com.shyslav.models.orderList;
-import com.shyslav.server.comands;
-import com.shyslav.server.serverConnection;
+import com.shyslav.server.ServerCommands;
 import data.DataUpdater;
 import javafx.event.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -59,7 +57,7 @@ public class EmployeeController {
         handlerTreeView();
         generateList();
         if (cas.size() == 0) {
-            sampleAlert.ConnectionError();
+            LazyAlert.ConnectionError();
         }
         gridPane.setPadding(new Insets(5));
         gridPane.setHgap(5);
@@ -115,7 +113,7 @@ public class EmployeeController {
                     if (item.getValue().equals("Удалить блюдо")) {
                         for (int i = 0; i < orderLists.size(); i++) {
                             if (orderLists.get(i).getDishName().equals(item.getParent().getValue())) {
-                                if (confirmAlert.confirmAlert("Удаление", "Вы действиетельно хотите удалить " + item.getParent().getValue() + " из заказа", "Действие не возвратимо")) {
+                                if (LazyConfirmDialog.confirmAlert("Удаление", "Вы действиетельно хотите удалить " + item.getParent().getValue() + " из заказа", "Действие не возвратимо")) {
                                     orderLists.remove(i);
                                     addToTree();
                                 }
@@ -168,7 +166,7 @@ public class EmployeeController {
     }
 
     private void generateList() {
-        cas = comands.getCassirData();
+        cas = ServerCommands.getCassirData();
     }
 
 
@@ -271,15 +269,15 @@ public class EmployeeController {
                 message += orderLists.get(i).getDishName() + " - " + orderLists.get(i).getAmount() + " шт. - " + orderLists.get(i).getPrice() + " грн.\n";
             }
             double summ = sum(orderLists);
-            if (confirmAlert.confirmAlert("Подтвердить заказ на сумму " + summ + " гривен", message, "Закрить заказ?")) {
-                String str = comands.cassirSent(orderLists, summ);
-                confirmAlert.fifthSecondAlert("Заказ принят", str);
+            if (LazyConfirmDialog.confirmAlert("Подтвердить заказ на сумму " + summ + " гривен", message, "Закрить заказ?")) {
+                String str = ServerCommands.cassirSent(orderLists, summ);
+                LazyConfirmDialog.fifthSecondAlert("Заказ принят", str);
                 orderLists.clear();
                 addToTree();
                 ReUse();
             }
         } else {
-            sampleAlert sa = new sampleAlert("Ошибка", "Чек пустой", "Чек не должен быть пустой, добавьте в заказ блюда", Alert.AlertType.ERROR);
+            LazyAlert sa = new LazyAlert("Ошибка", "Чек пустой", "Чек не должен быть пустой, добавьте в заказ блюда", Alert.AlertType.ERROR);
         }
     }
 

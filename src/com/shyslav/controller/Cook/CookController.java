@@ -1,11 +1,10 @@
 package com.shyslav.controller.Cook;
 
-import com.shyslav.controller.alert.confirmAlert;
-import com.shyslav.controller.alert.sampleAlert;
-import com.shyslav.server.comands;
-import com.shyslav.server.serverConnection;
+import com.shyslav.controller.alert.LazyConfirmDialog;
+import com.shyslav.controller.alert.LazyAlert;
+import com.shyslav.server.ServerCommands;
+import com.shyslav.server.ServerConnect;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
@@ -111,23 +110,23 @@ public class CookController {
 
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            if (serverConnection.emp.get(0).getPositionID() == 3) {
+            if (ServerConnect.emp.get(0).getPositionID() == 3) {
                 Object source = event.getSource();
                 WebView clicked = (WebView) source;
                 System.out.println(clicked.getId());
                 int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
                 System.out.println(firstNumber);
-                if (confirmAlert.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
                     if (CookModel.list.size() > firstNumber) {
-                        comands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
+                        ServerCommands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
                     } else {
-                        sampleAlert sa = new sampleAlert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
+                        LazyAlert sa = new LazyAlert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
                     }
                 }
             }
             else
             {
-                sampleAlert.RuleError();
+                LazyAlert.RuleError();
             }
         }
     }
