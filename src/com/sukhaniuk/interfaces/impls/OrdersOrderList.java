@@ -1,6 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.orderList;
+
+import appmodels.orderList;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.dish;
+import appmodels.dish;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;

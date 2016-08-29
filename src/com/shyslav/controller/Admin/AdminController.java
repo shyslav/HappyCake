@@ -2,7 +2,7 @@ package com.shyslav.controller.Admin;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyAlert;
-import com.shyslav.models.*;
+import appmodels.*;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.start.Main;
 import com.sukhaniuk.interfaces.impls.*;

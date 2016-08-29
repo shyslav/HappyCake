@@ -1,7 +1,7 @@
 package com.shyslav.server;
 
+import appmodels.employees;
 import com.shyslav.controller.alert.LazyAlert;
-import com.shyslav.models.employees;
 
 import java.io.*;
 import java.net.Socket;

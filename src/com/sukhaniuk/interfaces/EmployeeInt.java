@@ -1,6 +1,7 @@
 package com.sukhaniuk.interfaces;
 
-import com.shyslav.models.jEmployees;
+
+import appmodels.jEmployees;
 
 /**
  * Created by Shyshkin Vladyslav on 28.03.2016.

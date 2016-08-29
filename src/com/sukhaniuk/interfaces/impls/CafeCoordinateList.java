@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.cafeCoordinate;
+import appmodels.*;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ public class CafeCoordinateList {
         }
     }
 
-    public ArrayList<com.shyslav.models.cafeCoordinate> getCafeCoordinate() {
+    public ArrayList<cafeCoordinate> getCafeCoordinate() {
         return cafeCoordinate;
     }
 
-    public void setCafeCoordinate(ArrayList<com.shyslav.models.cafeCoordinate> cafeCoordinate) {
+    public void setCafeCoordinate(ArrayList<cafeCoordinate> cafeCoordinate) {
         this.cafeCoordinate = cafeCoordinate;
     }
 }

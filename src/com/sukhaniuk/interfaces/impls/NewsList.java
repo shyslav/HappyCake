@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.news;
+import appmodels.news;
 import com.shyslav.server.ServerCommands;
 import com.sukhaniuk.interfaces.newsInt;
 

@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.preOrderTable;
+import appmodels.preOrderTable;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;

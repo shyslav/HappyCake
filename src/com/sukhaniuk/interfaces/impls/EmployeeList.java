@@ -1,8 +1,7 @@
 package com.sukhaniuk.interfaces.impls;
 
-import com.shyslav.models.employees;
 import com.shyslav.server.ServerCommands;
-
+import appmodels.*;
 import java.util.ArrayList;
 
 /**

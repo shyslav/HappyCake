@@ -1,7 +1,7 @@
 package com.shyslav.resources;
 
-import com.shyslav.models.KeyValue;
-import com.shyslav.models.Roles;
+import appmodels.KeyValue;
+import appmodels.Roles;
 import com.shyslav.server.ServerCommands;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

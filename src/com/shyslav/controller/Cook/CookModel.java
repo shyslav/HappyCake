@@ -1,7 +1,7 @@
 package com.shyslav.controller.Cook;
 
+import appmodels.CookOrder;
 import com.shyslav.controller.alert.LazyAlert;
-import com.shyslav.models.CookOrder;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.server.ServerConnect;
 import com.shyslav.start.Main;

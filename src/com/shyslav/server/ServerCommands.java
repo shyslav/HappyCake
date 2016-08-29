@@ -1,7 +1,7 @@
 package com.shyslav.server;
 
 import com.shyslav.controller.alert.LazyAlert;
-import com.shyslav.models.*;
+import appmodels.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

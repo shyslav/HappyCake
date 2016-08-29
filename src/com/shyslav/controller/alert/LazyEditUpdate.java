@@ -1,6 +1,6 @@
 package com.shyslav.controller.alert;
 
-import com.shyslav.models.Roles;
+import appmodels.Roles;
 import com.shyslav.resources.DomReader;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.start.Main;

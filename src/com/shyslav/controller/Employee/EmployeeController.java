@@ -2,9 +2,7 @@ package com.shyslav.controller.Employee;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyAlert;
-import com.shyslav.models._Cassir;
-import com.shyslav.models.dish;
-import com.shyslav.models.orderList;
+import appmodels.*;
 import com.shyslav.server.ServerCommands;
 import data.DataUpdater;
 import javafx.event.*;
