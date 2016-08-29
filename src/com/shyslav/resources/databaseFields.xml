@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!--Категория-->
-    <!--<category id ="id">-->
+    <!--<_Category id ="id">-->
         <!--<labelName>№ категории</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</category>-->
+    <!--</_Category>-->
 
     <category id ="name">
         <labelName>Имя категории</labelName>
@@ -70,13 +70,13 @@
     </cafecoordinate>
 
     <!-- Блюдо -->
-    <!--<dish id ="id">-->
+    <!--<_Dish id ="id">-->
         <!--<labelName>№ блюда</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</dish>-->
+    <!--</_Dish>-->
     <dish id ="categoryID">
         <labelName>№ категории</labelName>
         <type>text</type>
@@ -127,13 +127,13 @@
         <emptyOrNot>false</emptyOrNot>
     </dish>
     <!-- Сотрудники -->
-    <!--<employees id ="id">-->
+    <!--<_Employee id ="id">-->
         <!--<labelName>№ сотрудника</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</employees>-->
+    <!--</_Employee>-->
     <employees id ="positionsID">
         <labelName>№ должности</labelName>
         <type>text</type>
@@ -234,13 +234,13 @@
         <emptyOrNot>false</emptyOrNot>
     </hotprice>
     <!-- Новости -->
-    <!--<news id ="id">-->
+    <!--<_News id ="id">-->
         <!--<labelName>№ новости</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</news>-->
+    <!--</_News>-->
     <news id ="authorID">
         <labelName>№ автора</labelName>
         <type>text</type>
@@ -292,13 +292,13 @@
     </news>
 
     <!-- Должности -->
-    <!--<positions id ="id">-->
+    <!--<_Positions id ="id">-->
         <!--<labelName>№ должности</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</positions>-->
+    <!--</_Positions>-->
     <positions id ="name">
         <labelName>Название</labelName>
         <type>text</type>
@@ -343,13 +343,13 @@
         <emptyOrNot>false</emptyOrNot>
     </preorder>
     <!-- Отзывы -->
-    <!--<reports id ="id">-->
+    <!--<_Reports id ="id">-->
         <!--<labelName>№ отзыва</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</reports>-->
+    <!--</_Reports>-->
     <reports id ="author">
         <labelName>Имя автора</labelName>
         <type>text</type>
@@ -394,13 +394,13 @@
     </reports>
 
     <!-- Бронирование -->
-    <!--<reservation id ="id">-->
+    <!--<_Reservation id ="id">-->
         <!--<labelName>№ Брони</labelName>-->
         <!--<type>text</type>-->
         <!--<maxLenght>500</maxLenght>-->
         <!--<minLenght>1</minLenght>-->
         <!--<emptyOrNot>false</emptyOrNot>-->
-    <!--</reservation>-->
+    <!--</_Reservation>-->
     <reservation id ="cafeID">
         <labelName>№ кафе</labelName>
         <type>text</type>

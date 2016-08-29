@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import appmodels.dish;
+import appmodels._Dish;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class DishList {
-    private ArrayList<dish> dishList;
+    private ArrayList<_Dish> dishList;
 
-    public ArrayList<dish> getDishList() {
+    public ArrayList<_Dish> getDishList() {
         return dishList;
     }
 
-    public void setDishList(ArrayList<dish> dishList) {
+    public void setDishList(ArrayList<_Dish> dishList) {
         this.dishList = dishList;
     }
 

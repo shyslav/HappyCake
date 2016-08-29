@@ -1,6 +1,6 @@
 package com.shyslav.controller.alert;
 
-import appmodels.Roles;
+import appmodels.localmodels.LocalRoles;
 import com.shyslav.resources.DomReader;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.start.Main;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class LazyEditUpdate {
 
-    private ArrayList<Roles> roles = new ArrayList<>();
+    private ArrayList<LocalRoles> roles = new ArrayList<>();
     private Stage updateStage = new Stage();
     private Stage primaryStage;
     private String title;

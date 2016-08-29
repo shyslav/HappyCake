@@ -1,7 +1,7 @@
 package com.shyslav.resources;
 
-import appmodels.KeyValue;
-import appmodels.Roles;
+import appmodels.localmodels.KeyValue;
+import appmodels.localmodels.LocalRoles;
 import com.shyslav.server.ServerCommands;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
 public class DomReader {
-    public static ArrayList<Roles> parseFunc(String tableName, String command, int id) {
+    public static ArrayList<LocalRoles> parseFunc(String tableName, String command, int id) {
         String labelName = null;
         String type = null;
         int maxLenght = 0;
@@ -27,7 +27,7 @@ public class DomReader {
         Boolean emptyOrNot = null;
         String key = null;
         String value = null;
-        ArrayList<Roles> role = new ArrayList<>();
+        ArrayList<LocalRoles> role = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         try {
@@ -61,7 +61,7 @@ public class DomReader {
                         value = "";
                     }
                     //System.out.println(element.getElementsByTagName("labelName").item(0).getTextContent());
-                    role.add(new Roles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,value)));
+                    role.add(new LocalRoles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,value)));
                 }
             }
         } catch (ParserConfigurationException e) {

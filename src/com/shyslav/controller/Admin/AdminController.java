@@ -1,5 +1,6 @@
 package com.shyslav.controller.Admin;
 
+import appmodels.localmodels.LocalEmployee;
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyAlert;
 import appmodels.*;
@@ -29,136 +30,136 @@ public class AdminController {
     @FXML
     private TableView tableEmployees;
     @FXML
-    private TableColumn<jEmployees, Integer> id;
+    private TableColumn<LocalEmployee, Integer> id;
     @FXML
-    private TableColumn<jEmployees, String> positionID;
+    private TableColumn<LocalEmployee, String> positionID;
     @FXML
-    private TableColumn<jEmployees, String> cafeID;
+    private TableColumn<LocalEmployee, String> cafeID;
     @FXML
-    private TableColumn<jEmployees, String> name;
+    private TableColumn<LocalEmployee, String> name;
     @FXML
-    private TableColumn<jEmployees, String> lastname;
+    private TableColumn<LocalEmployee, String> lastname;
     @FXML
-    private TableColumn<jEmployees, String> address;
+    private TableColumn<LocalEmployee, String> address;
     @FXML
-    private TableColumn<jEmployees, Date> birthdayDay;
+    private TableColumn<LocalEmployee, Date> birthdayDay;
     @FXML
-    private TableColumn<jEmployees, String> empLogin;
+    private TableColumn<LocalEmployee, String> empLogin;
     @FXML
-    private TableColumn<jEmployees, String> empPass;
+    private TableColumn<LocalEmployee, String> empPass;
     //*******News tabs
     @FXML
     private TableView newsTable;
     @FXML
-    private TableColumn<news, Integer> ncAuthorID;
+    private TableColumn<_News, Integer> ncAuthorID;
     @FXML
-    private TableColumn<news, String> ncNews;
+    private TableColumn<_News, String> ncNews;
     @FXML
-    private TableColumn<news, String> ncText;
+    private TableColumn<_News, String> ncText;
     @FXML
-    private TableColumn<news, Date> ncDate;
+    private TableColumn<_News, Date> ncDate;
     @FXML
-    private TableColumn<news, Integer> ncViews;
+    private TableColumn<_News, Integer> ncViews;
     @FXML
-    private TableColumn<news, String> ncTegs;
+    private TableColumn<_News, String> ncTegs;
     @FXML
-    private TableColumn<news, String> ncImageView;
+    private TableColumn<_News, String> ncImageView;
     @FXML
-    private TableColumn<news, Integer> ncID;
+    private TableColumn<_News, Integer> ncID;
     //*********Category tabs
     @FXML
     private TableView categoryTable;
     @FXML
-    private TableColumn<category, Integer> categoryId;
+    private TableColumn<_Category, Integer> categoryId;
     @FXML
-    private TableColumn<category, String> categoryName;
+    private TableColumn<_Category, String> categoryName;
     @FXML
-    private TableColumn<category, String> categoryDescription;
+    private TableColumn<_Category, String> categoryDescription;
     @FXML
-    private TableColumn<category, String> categoryImage;
+    private TableColumn<_Category, String> categoryImage;
     //**********Dish tabs
     @FXML
     private TableView dishTable;
     @FXML
-    private TableColumn<dish, Integer> dishId;
+    private TableColumn<_Dish, Integer> dishId;
     @FXML
-    private TableColumn<dish, Integer> dishCategoryId;
+    private TableColumn<_Dish, Integer> dishCategoryId;
     @FXML
-    private TableColumn<dish, String> dishName;
+    private TableColumn<_Dish, String> dishName;
     @FXML
-    private TableColumn<dish, String> dishDescription;
+    private TableColumn<_Dish, String> dishDescription;
     @FXML
-    private TableColumn<dish, Integer> dishAmount;
+    private TableColumn<_Dish, Integer> dishAmount;
     @FXML
-    private TableColumn<dish, Double> dishPrice;
+    private TableColumn<_Dish, Double> dishPrice;
     @FXML
-    private TableColumn<dish, String> dishImage;
+    private TableColumn<_Dish, String> dishImage;
     @FXML
-    private TableColumn<dish, String> dishReadyOrNot;
+    private TableColumn<_Dish, String> dishReadyOrNot;
     @FXML
-    private TableColumn<dish, String> dishSell;
+    private TableColumn<_Dish, String> dishSell;
     //********************Reservation tabs
     @FXML
     private TableView reservationTable;
     @FXML
-    private TableColumn<reservation, Integer> reservationID;
+    private TableColumn<_Reservation, Integer> reservationID;
     @FXML
-    private TableColumn<reservation, Integer> reservationCafeID;
+    private TableColumn<_Reservation, Integer> reservationCafeID;
     @FXML
-    private TableColumn<reservation, String> reservationClientName;
+    private TableColumn<_Reservation, String> reservationClientName;
     @FXML
-    private TableColumn<reservation, String> reservationClientPhone;
+    private TableColumn<_Reservation, String> reservationClientPhone;
     @FXML
-    private TableColumn<reservation, Date> reservationDate;
+    private TableColumn<_Reservation, Date> reservationDate;
     @FXML
-    private TableColumn<reservation, Time> reservationTime;
+    private TableColumn<_Reservation, Time> reservationTime;
     @FXML
-    private TableColumn<reservation, String> reservationStatus;
+    private TableColumn<_Reservation, String> reservationStatus;
     @FXML
-    private TableColumn<reservation, Integer> reservationAmountPeople;
+    private TableColumn<_Reservation, Integer> reservationAmountPeople;
     @FXML
-    private TableColumn<reservation, String> reservationDescription;
+    private TableColumn<_Reservation, String> reservationDescription;
     //**************************PREORDER TABS
     @FXML
     private TableView preorderTable;
     @FXML
-    private TableColumn<preOrderTable, String> preorderDishName;
+    private TableColumn<_PreOrderTable, String> preorderDishName;
     @FXML
-    private TableColumn<preOrderTable, Integer> preorderAmount;
+    private TableColumn<_PreOrderTable, Integer> preorderAmount;
     @FXML
-    private TableColumn<preOrderTable, Double> preorderPrice;
+    private TableColumn<_PreOrderTable, Double> preorderPrice;
     @FXML
-    private TableColumn<preOrderTable, Integer> preOrderResID;
+    private TableColumn<_PreOrderTable, Integer> preOrderResID;
     @FXML
-    private TableColumn<preOrderTable,Integer> preOrderID;
+    private TableColumn<_PreOrderTable,Integer> preOrderID;
     //**************************REPORTS TABS
     @FXML
     private TableView repTable;
     @FXML
-    private TableColumn<reports, Integer> repID;
+    private TableColumn<_Reports, Integer> repID;
     @FXML
-    private TableColumn<reports, String> repAuthor;
+    private TableColumn<_Reports, String> repAuthor;
     @FXML
-    private TableColumn<reports, String> repText;
+    private TableColumn<_Reports, String> repText;
     @FXML
-    private TableColumn<reports, Date> repDate;
+    private TableColumn<_Reports, Date> repDate;
     @FXML
-    private TableColumn<reports, String> repMail;
+    private TableColumn<_Reports, String> repMail;
     @FXML
-    private TableColumn<reports, String> repPhone;
+    private TableColumn<_Reports, String> repPhone;
     @FXML
-    private TableColumn<reports, String> repVision;
+    private TableColumn<_Reports, String> repVision;
     //*******CafeCoordinate
     @FXML
     private TableView cafeCoordinateTable;
     @FXML
-    private TableColumn<cafeCoordinate, Integer> coordId;
+    private TableColumn<_CafeCoordinate, Integer> coordId;
     @FXML
-    private TableColumn<cafeCoordinate, String> coordAdrs;
+    private TableColumn<_CafeCoordinate, String> coordAdrs;
     @FXML
-    private TableColumn<cafeCoordinate, String> coordPhone;
+    private TableColumn<_CafeCoordinate, String> coordPhone;
     @FXML
-    private TableColumn<cafeCoordinate, String> coordMail;
+    private TableColumn<_CafeCoordinate, String> coordMail;
 
     private void cafeCoordinateInitialize() {
         CafeCoordinateList cl = new CafeCoordinateList(0);
@@ -173,11 +174,11 @@ public class AdminController {
     @FXML
     private TableView positionTable;
     @FXML
-    private TableColumn<position, Integer> posID;
+    private TableColumn<_Positions, Integer> posID;
     @FXML
-    private TableColumn<position, String> posName;
+    private TableColumn<_Positions, String> posName;
     @FXML
-    private TableColumn<position, Double> posSalary;
+    private TableColumn<_Positions, Double> posSalary;
 
     private void positionInitialize() {
         PositionList pl = new PositionList(0);
@@ -191,15 +192,15 @@ public class AdminController {
     @FXML
     private TableView OrdersTable;
     @FXML
-    private TableColumn<orders, Integer> ordID;
+    private TableColumn<_Order, Integer> ordID;
     @FXML
-    private TableColumn<orders, Integer> ordEmployeeId;
+    private TableColumn<_Order, Integer> ordEmployeeId;
     @FXML
-    private TableColumn<orders, Double> orderFullPrice;
+    private TableColumn<_Order, Double> orderFullPrice;
     @FXML
-    private TableColumn<orders, String> ordDate;
+    private TableColumn<_Order, String> ordDate;
     @FXML
-    private TableColumn<orders, String> ordCompliteORnot;
+    private TableColumn<_Order, String> ordCompliteORnot;
 
     private void ordersInitialize() {
         OrderList order = new OrderList(0);
@@ -214,15 +215,15 @@ public class AdminController {
     @FXML
     private TableView ordersOrderTable;
     @FXML
-    private TableColumn<orderList, Integer> ordlistId;
+    private TableColumn<_OrderList, Integer> ordlistId;
     @FXML
-    private TableColumn<orderList, Integer> ordlistOrdId;
+    private TableColumn<_OrderList, Integer> ordlistOrdId;
     @FXML
-    private TableColumn<orderList, String> ordlistDish;
+    private TableColumn<_OrderList, String> ordlistDish;
     @FXML
-    private TableColumn<orderList, Integer> ordlistAmount;
+    private TableColumn<_OrderList, Integer> ordlistAmount;
     @FXML
-    private TableColumn<orderList, Double> ordlistPrice;
+    private TableColumn<_OrderList, Double> ordlistPrice;
 
     private void orderListInitialize(OrdersOrderList order )
     {
@@ -317,29 +318,29 @@ public class AdminController {
 
     private void employeeInitialize() {
         EmployeeList el = new EmployeeList(0);
-        id.setCellValueFactory(new PropertyValueFactory<jEmployees, Integer>("id"));
-        positionID.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("positionID"));
-        cafeID.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("cafeID"));
-        name.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("name"));
-        lastname.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("lastname"));
-        address.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("address"));
-        birthdayDay.setCellValueFactory(new PropertyValueFactory<jEmployees, Date>("birthdayDay"));
-        empLogin.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("elogin"));
-        empPass.setCellValueFactory(new PropertyValueFactory<jEmployees, String>("epassword"));
+        id.setCellValueFactory(new PropertyValueFactory<LocalEmployee, Integer>("id"));
+        positionID.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("positionID"));
+        cafeID.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("cafeID"));
+        name.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("name"));
+        lastname.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("lastname"));
+        address.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("address"));
+        birthdayDay.setCellValueFactory(new PropertyValueFactory<LocalEmployee, Date>("birthdayDay"));
+        empLogin.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("elogin"));
+        empPass.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("epassword"));
         //записать обзервебл лист в таблицу
         tableEmployees.setItems(FXCollections.observableList(el.getEmployees()));
     }
 
     private void newsInitialize() {
         NewsList nl = new NewsList();
-        ncID.setCellValueFactory(new PropertyValueFactory<news, Integer>("id"));
-        ncAuthorID.setCellValueFactory(new PropertyValueFactory<news, Integer>("authorID"));
-        ncNews.setCellValueFactory(new PropertyValueFactory<news, String>("name"));
-        ncText.setCellValueFactory(new PropertyValueFactory<news, String>("text"));
-        ncDate.setCellValueFactory(new PropertyValueFactory<news, Date>("date"));
-        ncViews.setCellValueFactory(new PropertyValueFactory<news, Integer>("view"));
-        ncTegs.setCellValueFactory(new PropertyValueFactory<news, String>("tegs"));
-        ncImageView.setCellValueFactory(new PropertyValueFactory<news, String>("imageLink"));
+        ncID.setCellValueFactory(new PropertyValueFactory<_News, Integer>("id"));
+        ncAuthorID.setCellValueFactory(new PropertyValueFactory<_News, Integer>("authorID"));
+        ncNews.setCellValueFactory(new PropertyValueFactory<_News, String>("name"));
+        ncText.setCellValueFactory(new PropertyValueFactory<_News, String>("text"));
+        ncDate.setCellValueFactory(new PropertyValueFactory<_News, Date>("date"));
+        ncViews.setCellValueFactory(new PropertyValueFactory<_News, Integer>("view"));
+        ncTegs.setCellValueFactory(new PropertyValueFactory<_News, String>("tegs"));
+        ncImageView.setCellValueFactory(new PropertyValueFactory<_News, String>("imageLink"));
         newsTable.setItems(FXCollections.observableList(nl.getNewsList()));
     }
 
@@ -410,21 +411,21 @@ public class AdminController {
 
     public void mouseReservationClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            reservation res = (reservation) reservationTable.getSelectionModel().getSelectedItem();
+            _Reservation res = (_Reservation) reservationTable.getSelectionModel().getSelectedItem();
             preorderInitialize(new PreOrderList(res.getId()));
         }
     }
 
     public void mouseOrdersClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            orders ord = (orders) OrdersTable.getSelectionModel().getSelectedItem();
+            _Order ord = (_Order) OrdersTable.getSelectionModel().getSelectedItem();
             orderListInitialize(new OrdersOrderList(ord.getId()));
         }
     }
 
     public void mouseCategoryClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
+            _Category cat = (_Category) categoryTable.getSelectionModel().getSelectedItem();
             dishInitialize(new DishList(cat.getId()));
         }
     }
@@ -432,13 +433,13 @@ public class AdminController {
 
     public void btnEventReservationDelete(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<reservation> res = reservationTable.getSelectionModel().getSelectedItems();
+            ObservableList<_Reservation> res = reservationTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("reservation",res.get(0).getId());
+                ServerCommands.delete("_Reservation",res.get(0).getId());
                 reservationInitialize();
             }
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<preOrderTable> preor = preorderTable.getSelectionModel().getSelectedItems();
+            ObservableList<_PreOrderTable> preor = preorderTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
                 ServerCommands.delete("preorder",preor.get(0).getId());
                 reservationInitialize();
@@ -452,19 +453,19 @@ public class AdminController {
 
     public void btnEventEmployeeDelete(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<employees> tmp = tableEmployees.getSelectionModel().getSelectedItems();
+            ObservableList<_Employee> tmp = tableEmployees.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("employees",tmp.get(0).getId());
+                ServerCommands.delete("_Employee",tmp.get(0).getId());
                 cafeCoordinateInitialize();
             }
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<positions> tmp = positionTable.getSelectionModel().getSelectedItems();
+            ObservableList<_Positions> tmp = positionTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("positions",tmp.get(0).getId());
+                ServerCommands.delete("_Positions",tmp.get(0).getId());
                 cafeCoordinateInitialize();
             }
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<cafeCoordinate> tmp = cafeCoordinateTable.getSelectionModel().getSelectedItems();
+            ObservableList<_CafeCoordinate> tmp = cafeCoordinateTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
                 ServerCommands.delete("cafecoordinate",tmp.get(0).getId());
                 cafeCoordinateInitialize();
@@ -476,9 +477,9 @@ public class AdminController {
 
     public void btnEventReviewDelete(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<reports> rep = repTable.getSelectionModel().getSelectedItems();
+            ObservableList<_Reports> rep = repTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("reports",rep.get(0).getId());
+                ServerCommands.delete("_Reports",rep.get(0).getId());
                 reportsInitialize();
             }
         } else {
@@ -488,15 +489,15 @@ public class AdminController {
 
     public void btnEventCategoryDishDelete(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<category> cat = categoryTable.getSelectionModel().getSelectedItems();
+            ObservableList<_Category> cat = categoryTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("category",cat.get(0).getId());
+                ServerCommands.delete("_Category",cat.get(0).getId());
                 categoryInitialize();
             }
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<dish> dish = dishTable.getSelectionModel().getSelectedItems();
+            ObservableList<_Dish> dish = dishTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("dish",dish.get(0).getId());
+                ServerCommands.delete("_Dish",dish.get(0).getId());
                 dishInitialize(new DishList(0));
             }
         } else {
@@ -506,9 +507,9 @@ public class AdminController {
 
     public void btnEventNewsDelete(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
-            ObservableList<news> news = newsTable.getSelectionModel().getSelectedItems();
+            ObservableList<_News> news = newsTable.getSelectionModel().getSelectedItems();
             if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                ServerCommands.delete("news",news.get(0).getId());
+                ServerCommands.delete("_News",news.get(0).getId());
                 newsInitialize();
             }
         } else {
@@ -567,7 +568,7 @@ public class AdminController {
         pieChart.getData().clear();
     }
     private boolean pieChartInit(String dateStart, String dateEnd) {
-        ArrayList<ReportsGraph> tmp = null;
+        ArrayList<_GraphReport> tmp = null;
         tmp = ServerCommands.getReportsGraph("pie", dateStart, dateEnd);
         if (tmp == null) {
             return false;
@@ -588,7 +589,7 @@ public class AdminController {
 
     private boolean lineChartInit(String dateStart, String dateEnd)
     {
-        ArrayList<ReportsGraph> tmp = null;
+        ArrayList<_GraphReport> tmp = null;
         tmp = ServerCommands.getReportsGraph("line",dateStart,dateEnd);
         if(tmp == null)
         {
@@ -616,7 +617,7 @@ public class AdminController {
 
     private boolean barChartInit(String dateStart, String dateEnd)
     {
-        ArrayList<ReportsGraph>  tmp = null;
+        ArrayList<_GraphReport>  tmp = null;
         tmp = ServerCommands.getReportsGraph("bar",dateStart,dateEnd);
         if(tmp == null)
         {
@@ -661,11 +662,11 @@ public class AdminController {
 
     public void MouseClickBtnAddDishCategory(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Категорию", "category", "insert",cat.getId());
+            _Category cat = (_Category) categoryTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Категорию", "_Category", "insert",cat.getId());
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            dish dish = (dish) dishTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить блюдо", "dish", "insert",dish.getId());
+            _Dish dish = (_Dish) dishTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить блюдо", "_Dish", "insert",dish.getId());
         } else {
             alertNullValue();
         }
@@ -674,11 +675,11 @@ public class AdminController {
     public void MouseClickBtnEditDishCategory(Event event) {
 
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            category cat = (category) categoryTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Категорию", "category", "update",cat.getId());
+            _Category cat = (_Category) categoryTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Категорию", "_Category", "update",cat.getId());
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            dish dish = (dish) dishTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить блюдо", "dish", "update",dish.getId());
+            _Dish dish = (_Dish) dishTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить блюдо", "_Dish", "update",dish.getId());
         }else
         {
             alertNullValue();
@@ -686,8 +687,8 @@ public class AdminController {
     }
     public void NewsEditBtn(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
-            news news = (news) newsTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Новость", "news", "update",news.getId());
+            _News news = (_News) newsTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Новость", "_News", "update",news.getId());
         } else
         {
             alertNullValue();
@@ -696,8 +697,8 @@ public class AdminController {
 
     public void NewsAddBtn(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
-            news news = (news) newsTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Новость", "news", "insert",news.getId());
+            _News news = (_News) newsTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Новость", "_News", "insert",news.getId());
         } else
         {
             alertNullValue();
@@ -706,10 +707,10 @@ public class AdminController {
 
     public void ReservationPreOrderEditBtn(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            reservation tmp = (reservation) reservationTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить Резерв", "reservation", "update", tmp.getId());
+            _Reservation tmp = (_Reservation) reservationTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить Резерв", "_Reservation", "update", tmp.getId());
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            preOrderTable tmp = (preOrderTable) preorderTable.getSelectionModel().getSelectedItem();
+            _PreOrderTable tmp = (_PreOrderTable) preorderTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Изменить Предзаказ", "preorder", "update", tmp.getId());
         }
         else {
@@ -719,10 +720,10 @@ public class AdminController {
 
     public void ReservationPreOrderAddBtn(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            reservation tmp = (reservation) reservationTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Резерв", "reservation", "insert", tmp.getId());
+            _Reservation tmp = (_Reservation) reservationTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить Резерв", "_Reservation", "insert", tmp.getId());
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            preOrderTable tmp = (preOrderTable) preorderTable.getSelectionModel().getSelectedItem();
+            _PreOrderTable tmp = (_PreOrderTable) preorderTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Добавить Предзаказ", "preorder", "insert", tmp.getId());
         }
         else {
@@ -732,13 +733,13 @@ public class AdminController {
 
     public void EmployeeAddBtn(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            employees tmp = (employees) tableEmployees.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить сотрудника", "employees", "insert", tmp.getId());
+            _Employee tmp = (_Employee) tableEmployees.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить сотрудника", "_Employee", "insert", tmp.getId());
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            positions tmp = (positions) positionTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить вакансию", "positions", "insert", tmp.getId());
+            _Positions tmp = (_Positions) positionTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить вакансию", "_Positions", "insert", tmp.getId());
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            cafeCoordinate tmp = (cafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            _CafeCoordinate tmp = (_CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Добавить новое кафе", "cafecoordinate", "insert", tmp.getId());
         } else {
             alertNullValue();
@@ -747,13 +748,13 @@ public class AdminController {
 
     public void EmployeeEditBtn(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            employees tmp = (employees) tableEmployees.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить сотрудника", "employees", "update", tmp.getId());
+            _Employee tmp = (_Employee) tableEmployees.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить сотрудника", "_Employee", "update", tmp.getId());
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            positions tmp = (positions) positionTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить вакансию", "positions", "update", tmp.getId());
+            _Positions tmp = (_Positions) positionTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить вакансию", "_Positions", "update", tmp.getId());
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            cafeCoordinate tmp = (cafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            _CafeCoordinate tmp = (_CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Изменить кафе", "cafecoordinate", "update", tmp.getId());
         } else {
             alertNullValue();
@@ -762,8 +763,8 @@ public class AdminController {
 
     public void ReviewAddBtn(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
-            reports tmp = (reports) repTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить отзыв", "reports", "insert", tmp.getId());
+            _Reports tmp = (_Reports) repTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Добавить отзыв", "_Reports", "insert", tmp.getId());
         } else {
             alertNullValue();
         }
@@ -771,8 +772,8 @@ public class AdminController {
 
     public void ReviewEditBtn(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
-            reports tmp = (reports) repTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить отзыв", "reports", "update", tmp.getId());
+            _Reports tmp = (_Reports) repTable.getSelectionModel().getSelectedItem();
+            Main.updateInsertDialog("Изменить отзыв", "_Reports", "update", tmp.getId());
         } else {
             alertNullValue();
         }

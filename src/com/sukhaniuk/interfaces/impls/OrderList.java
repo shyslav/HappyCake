@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import appmodels.orders;
+import appmodels._Order;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
 public class OrderList {
-    private ArrayList<orders> orderList;
+    private ArrayList<_Order> orderList;
 
-    public ArrayList<orders> getOrderList() {
+    public ArrayList<_Order> getOrderList() {
         return orderList;
     }
 
-    public void setOrderList(ArrayList<orders> orderList) {
+    public void setOrderList(ArrayList<_Order> orderList) {
         this.orderList = orderList;
     }
 

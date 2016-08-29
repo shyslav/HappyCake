@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class CafeCoordinateList {
-    private ArrayList<cafeCoordinate> cafeCoordinate;
+    private ArrayList<_CafeCoordinate> cafeCoordinate;
 
     public CafeCoordinateList(int id) {
         if(id == 0) {
@@ -20,11 +20,11 @@ public class CafeCoordinateList {
         }
     }
 
-    public ArrayList<cafeCoordinate> getCafeCoordinate() {
+    public ArrayList<_CafeCoordinate> getCafeCoordinate() {
         return cafeCoordinate;
     }
 
-    public void setCafeCoordinate(ArrayList<cafeCoordinate> cafeCoordinate) {
+    public void setCafeCoordinate(ArrayList<_CafeCoordinate> cafeCoordinate) {
         this.cafeCoordinate = cafeCoordinate;
     }
 }

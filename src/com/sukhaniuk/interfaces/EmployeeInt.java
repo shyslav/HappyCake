@@ -1,16 +1,16 @@
 package com.sukhaniuk.interfaces;
 
 
-import appmodels.jEmployees;
+import appmodels.localmodels.LocalEmployee;
 
 /**
  * Created by Shyshkin Vladyslav on 28.03.2016.
  */
 public interface EmployeeInt {
     //добавление
-    void add(jEmployees Employee);
+    void add(LocalEmployee Employee);
     //удаление
-    void delete(jEmployees Employee);
+    void delete(LocalEmployee Employee);
     //обновление
-    void update(jEmployees Employee);
+    void update(LocalEmployee Employee);
 }

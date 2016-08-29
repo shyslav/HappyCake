@@ -1,15 +1,15 @@
 package com.sukhaniuk.interfaces;
 
-import appmodels.news;
+import appmodels._News;
 
 /**
  * Created by Shyshkin Vladyslav on 28.03.2016.
  */
 public interface newsInt {
     //добавление
-    void add(news news);
+    void add(_News news);
     //удаление
-    void delete(news news);
+    void delete(_News news);
     //обновление
-    void update(news news);
+    void update(_News news);
 }

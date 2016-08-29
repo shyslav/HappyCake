@@ -1,19 +1,19 @@
 package com.sukhaniuk.interfaces.impls;
 
 
-import appmodels.orderList;
+import appmodels._OrderList;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
 
 public class OrdersOrderList {
-    private ArrayList<orderList> OrdersOrderList;
+    private ArrayList<_OrderList> OrdersOrderList;
 
-    public ArrayList<orderList> getOrdersOrderList() {
+    public ArrayList<_OrderList> getOrdersOrderList() {
         return OrdersOrderList;
     }
 
-    public void setOrdersOrderList(ArrayList<orderList> ordersOrderList) {
+    public void setOrdersOrderList(ArrayList<_OrderList> ordersOrderList) {
         OrdersOrderList = ordersOrderList;
     }
 

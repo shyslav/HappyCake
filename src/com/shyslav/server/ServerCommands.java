@@ -1,5 +1,6 @@
 package com.shyslav.server;
 
+import appmodels.localmodels.LocalServerCassir;
 import com.shyslav.controller.alert.LazyAlert;
 import appmodels.*;
 
@@ -26,7 +27,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return false;
             }
-            ServerConnect.emp = (ArrayList<employees>) object;
+            ServerConnect.emp = (ArrayList<_Employee>) object;
             System.out.println(ServerConnect.emp.get(0).getBirthdayDay());
             return true;
         } catch (IOException e) {
@@ -38,7 +39,7 @@ public class ServerCommands {
         return false;
     }
 
-    public static ArrayList<news> getNews(String id) {
+    public static ArrayList<_News> getNews(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectNews:" + 0);
         } else {
@@ -55,7 +56,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<news> news = (ArrayList<news>) object;
+            ArrayList<_News> news = (ArrayList<_News>) object;
             return news;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -66,7 +67,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<category> getCategory(String id) {
+    public static ArrayList<_Category> getCategory(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectCategory:" + 0);
         } else {
@@ -83,7 +84,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<category> category = (ArrayList<category>) object;
+            ArrayList<_Category> category = (ArrayList<_Category>) object;
             return category;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -95,7 +96,7 @@ public class ServerCommands {
     }
 
 
-    public static ArrayList<dish> getDish(String id) {
+    public static ArrayList<_Dish> getDish(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectDish:" + 0);
         } else {
@@ -112,7 +113,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<dish> dish = (ArrayList<dish>) object;
+            ArrayList<_Dish> dish = (ArrayList<_Dish>) object;
             return dish;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -123,7 +124,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<reservation> getReservation(String id) {
+    public static ArrayList<_Reservation> getReservation(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectReservation:" + 0);
         } else {
@@ -140,7 +141,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<reservation> reservation = (ArrayList<reservation>) object;
+            ArrayList<_Reservation> reservation = (ArrayList<_Reservation>) object;
             return reservation;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -151,7 +152,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<preOrderTable> getPreOrder(String id) {
+    public static ArrayList<_PreOrderTable> getPreOrder(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectPreOrder:" + 0);
         } else {
@@ -168,7 +169,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<preOrderTable> preOrder = (ArrayList<preOrderTable>) object;
+            ArrayList<_PreOrderTable> preOrder = (ArrayList<_PreOrderTable>) object;
             return preOrder;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -179,7 +180,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<employees> getEmployees(String id) {
+    public static ArrayList<_Employee> getEmployees(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectEmployees:" + 0);
         } else {
@@ -196,7 +197,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<employees> employees = (ArrayList<employees>) object;
+            ArrayList<_Employee> employees = (ArrayList<_Employee>) object;
             return employees;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -207,7 +208,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<reports> getReport(String id) {
+    public static ArrayList<_Reports> getReport(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectReports:" + 0);
         } else {
@@ -224,7 +225,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<reports> reports = (ArrayList<reports>) object;
+            ArrayList<_Reports> reports = (ArrayList<_Reports>) object;
             return reports;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -235,7 +236,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<cafeCoordinate> getCafeCoordinate(String id) {
+    public static ArrayList<_CafeCoordinate> getCafeCoordinate(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectCafeCoordinte:" + 0);
         } else {
@@ -252,7 +253,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<cafeCoordinate> cafeCoordinate = (ArrayList<cafeCoordinate>) object;
+            ArrayList<_CafeCoordinate> cafeCoordinate = (ArrayList<_CafeCoordinate>) object;
             return cafeCoordinate;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -263,7 +264,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<position> getPosition(String id) {
+    public static ArrayList<_Positions> getPosition(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectPositions:" + 0);
         } else {
@@ -280,7 +281,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<position> position = (ArrayList<position>) object;
+            ArrayList<_Positions> position = (ArrayList<_Positions>) object;
             return position;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -291,7 +292,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<orders> getOrders(String id) {
+    public static ArrayList<_Order> getOrders(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectOrders:" + 0);
         } else {
@@ -308,7 +309,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<orders> order = (ArrayList<orders>) object;
+            ArrayList<_Order> order = (ArrayList<_Order>) object;
             return order;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -319,7 +320,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<orderList> getOrdersOrderList(String id) {
+    public static ArrayList<_OrderList> getOrdersOrderList(String id) {
         if (id == null) {
             ServerConnect.printWriter.println("selectOrderList:" + 0);
         } else {
@@ -336,7 +337,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<orderList> order = (ArrayList<orderList>) object;
+            ArrayList<_OrderList> order = (ArrayList<_OrderList>) object;
             return order;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -416,7 +417,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<ReportsGraph> getReportsGraph(String chart, String dateStart, String dateEnd) {
+    public static ArrayList<_GraphReport> getReportsGraph(String chart, String dateStart, String dateEnd) {
         if (dateStart == null || dateEnd == null) {
             ServerConnect.printWriter.println("selectGrapgMonth:" + chart);
         } else {
@@ -433,7 +434,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<ReportsGraph> charts = (ArrayList<ReportsGraph>) object;
+            ArrayList<_GraphReport> charts = (ArrayList<_GraphReport>) object;
             return charts;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -444,7 +445,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static ArrayList<_Cassir> getCassirData() {
+    public static ArrayList<LocalServerCassir> getCassirData() {
         ServerConnect.printWriter.println("selectCassir:");
         try {
             if (ServerConnect.objInputStream == null)
@@ -457,7 +458,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            ArrayList<_Cassir> cas = (ArrayList<_Cassir>) object;
+            ArrayList<LocalServerCassir> cas = (ArrayList<LocalServerCassir>) object;
             return cas;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");
@@ -468,7 +469,7 @@ public class ServerCommands {
         return null;
     }
 
-    public static String cassirSent(ArrayList<orderList> od, double price) {
+    public static String cassirSent(ArrayList<_OrderList> od, double price) {
         int employeeID = ServerConnect.emp.get(0).getId();
         try {
             if (ServerConnect.objOutputStream == null) {
@@ -495,7 +496,7 @@ public class ServerCommands {
         return "error";
     }
 
-    public static LinkedList<CookOrder> getCookList() {
+    public static LinkedList<_CookOrder> getCookList() {
         ServerConnect.printWriter.println("getCookList:");
         try {
             if (ServerConnect.objInputStream == null)
@@ -509,7 +510,7 @@ public class ServerCommands {
             if (object.equals("not found")) {
                 return null;
             }
-            LinkedList<CookOrder> cas = (LinkedList<CookOrder>) object;
+            LinkedList<_CookOrder> cas = (LinkedList<_CookOrder>) object;
             return cas;
         } catch (IOException e) {
             System.out.println("Не правильно введенные данные");

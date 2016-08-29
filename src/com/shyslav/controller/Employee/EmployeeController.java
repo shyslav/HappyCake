@@ -1,5 +1,6 @@
 package com.shyslav.controller.Employee;
 
+import appmodels.localmodels.LocalServerCassir;
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyAlert;
 import appmodels.*;
@@ -28,10 +29,10 @@ import java.util.Map;
 
 
 public class EmployeeController {
-    private Map<dish, TextField> mapTextFields = new HashMap<>();
-    private ArrayList<_Cassir> cas = new ArrayList<>();
+    private Map<_Dish, TextField> mapTextFields = new HashMap<>();
+    private ArrayList<LocalServerCassir> cas = new ArrayList<>();
     private ArrayList<TreeItem> treeItems = new ArrayList<>();
-    private ArrayList<orderList> orderLists = new ArrayList<>();
+    private ArrayList<_OrderList> orderLists = new ArrayList<>();
     private GridPane gridPane = new GridPane();
     @FXML
     private AnchorPane AnchorTest;
@@ -72,15 +73,15 @@ public class EmployeeController {
 
         scPane.setContent(gridPane);
 
-        for (_Cassir cs : cas) {
+        for (LocalServerCassir cs : cas) {
             Button btn = generateBtnCategory(cs.getName());
             VboxButtons.getChildren().add(btn);
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     //System.out.println(btn.getText());
-                    ArrayList<_Cassir> clone = new ArrayList<_Cassir>(cas);
-                    ArrayList<_Cassir> tmp = new ArrayList<>();
+                    ArrayList<LocalServerCassir> clone = new ArrayList<LocalServerCassir>(cas);
+                    ArrayList<LocalServerCassir> tmp = new ArrayList<>();
                     for (int i = 0; i < cas.size(); i++) {
                         if (cas.get(i).getName().equals(btn.getText())) {
                             tmp.add(cas.get(i));
@@ -184,14 +185,14 @@ public class EmployeeController {
         return imgView;
     }
 
-    private Button generateBtnAdd(String name, dish ds) {
+    private Button generateBtnAdd(String name, _Dish ds) {
         Button btnSubmit = new Button(name);
         btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //System.out.println(mapTextFields.get(ds).getText());
                 double sum = Integer.parseInt(mapTextFields.get(ds).getText()) * ds.getPrice();
-                for (orderList od : orderLists) {
+                for (_OrderList od : orderLists) {
                     if (od.getDishID() == ds.getId()) {
                         //текущее кол-во + в текстовом поле
                         od.setAmount(od.getAmount() + Integer.parseInt(mapTextFields.get(ds).getText()));
@@ -203,7 +204,7 @@ public class EmployeeController {
                         return;
                     }
                 }
-                orderLists.add(new orderList(0, 0, ds.getId(), ds.getName(), Integer.parseInt(mapTextFields.get(ds).getText()), sum));
+                orderLists.add(new _OrderList(0, 0, ds.getId(), ds.getName(), Integer.parseInt(mapTextFields.get(ds).getText()), sum));
                 addToTree();
             }
         });
@@ -219,7 +220,7 @@ public class EmployeeController {
         return btnSubmit;
     }
 
-    private HBox generatePlusMinus(dish ds) {
+    private HBox generatePlusMinus(_Dish ds) {
         HBox hb = new HBox();
         hb.setPadding(new Insets(5, 0, 5, 0));
 
@@ -283,7 +284,7 @@ public class EmployeeController {
         ReUse();
     }
 
-    private double sum(ArrayList<orderList> ord) {
+    private double sum(ArrayList<_OrderList> ord) {
         double summ = 0.0;
         for (int i = 0; i < ord.size(); i++) {
             summ += ord.get(i).getPrice();

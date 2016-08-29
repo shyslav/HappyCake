@@ -1,6 +1,6 @@
 package com.shyslav.controller.Cook;
 
-import appmodels.CookOrder;
+import appmodels._CookOrder;
 import com.shyslav.controller.alert.LazyAlert;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.server.ServerConnect;
@@ -18,7 +18,7 @@ import java.util.LinkedList;
  * Created by Shyshkin Vladyslav on 25.05.2016.
  */
 public class CookModel {
-    public static LinkedList<CookOrder> list = new LinkedList<>();
+    public static LinkedList<_CookOrder> list = new LinkedList<>();
     public static volatile Thread tr = null;
     public static volatile boolean done = false;
 
@@ -41,7 +41,7 @@ public class CookModel {
                         if (line.equals("updateCook")) {
                             try {
                                 Object o = ServerConnect.objInputStream.readObject();
-                                list = (LinkedList<CookOrder>) o;
+                                list = (LinkedList<_CookOrder>) o;
                                 Main.cookConroller.updateOrders();
                                 playSound("cookMusic.wav");
                             } catch (IOException e) {

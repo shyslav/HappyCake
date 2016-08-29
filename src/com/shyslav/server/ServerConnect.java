@@ -1,6 +1,6 @@
 package com.shyslav.server;
 
-import appmodels.employees;
+import appmodels._Employee;
 import com.shyslav.controller.alert.LazyAlert;
 
 import java.io.*;
@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class ServerConnect {
-    public static ArrayList<employees> emp;
+    public static ArrayList<_Employee> emp;
     public static Socket connection;
     public InputStream inputStream;
     public OutputStream outputStream;

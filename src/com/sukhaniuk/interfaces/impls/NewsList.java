@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import appmodels.news;
+import appmodels._News;
 import com.shyslav.server.ServerCommands;
 import com.sukhaniuk.interfaces.newsInt;
 
@@ -10,28 +10,28 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 28.03.2016.
  */
 public class NewsList implements newsInt {
-    private ArrayList<news> newsList;
+    private ArrayList<_News> newsList;
 
-    public ArrayList<news> getNewsList() {
+    public ArrayList<_News> getNewsList() {
         return newsList;
     }
 
-    public void setNewsList(ArrayList<news> newsList) {
+    public void setNewsList(ArrayList<_News> newsList) {
         this.newsList = newsList;
     }
 
     @Override
-    public void add(news news) {
+    public void add(_News news) {
 
     }
 
     @Override
-    public void delete(news news) {
+    public void delete(_News news) {
 
     }
 
     @Override
-    public void update(news news) {
+    public void update(_News news) {
 
     }
 

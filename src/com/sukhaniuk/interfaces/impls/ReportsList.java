@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import appmodels.reports;
+import appmodels._Reports;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class ReportsList {
-    private ArrayList<reports> report;
+    private ArrayList<_Reports> report;
 
     public ReportsList(int id) {
         if(id == 0) {
@@ -20,11 +20,11 @@ public class ReportsList {
         }
     }
 
-    public ArrayList<reports> getReport() {
+    public ArrayList<_Reports> getReport() {
         return report;
     }
 
-    public void setReport(ArrayList<reports> report) {
+    public void setReport(ArrayList<_Reports> report) {
         this.report = report;
     }
 }

@@ -1,6 +1,6 @@
 package com.sukhaniuk.interfaces.impls;
 
-import appmodels.category;
+import appmodels._Category;
 import com.shyslav.server.ServerCommands;
 
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class CategoryList {
-    private ArrayList<category> categoryLists;
+    private ArrayList<_Category> categoryLists;
 
-    public ArrayList<category> getCategoryLists() {
+    public ArrayList<_Category> getCategoryLists() {
         return categoryLists;
     }
 
-    public void setCategoryLists(ArrayList<category> categoryLists) {
+    public void setCategoryLists(ArrayList<_Category> categoryLists) {
         this.categoryLists = categoryLists;
     }
 
