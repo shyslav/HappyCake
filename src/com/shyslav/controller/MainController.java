@@ -60,10 +60,9 @@ public class MainController {
                 if (ServerConnect.emp == null) {
                     main.alertEnterDialog("Admin Entered Form", "Enter your password and username please");
                 } else {
-                    if(ServerConnect.emp.get(0).getPositionID()==1) {
+                    if (ServerConnect.emp.get(0).getPositionID() == 1) {
                         Main.chooseScreenAdmin();
-                    }else
-                    {
+                    } else {
                         LazyAlert.RuleError();
                     }
                 }
@@ -80,10 +79,9 @@ public class MainController {
                 if (ServerConnect.emp == null) {
                     main.alertEnterDialog("Employee Entered Form", "Enter your password and username please");
                 } else {
-                    if(ServerConnect.emp.get(0).getPositionID()==2|| ServerConnect.emp.get(0).getPositionID()==1) {
+                    if (ServerConnect.emp.get(0).getPositionID() == 2 || ServerConnect.emp.get(0).getPositionID() == 1) {
                         main.chooseScreenEmployee();
-                    }else
-                    {
+                    } else {
                         LazyAlert.RuleError();
                     }
                 }

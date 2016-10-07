@@ -6,6 +6,7 @@ import com.shyslav.controller.alert.LazyAlert;
 import appmodels.*;
 import com.shyslav.server.ServerCommands;
 import data.DataUpdater;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,7 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -175,6 +181,21 @@ public class EmployeeController {
         label.setPrefWidth(210);
         label.setAlignment(Pos.CENTER);
         return label;
+    }
+
+    private ImageView generateImageVew(byte[] image) {
+        InputStream in = new ByteArrayInputStream(image);
+        ImageView imgView = null;
+        try {
+            BufferedImage bufferedImage = ImageIO.read(in);
+            Image img = SwingFXUtils.toFXImage(bufferedImage,null);
+            imgView= new ImageView(img);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imgView.setFitWidth(210);
+        imgView.setFitHeight(170);
+        return imgView;
     }
 
     private ImageView generateImageVew(String path) {
