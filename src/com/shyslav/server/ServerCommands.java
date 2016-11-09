@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Created by Shyshkin Vladyslav on 16.05.2016.
+ * @author Shyshkin Vladyslav on 16.05.2016.
  */
 public class ServerCommands {
     public static boolean login(String user, String password) {
