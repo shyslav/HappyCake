@@ -19,7 +19,8 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
 public class DomReader {
-    public static ArrayList<LocalRoles> parseFunc(String tableName, String command, int id) {
+    private final ClassLoader classLoader = getClass().getClassLoader();
+    public  ArrayList<LocalRoles> parseFunc(String tableName, String command, int id) {
         String labelName = null;
         String type = null;
         int maxLenght = 0;
@@ -27,12 +28,12 @@ public class DomReader {
         Boolean emptyOrNot = null;
         String key = null;
         String value = null;
-        ArrayList<LocalRoles> role = new ArrayList<>();
+        ArrayList<LocalRoles> rules = new ArrayList<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         try {
             builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(String.valueOf(DomReader.class.getResource("databaseFields.xml")));
+            Document doc = builder.parse(String.valueOf(classLoader.getResource("data/databaseFields.xml")));
             NodeList personList = doc.getElementsByTagName(tableName);
             for (int i = 0 ; i < personList.getLength();i++)
             {
@@ -61,16 +62,12 @@ public class DomReader {
                         value = "";
                     }
                     //System.out.println(element.getElementsByTagName("labelName").item(0).getTextContent());
-                    role.add(new LocalRoles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,value)));
+                    rules.add(new LocalRoles(labelName,type,maxLenght,minLenght,emptyOrNot,new KeyValue(key,value)));
                 }
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        return role;
+        return rules;
     }
 }

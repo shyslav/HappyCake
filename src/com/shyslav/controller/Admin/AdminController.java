@@ -663,10 +663,10 @@ public class AdminController {
     public void MouseClickBtnAddDishCategory(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             _Category cat = (_Category) categoryTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Категорию", "_Category", "insert",cat.getId());
+            Main.updateInsertDialog("Добавить Категорию", "category", "insert",cat.getId());
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             _Dish dish = (_Dish) dishTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить блюдо", "_Dish", "insert",dish.getId());
+            Main.updateInsertDialog("Добавить блюдо", "dish", "insert",dish.getId());
         } else {
             alertNullValue();
         }
@@ -676,10 +676,10 @@ public class AdminController {
 
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             _Category cat = (_Category) categoryTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Категорию", "_Category", "update",cat.getId());
+            Main.updateInsertDialog("Добавить Категорию", "category", "update",cat.getId());
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             _Dish dish = (_Dish) dishTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить блюдо", "_Dish", "update",dish.getId());
+            Main.updateInsertDialog("Добавить блюдо", "dish", "update",dish.getId());
         }else
         {
             alertNullValue();
@@ -688,7 +688,7 @@ public class AdminController {
     public void NewsEditBtn(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             _News news = (_News) newsTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Новость", "_News", "update",news.getId());
+            Main.updateInsertDialog("Добавить Новость", "news", "update",news.getId());
         } else
         {
             alertNullValue();
@@ -698,7 +698,7 @@ public class AdminController {
     public void NewsAddBtn(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             _News news = (_News) newsTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Новость", "_News", "insert",news.getId());
+            Main.updateInsertDialog("Добавить Новость", "news", "insert",news.getId());
         } else
         {
             alertNullValue();
@@ -708,7 +708,7 @@ public class AdminController {
     public void ReservationPreOrderEditBtn(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             _Reservation tmp = (_Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить Резерв", "_Reservation", "update", tmp.getId());
+            Main.updateInsertDialog("Изменить Резерв", "reservation", "update", tmp.getId());
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             _PreOrderTable tmp = (_PreOrderTable) preorderTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Изменить Предзаказ", "preorder", "update", tmp.getId());
@@ -721,7 +721,7 @@ public class AdminController {
     public void ReservationPreOrderAddBtn(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             _Reservation tmp = (_Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить Резерв", "_Reservation", "insert", tmp.getId());
+            Main.updateInsertDialog("Добавить Резерв", "reservation", "insert", tmp.getId());
         }else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             _PreOrderTable tmp = (_PreOrderTable) preorderTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Добавить Предзаказ", "preorder", "insert", tmp.getId());
@@ -734,10 +734,10 @@ public class AdminController {
     public void EmployeeAddBtn(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             _Employee tmp = (_Employee) tableEmployees.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить сотрудника", "_Employee", "insert", tmp.getId());
+            Main.updateInsertDialog("Добавить сотрудника", "employees", "insert", tmp.getId());
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             _Positions tmp = (_Positions) positionTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить вакансию", "_Positions", "insert", tmp.getId());
+            Main.updateInsertDialog("Добавить вакансию", "positions", "insert", tmp.getId());
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             _CafeCoordinate tmp = (_CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Добавить новое кафе", "cafecoordinate", "insert", tmp.getId());
@@ -749,10 +749,10 @@ public class AdminController {
     public void EmployeeEditBtn(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             _Employee tmp = (_Employee) tableEmployees.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить сотрудника", "_Employee", "update", tmp.getId());
+            Main.updateInsertDialog("Изменить сотрудника", "employees", "update", tmp.getId());
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             _Positions tmp = (_Positions) positionTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить вакансию", "_Positions", "update", tmp.getId());
+            Main.updateInsertDialog("Изменить вакансию", "positions", "update", tmp.getId());
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             _CafeCoordinate tmp = (_CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
             Main.updateInsertDialog("Изменить кафе", "cafecoordinate", "update", tmp.getId());
@@ -764,7 +764,7 @@ public class AdminController {
     public void ReviewAddBtn(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             _Reports tmp = (_Reports) repTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Добавить отзыв", "_Reports", "insert", tmp.getId());
+            Main.updateInsertDialog("Добавить отзыв", "reports", "insert", tmp.getId());
         } else {
             alertNullValue();
         }
@@ -773,7 +773,7 @@ public class AdminController {
     public void ReviewEditBtn(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             _Reports tmp = (_Reports) repTable.getSelectionModel().getSelectedItem();
-            Main.updateInsertDialog("Изменить отзыв", "_Reports", "update", tmp.getId());
+            Main.updateInsertDialog("Изменить отзыв", "reports", "update", tmp.getId());
         } else {
             alertNullValue();
         }
