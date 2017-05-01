@@ -1,8 +1,5 @@
 package com.shyslav.controller.alert;
 
-import com.happycake.sitemodels.Employees;
-import com.shyslav.defaults.ErrorCodes;
-import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartApplication;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -48,9 +45,7 @@ public class EnterFrameController {
         if (txtFieldPassword.getLength() < 3 || txtFieldUsername.getLength() < 4) {
             LazyJavaFXAlert.alert("Ошибка", null, "Все поля обязательны для ввода", Alert.AlertType.WARNING);
         } else {
-            HappyCakeResponse login = StartApplication.userEntity.getClientActions().login(txtFieldUsername.getText(), txtFieldPassword.getText());
-            if (login.getCode() == ErrorCodes.SUCCESS) {
-                StartApplication.userEntity.setEmp(login.getObject(Employees.class));
+            if (StartApplication.userEntity.login(txtFieldUsername.getText(), txtFieldPassword.getText())) {
                 StartApplication.controllerMainItems.setBtnExit(true);
                 actionCancel(event);
             } else {

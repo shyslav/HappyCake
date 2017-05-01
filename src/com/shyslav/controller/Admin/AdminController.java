@@ -164,7 +164,7 @@ public class AdminController {
     private TableColumn<CafeCoordinate, String> coordMail;
 
     private void cafeCoordinateInitialize() {
-        CafeCoordinateList cl = new CafeCoordinateList();
+        CafeCoordinateList cl = StartApplication.userEntity.getUserBean().getCafeCoordinatesList();
         coordId.setCellValueFactory(new PropertyValueFactory<>("id"));
         coordAdrs.setCellValueFactory(new PropertyValueFactory<>("address"));
         coordPhone.setCellValueFactory(new PropertyValueFactory<>("mobilePhone"));
@@ -183,7 +183,7 @@ public class AdminController {
     private TableColumn<Position, Double> posSalary;
 
     private void positionInitialize() {
-        PositionsList pl = new PositionsList();
+        PositionsList pl = StartApplication.userEntity.getUserBean().getPositionsList();
         posID.setCellValueFactory(new PropertyValueFactory<>("id"));
         posName.setCellValueFactory(new PropertyValueFactory<>("name"));
         posSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
@@ -205,7 +205,7 @@ public class AdminController {
     private TableColumn<Order, String> ordCompliteORnot;
 
     private void ordersInitialize() {
-        OrderList order = new OrderList();
+        OrderList order = StartApplication.userEntity.getUserBean().getOrderList();
         ordID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
@@ -253,6 +253,7 @@ public class AdminController {
 
     @FXML
     private void initialize() {
+        StartApplication.userEntity.getUserBean().waitLoad();
         labelPercent.setTextFill(Color.DARKORANGE);
         labelPercent.setStyle("-fx-font: 24 arial;");
         labelPercent.setVisible(false);
@@ -321,35 +322,35 @@ public class AdminController {
     }
 
     private void employeeInitialize() {
-        EmployeesList el = new EmployeesList();
-        id.setCellValueFactory(new PropertyValueFactory<LocalEmployee, Integer>("id"));
-        positionID.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("positionID"));
-        cafeID.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("cafeID"));
-        name.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("name"));
-        lastname.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("lastname"));
-        address.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("address"));
-        birthdayDay.setCellValueFactory(new PropertyValueFactory<LocalEmployee, Date>("birthdayDay"));
-        empLogin.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("elogin"));
-        empPass.setCellValueFactory(new PropertyValueFactory<LocalEmployee, String>("epassword"));
+        EmployeesList el = StartApplication.userEntity.getUserBean().getEmployeesList();
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        positionID.setCellValueFactory(new PropertyValueFactory<>("positionID"));
+        cafeID.setCellValueFactory(new PropertyValueFactory<>("cafeID"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        birthdayDay.setCellValueFactory(new PropertyValueFactory<>("birthdayDay"));
+        empLogin.setCellValueFactory(new PropertyValueFactory<>("elogin"));
+        empPass.setCellValueFactory(new PropertyValueFactory<>("epassword"));
         //записать обзервебл лист в таблицу
         tableEmployees.setItems(FXCollections.observableList(el));
     }
 
     private void newsInitialize() {
-        NewsList nl = new NewsList();
-        ncID.setCellValueFactory(new PropertyValueFactory<News, Integer>("id"));
-        ncAuthorID.setCellValueFactory(new PropertyValueFactory<News, Integer>("authorID"));
-        ncNews.setCellValueFactory(new PropertyValueFactory<News, String>("name"));
-        ncText.setCellValueFactory(new PropertyValueFactory<News, String>("text"));
-        ncDate.setCellValueFactory(new PropertyValueFactory<News, Date>("date"));
-        ncViews.setCellValueFactory(new PropertyValueFactory<News, Integer>("view"));
-        ncTegs.setCellValueFactory(new PropertyValueFactory<News, String>("tegs"));
-        ncImageView.setCellValueFactory(new PropertyValueFactory<News, String>("imageLink"));
+        NewsList nl = StartApplication.userEntity.getUserBean().getNewsList();
+        ncID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ncAuthorID.setCellValueFactory(new PropertyValueFactory<>("authorID"));
+        ncNews.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ncText.setCellValueFactory(new PropertyValueFactory<>("text"));
+        ncDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        ncViews.setCellValueFactory(new PropertyValueFactory<>("view"));
+        ncTegs.setCellValueFactory(new PropertyValueFactory<>("tegs"));
+        ncImageView.setCellValueFactory(new PropertyValueFactory<>("imageLink"));
         newsTable.setItems(FXCollections.observableList(nl));
     }
 
     private void categoryInitialize() {
-        CategoriesList cl = new CategoriesList();
+        CategoriesList cl = StartApplication.userEntity.getUserBean().getCategoriesList();
         categoryId.setCellValueFactory(new PropertyValueFactory<>("id"));
         categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -366,7 +367,7 @@ public class AdminController {
         dishPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         dishImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         dishReadyOrNot.setCellValueFactory(new PropertyValueFactory<>("readyORnot"));
-        dishSell.setCellValueFactory(new PropertyValueFactory<>("sell"));
+        dishSell.setCellValueFactory(new PropertyValueFactory<>("discount"));
         if (dishList != null) {
             dishTable.setItems(FXCollections.observableList(dishList));
         } else {
@@ -375,7 +376,7 @@ public class AdminController {
     }
 
     private void reservationInitialize() {
-        ReservationList rl = new ReservationList();
+        ReservationList rl = StartApplication.userEntity.getUserBean().getReservationList();
         reservationID.setCellValueFactory(new PropertyValueFactory<>("id"));
         reservationCafeID.setCellValueFactory(new PropertyValueFactory<>("cafeId"));
         reservationClientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -402,7 +403,7 @@ public class AdminController {
     }
 
     private void reportsInitialize() {
-        ReportsList rl = new ReportsList();
+        ReportsList rl = StartApplication.userEntity.getUserBean().getReportsList();
         repID.setCellValueFactory(new PropertyValueFactory<>("id"));
         repAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         repText.setCellValueFactory(new PropertyValueFactory<>("text"));
@@ -416,21 +417,23 @@ public class AdminController {
     public void mouseReservationClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             Reservation res = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            preorderInitialize(new PreOrderList());
+            //TODO переделать по аналогу orders
+            preorderInitialize(StartApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(res.getId()));
         }
     }
 
     public void mouseOrdersClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             Order ord = (Order) OrdersTable.getSelectionModel().getSelectedItem();
-            orderListInitialize(new OrderDetailsList());
+            orderListInitialize(ord.getOrderDetails());
         }
     }
 
     public void mouseCategoryClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            dishInitialize(new DishesList());
+            //TODO нужно переделать по аналогу orders
+            dishInitialize(StartApplication.userEntity.getUserBean().getDishesList().getByCategoryId(cat.getId()));
         }
     }
 

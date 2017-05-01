@@ -124,7 +124,7 @@
                                                             <TableColumn fx:id="dishPrice" prefWidth="75.0" text="price" />
                                                             <TableColumn fx:id="dishImage" prefWidth="75.0" text="image" />
                                                             <TableColumn fx:id="dishReadyOrNot" prefWidth="75.0" text="readyornot" />
-                                                            <TableColumn fx:id="dishSell" prefWidth="75.0" text="sell" />
+                                                            <TableColumn fx:id="dishSell" prefWidth="75.0" text="discount" />
                                                         </columns>
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

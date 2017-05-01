@@ -1,13 +1,11 @@
 package com.shyslav.start;
 
-import com.shyslav.UserEntity;
+import com.shyslav.UserConnection;
 import com.shyslav.controller.Admin.AdminController;
 import com.shyslav.controller.Cook.CookController;
 import com.shyslav.controller.Cook.CookModel;
 import com.shyslav.controller.Employee.EmployeeController;
 import com.shyslav.controller.MainItems;
-import com.shyslav.controller.ServerClient;
-import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.controller.alert.LazyEditUpdate;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,13 +27,13 @@ public class StartApplication extends Application {
     public static AdminController controllerAdminItems;
     public static EmployeeController employeeController;
     public static CookController cookConroller;
-    public static UserEntity userEntity;
+    public static UserConnection userEntity;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         StartApplication.primaryStage = primaryStage;
         StartApplication.primaryStage.setTitle("EmployeeApp");
-        StartApplication.userEntity = new UserEntity();
+        StartApplication.userEntity = new UserConnection();
 
         showMainView();
         showMainItems();
