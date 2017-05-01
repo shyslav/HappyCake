@@ -1,7 +1,7 @@
 package com.shyslav.server;
 
-import appmodels._Employee;
-import com.shyslav.controller.alert.LazyAlert;
+import com.happycake.sitemodels.Employees;
+import com.shyslav.controller.alert.LazyJavaFXAlert;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by Shyshkin Vladyslav on 16.05.2016.
+ * @author Shyshkin Vladyslav on 16.05.2016.
  */
 public class ServerConnect {
-    public static ArrayList<_Employee> emp;
+    public static ArrayList<Employees> emp;
     public static Socket connection;
     public InputStream inputStream;
     public OutputStream outputStream;
@@ -20,6 +20,7 @@ public class ServerConnect {
     public static PrintWriter printWriter;
     public static ObjectInputStream objInputStream;
     public static ObjectOutputStream objOutputStream;
+
     public ServerConnect() {
         try {
             this.connection = new Socket("127.0.0.1", 8189);
@@ -33,15 +34,15 @@ public class ServerConnect {
             this.emp = new ArrayList<>();
         } catch (IOException ex) {
             System.out.println(ex);
-            LazyAlert.ConnectionError();
+            LazyJavaFXAlert.connectionError();
         }
     }
-    public static void dispatcher()
-    {
+
+    public static void dispatcher() {
         connection = null;
         objOutputStream = null;
         objInputStream = null;
-        emp=null;
+        emp = null;
     }
 }
 

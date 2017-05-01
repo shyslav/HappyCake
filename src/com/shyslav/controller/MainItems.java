@@ -2,7 +2,7 @@ package com.shyslav.controller;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.server.ServerConnect;
-import com.shyslav.start.Main;
+import com.shyslav.start.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -27,13 +27,13 @@ public class MainItems {
     @FXML
     private Button btnReinitializeAdmin;
 
-    private Main main;
+    private StartApplication main;
     public void HomeButton(ActionEvent actionEvent) throws IOException {
         main.showMainItems();
     }
 
     public void mouseEventReinitialize(Event event) {
-        Main.controllerAdminItems.ReInit();
+        StartApplication.controllerAdminItems.ReInit();
     }
 
     public void setBtnReinitializeAdmin(Boolean visiable) {
@@ -53,7 +53,7 @@ public class MainItems {
         {
             if(LazyConfirmDialog.confirmAlert("Вы хотите выйти?","Доступ ко всем разделам будет закрыт",null)) {
                 ServerConnect.dispatcher();
-                Main.controllerMainItems.setBtnExit(false);
+                StartApplication.controllerMainItems.setBtnExit(false);
             }
         }
     }

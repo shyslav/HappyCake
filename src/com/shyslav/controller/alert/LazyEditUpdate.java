@@ -3,7 +3,7 @@ package com.shyslav.controller.alert;
 import appmodels.localmodels.LocalRoles;
 import com.shyslav.resources.DomReader;
 import com.shyslav.server.ServerCommands;
-import com.shyslav.start.Main;
+import com.shyslav.start.StartApplication;
 import com.shyslav.validation.UpdateInsertValid;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * Current class open edit and update table data dialog
+ *
  * @author Shyshkin Vladyslav on 21.05.2016.
  */
 @SuppressWarnings("unused")
@@ -131,7 +132,7 @@ public class LazyEditUpdate {
                         break;
                 }
             } else {
-                new LazyAlert("Ошибка заполнения", "Дейтсвие не возможно, допущенны следующие ошибки", String.join("\n", errors), Alert.AlertType.ERROR);
+                LazyJavaFXAlert.alert("Ошибка заполнения", "Дейтсвие не возможно, допущенны следующие ошибки", String.join("\n", errors), Alert.AlertType.ERROR);
             }
         });
 
@@ -204,12 +205,12 @@ public class LazyEditUpdate {
     private void comandEvent(String com) {
         String result = ServerCommands.executeComand(com);
         if (result == null) {
-            LazyAlert.ConnectionError();
+            LazyJavaFXAlert.connectionError();
         } else if (result.equals("done")) {
-            Main.controllerAdminItems.ReInit();
+            StartApplication.controllerAdminItems.ReInit();
             closeScene();
         } else {
-            LazyAlert sa = new LazyAlert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам", result, Alert.AlertType.ERROR);
+            LazyJavaFXAlert.alert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам", result, Alert.AlertType.ERROR);
         }
         System.out.println(com);
     }

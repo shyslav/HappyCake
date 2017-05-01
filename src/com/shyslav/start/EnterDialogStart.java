@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by Shyshkin Vladyslav on 07.03.2016.
+ * @author Shyshkin Vladyslav on 07.03.2016.
  */
 public class EnterDialogStart {
     private String title;
@@ -26,7 +26,7 @@ public class EnterDialogStart {
 
     public void start() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("/com/shyslav/fxml/alerts/EnterDialog.fxml"));
+        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/alerts/EnterDialog.fxml"));
         VBox passwordAlert = loader.load();
         EnterFrameController controller = loader.getController();
         Stage enterFormStage = new Stage();

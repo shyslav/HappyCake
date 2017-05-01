@@ -1,7 +1,7 @@
 package com.shyslav.controller.Cook;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
-import com.shyslav.controller.alert.LazyAlert;
+import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.server.ServerCommands;
 import com.shyslav.server.ServerConnect;
 import javafx.application.Platform;
@@ -14,7 +14,7 @@ import javafx.scene.web.WebView;
 import java.util.ArrayList;
 
 /**
- * Created by Shyshkin Vladyslav on 25.05.2016.
+ * @author Shyshkin Vladyslav on 25.05.2016.
  */
 public class CookController {
     @FXML
@@ -51,10 +51,11 @@ public class CookController {
         webViews.add(webView8);
         generate();
     }
-    public void updateOrders()
-    {
-        Platform.runLater(()->generate());
+
+    public void updateOrders() {
+        Platform.runLater(() -> generate());
     }
+
     public void generate() {
         int listSize = 0;
         String style = "<html><head>" +
@@ -74,10 +75,10 @@ public class CookController {
                 "</head> ";
 
         for (int i = 0; i < webViews.size(); i++) {
-            String orderNumber = CookModel.list.size()>listSize?String.valueOf(CookModel.list.get(listSize).getOrderID()):"Нет заказа";
-            String order = "<body style='background :" + colors[i] + ";font-size: 30px;text-align:center;'>Замовлення №"+orderNumber+" <hr> </body>";
-            String table =  "<div align=\"center\">" +
-                    "<table style='background :"+ colors[i] +";'>\n" +
+            String orderNumber = CookModel.list.size() > listSize ? String.valueOf(CookModel.list.get(listSize).getOrderID()) : "Нет заказа";
+            String order = "<body style='background :" + colors[i] + ";font-size: 30px;text-align:center;'>Замовлення №" + orderNumber + " <hr> </body>";
+            String table = "<div align=\"center\">" +
+                    "<table style='background :" + colors[i] + ";'>\n" +
                     " <thead>   " +
                     generateTable(listSize++) +
                     "</tbody>\n" +
@@ -86,7 +87,7 @@ public class CookController {
                     "</body>" +
                     "<html>";
             WebEngine engine = webViews.get(i).getEngine();
-            engine.loadContent(style+order+table);
+            engine.loadContent(style + order + table);
         }
     }
 
@@ -100,8 +101,7 @@ public class CookController {
                 table += "</tr>";
             }
             return table;
-        } else
-        {
+        } else {
             return "Пусто";
         }
 
@@ -120,13 +120,11 @@ public class CookController {
                     if (CookModel.list.size() > firstNumber) {
                         ServerCommands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
                     } else {
-                        LazyAlert sa = new LazyAlert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
+                        LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
                     }
                 }
-            }
-            else
-            {
-                LazyAlert.RuleError();
+            } else {
+                LazyJavaFXAlert.ruleError();
             }
         }
     }
