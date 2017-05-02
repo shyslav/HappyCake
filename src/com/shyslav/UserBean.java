@@ -128,13 +128,17 @@ public class UserBean {
         return load;
     }
 
-    public void waitLoad(){
+    public void waitLoad() {
         while (!load) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
 
             }
         }
+    }
+
+    public ClientActions getClientActions() {
+        return clientActions;
     }
 }

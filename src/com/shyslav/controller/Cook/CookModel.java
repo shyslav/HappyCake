@@ -1,17 +1,10 @@
 package com.shyslav.controller.Cook;
 
 import appmodels._CookOrder;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
-import com.shyslav.server.ServerCommands;
-import com.shyslav.server.ServerConnect;
-import com.shyslav.start.StartApplication;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -24,37 +17,37 @@ public class CookModel {
 
     public static void initialize() {
         if (tr == null) {
-            list = ServerCommands.getCookList();
+//            list = ServerCommands.getCookList();
             newDishThread();
         }
     }
 
     private static void newDishThread() {
-        if (ServerConnect.emp.get(0).getPositionID() == 3) {
-            tr = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (!done && ServerConnect.scanner.hasNextLine()) {
-                        String line = ServerConnect.scanner.nextLine();
-                        if (line.equals("updateCook")) {
-                            try {
-                                Object o = ServerConnect.objInputStream.readObject();
-                                list = (LinkedList<_CookOrder>) o;
-                                StartApplication.cookConroller.updateOrders();
-                                playSound("cookMusic.wav");
-                            } catch (IOException | ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                    Platform.runLater(LazyJavaFXAlert::connectionError);
-                }
-            });
-            tr.start();
-        } else {
-            LazyJavaFXAlert.alert("Предупреждение", "Это не ваш раздел но вы имеете доступ к нему",
-                    "Вам не будут приходить новые уведомления, Вы видите только текущую загруженость данного раздела.", Alert.AlertType.INFORMATION);
-        }
+//        if (ServerConnect.emp.get(0).getPositionID() == 3) {
+//            tr = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while (!done && ServerConnect.scanner.hasNextLine()) {
+//                        String line = ServerConnect.scanner.nextLine();
+//                        if (line.equals("updateCook")) {
+//                            try {
+//                                Object o = ServerConnect.objInputStream.readObject();
+//                                list = (LinkedList<_CookOrder>) o;
+//                                StartApplication.cookConroller.updateOrders();
+//                                playSound("cookMusic.wav");
+//                            } catch (IOException | ClassNotFoundException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                    Platform.runLater(LazyJavaFXAlert::connectionError);
+//                }
+//            });
+//            tr.start();
+//        } else {
+//            LazyJavaFXAlert.alert("Предупреждение", "Это не ваш раздел но вы имеете доступ к нему",
+//                    "Вам не будут приходить новые уведомления, Вы видите только текущую загруженость данного раздела.", Alert.AlertType.INFORMATION);
+//        }
     }
 
     public static synchronized void playSound(final String url) {

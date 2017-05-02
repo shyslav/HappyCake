@@ -1,7 +1,6 @@
 package com.shyslav.controller;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
-import com.shyslav.server.ServerConnect;
 import com.shyslav.start.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -11,23 +10,25 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 /**
- * Created by Shyshkin Vladyslav on 07.03.2016.
+ * @author Shyshkin Vladyslav on 07.03.2016.
  */
 public class MainItems {
     @FXML
     private Button Home;
     @FXML
     private Button btnExit;
+
     @FXML
-    private void initialize()
-    {
+    private void initialize() {
         btnReinitializeAdmin.setVisible(false);
         btnExit.setVisible(false);
     }
+
     @FXML
     private Button btnReinitializeAdmin;
 
     private StartApplication main;
+
     public void HomeButton(ActionEvent actionEvent) throws IOException {
         main.showMainItems();
     }
@@ -49,12 +50,12 @@ public class MainItems {
     }
 
     public void mouseExitEvent(Event event) {
-        if(ServerConnect.emp.size()!=0)
-        {
-            if(LazyConfirmDialog.confirmAlert("Вы хотите выйти?","Доступ ко всем разделам будет закрыт",null)) {
-                ServerConnect.dispatcher();
-                StartApplication.controllerMainItems.setBtnExit(false);
-            }
+//        if(ServerConnect.emp.size()!=0)
+//        {
+        if (LazyConfirmDialog.confirmAlert("Вы хотите выйти?", "Доступ ко всем разделам будет закрыт", null)) {
+//                ServerConnect.dispatcher();
+            StartApplication.controllerMainItems.setBtnExit(false);
         }
+//        }
     }
 }

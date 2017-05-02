@@ -2,14 +2,15 @@ package com.shyslav.controller.alert;
 
 import appmodels.localmodels.LocalRoles;
 import com.shyslav.resources.DomReader;
-import com.shyslav.server.ServerCommands;
-import com.shyslav.start.StartApplication;
 import com.shyslav.validation.UpdateInsertValid;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -203,16 +204,16 @@ public class LazyEditUpdate {
      * @param com insert or update command
      */
     private void comandEvent(String com) {
-        String result = ServerCommands.executeComand(com);
-        if (result == null) {
-            LazyJavaFXAlert.connectionError();
-        } else if (result.equals("done")) {
-            StartApplication.controllerAdminItems.ReInit();
-            closeScene();
-        } else {
-            LazyJavaFXAlert.alert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам", result, Alert.AlertType.ERROR);
-        }
-        System.out.println(com);
+//        String result = ServerCommands.executeComand(com);
+//        if (result == null) {
+//            LazyJavaFXAlert.connectionError();
+//        } else if (result.equals("done")) {
+//            StartApplication.controllerAdminItems.ReInit();
+//            closeScene();
+//        } else {
+//            LazyJavaFXAlert.alert("Ошибка", "Дейтсвие не возможно, обратитесь к разработчикам", result, Alert.AlertType.ERROR);
+//        }
+//        System.out.println(com);
     }
 
     /**

@@ -2,8 +2,6 @@ package com.shyslav.controller.Cook;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
-import com.shyslav.server.ServerCommands;
-import com.shyslav.server.ServerConnect;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -110,22 +108,22 @@ public class CookController {
 
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            if (ServerConnect.emp.get(0).getPositionID() == 3) {
-                Object source = event.getSource();
-                WebView clicked = (WebView) source;
-                System.out.println(clicked.getId());
-                int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
-                System.out.println(firstNumber);
-                if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
-                    if (CookModel.list.size() > firstNumber) {
-                        ServerCommands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
-                    } else {
-                        LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
-                    }
+//            if (ServerConnect.emp.get(0).getPositionID() == 3) {
+            Object source = event.getSource();
+            WebView clicked = (WebView) source;
+            System.out.println(clicked.getId());
+            int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
+            System.out.println(firstNumber);
+            if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                if (CookModel.list.size() > firstNumber) {
+//                        ServerCommands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
                 }
-            } else {
-                LazyJavaFXAlert.ruleError();
             }
+        } else {
+            LazyJavaFXAlert.ruleError();
         }
     }
 }
+
