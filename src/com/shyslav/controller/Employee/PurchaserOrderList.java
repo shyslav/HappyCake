@@ -1,5 +1,9 @@
 package com.shyslav.controller.Employee;
 
+import com.happycake.sitemodels.Order;
+import com.happycake.sitemodels.OrderDetails;
+import com.happycake.sitemodels.OrderDetailsList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,4 +51,28 @@ public class PurchaserOrderList extends ArrayList<PurchaserOrder> {
         map.clear();
         super.clear();
     }
+
+    /**
+     * Generate order
+     *
+     * @param employeeID employee id
+     * @return order by current list
+     */
+    public Order generateOrder(int employeeID) {
+        Order order = new Order();
+        order.setEmployeeId(employeeID);
+        order.setFullPrice(getTotalSum());
+
+        OrderDetailsList list = new OrderDetailsList();
+        for (PurchaserOrder purchaserOrder : this) {
+            OrderDetails orderDetails = new OrderDetails();
+            orderDetails.setAmount(purchaserOrder.getCount());
+            orderDetails.setDishID(purchaserOrder.getDish().getId());
+            orderDetails.setPrice(purchaserOrder.getSum());
+            list.add(orderDetails);
+        }
+        order.setOrderDetails(list);
+        return order;
+    }
+
 }

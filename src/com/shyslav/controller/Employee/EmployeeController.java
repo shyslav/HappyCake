@@ -3,6 +3,7 @@ package com.shyslav.controller.Employee;
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartApplication;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -24,13 +25,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@SuppressWarnings("unused")
 public class EmployeeController {
     private Map<Dish, TextField> mapTextFields = new HashMap<>();
     private ArrayList<TreeItem> treeItems = new ArrayList<>();
     private final PurchaserOrderList purchaserOrder = new PurchaserOrderList();
     private Employees employees;
-    private CategoriesList categories;
     private DishesList dishesList;
     private GridPane gridPane = new GridPane();
     /**
@@ -77,7 +77,7 @@ public class EmployeeController {
         StartApplication.userEntity.getUserBean().waitLoad();
 
         this.employees = StartApplication.userEntity.getEmp();
-        this.categories = StartApplication.userEntity.getUserBean().getCategoriesList();
+        CategoriesList categories = StartApplication.userEntity.getUserBean().getCategoriesList();
         this.dishesList = StartApplication.userEntity.getUserBean().getDishesList();
 
         if (employees == null) {
@@ -101,9 +101,7 @@ public class EmployeeController {
         //generate categories buttons
         for (Category category : categories) {
             Button btn = generateBtnCategory(category.getName());
-            btn.setOnAction(event -> {
-                reinitializeDishesList(category.getId());
-            });
+            btn.setOnAction(event -> reinitializeDishesList(category.getId()));
             categoriesButtonsVbox.getChildren().add(btn);
         }
     }
@@ -321,19 +319,29 @@ public class EmployeeController {
             for (PurchaserOrder order : purchaserOrder) {
                 message
                         .append(order.getDish().getName())
-                        .append(" - ")
-                        .append(order.getCount())
+                        .append(" - ");
+                if (order.getDish().isNeedCook()) {
+                    message.append(" (Нужно готовить) - ");
+                }
+                message.append(order.getCount())
                         .append(" шт. - ")
                         .append(order.getSum())
                         .append("\n");
             }
             double sum = purchaserOrder.getTotalSum();
-            if (LazyConfirmDialog.confirmAlert("Подтвердить заказ на сумму " + sum + " гривен", "Закрить заказ?", message.toString())) {
-//                String str = ServerCommands.cassirSent(orderLists, summ);
-//                LazyConfirmDialog.fifthSecondAlert("Заказ принят", str);
-                purchaserOrder.clear();
-                addToTree();
-                reinitializeDishesList(0);
+            message.append("Сумма заказа ").append(sum).append(" гривен");
+            if (LazyConfirmDialog.confirmAlert("Подтвердить заказ на сумму " + sum + " гривен", "Заказ верный?", message.toString())) {
+                Order order = purchaserOrder.generateOrder(employees.getId());
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().saveOrderWithDetails(order);
+                if (response.isSuccess()) {
+                    String msg = getMessage();
+                    LazyConfirmDialog.fifthSecondAlert(" Заказ принят ", msg);
+                    purchaserOrder.clear();
+                    addToTree();
+                    reinitializeDishesList(0);
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
             }
         } else {
             LazyJavaFXAlert.alert("Ошибка", "Чек пустой", "Чек не должен быть пустой, добавьте в заказ блюда", Alert.AlertType.ERROR);
@@ -347,5 +355,23 @@ public class EmployeeController {
      */
     public void showAllCategoriesBtnClick(Event event) {
         reinitializeDishesList(0);
+    }
+
+    /**
+     * Get message about need cook
+     *
+     * @return message
+     */
+    public String getMessage() {
+        StringBuilder builder = new StringBuilder();
+        for (PurchaserOrder order : purchaserOrder) {
+            if (order.getDish().isNeedCook()) {
+                builder.append(" Блюдо ").append(order.getDish().getName()).append(" нужно говотовить ").append("\n");
+            }
+        }
+        if (builder.length() < 5) {
+            builder.append(" Ни одно из блюд не требуется готовить ");
+        }
+        return builder.toString();
     }
 }
