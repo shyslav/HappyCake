@@ -1,10 +1,10 @@
 package com.shyslav.start;
 
 import com.shyslav.UserConnection;
-import com.shyslav.controller.Admin.AdminController;
-import com.shyslav.controller.Cook.CookController;
-import com.shyslav.controller.Cook.CookModel;
-import com.shyslav.controller.Employee.EmployeeController;
+import com.shyslav.controller.admin.AdminController;
+import com.shyslav.controller.cook.CookController;
+import com.shyslav.controller.cook.CookModel;
+import com.shyslav.controller.employee.EmployeeController;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.LazyEditUpdate;
 import javafx.application.Application;
@@ -21,12 +21,33 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class StartApplication extends Application {
+    /**
+     * Primary stage
+     */
     private static Stage primaryStage;
+    /**
+     * Main application pane. To center of this pane adds all another
+     */
     private static BorderPane mainLayout;
+    /**
+     * Main items controller
+     */
     public static MainItems controllerMainItems;
+    /**
+     * Admin pane controller
+     */
     public static AdminController controllerAdminItems;
+    /**
+     * Employee pane controller
+     */
     public static EmployeeController employeeController;
+    /**
+     * Cook pane controller
+     */
     public static CookController cookConroller;
+    /**
+     * User entity
+     */
     public static UserConnection userEntity;
 
     @Override
@@ -85,6 +106,11 @@ public class StartApplication extends Application {
         mainLayout.setCenter(mainItem);
     }
 
+    /**
+     * Add employee form to main view
+     *
+     * @throws IOException
+     */
     public static void chooseScreenEmployee() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Employee/EmployeeForm.fxml"));
@@ -93,6 +119,11 @@ public class StartApplication extends Application {
         employeeController = loader.getController();
     }
 
+    /**
+     * Added cook form to main view
+     *
+     * @throws IOException
+     */
     public static void chooseScreenCook() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Cook/CookForm.fxml"));
@@ -101,6 +132,11 @@ public class StartApplication extends Application {
         cookConroller = loader.getController();
     }
 
+    /**
+     * Added admin form to main vie
+     *
+     * @throws IOException
+     */
     public static void chooseScreenAdmin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Admin/AdminPane.fxml"));
@@ -109,12 +145,27 @@ public class StartApplication extends Application {
         controllerAdminItems = loader.getController();
     }
 
+    /**
+     * Load alert enter dialog
+     *
+     * @param title   enter dialog title
+     * @param message enter dialog message
+     * @throws IOException
+     */
     public static void alertEnterDialog(String title, String message) throws IOException {
-        EnterDialogStart eD = new EnterDialogStart(primaryStage, title, message);
+        new EnterDialogStart(primaryStage, title, message);
     }
 
+    /**
+     * Update insert dialog
+     *
+     * @param title     insert dialog title
+     * @param tableName table name
+     * @param command   command
+     * @param id        id of element
+     */
     public static void updateInsertDialog(String title, String tableName, String command, int id) {
-        LazyEditUpdate insertOrUpdate = new LazyEditUpdate(primaryStage, title, tableName, command, id);
+        new LazyEditUpdate(primaryStage, title, tableName, command, id);
     }
 
     public static void main(String[] args) {

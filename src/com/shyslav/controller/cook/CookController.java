@@ -1,4 +1,4 @@
-package com.shyslav.controller.Cook;
+package com.shyslav.controller.cook;
 
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;

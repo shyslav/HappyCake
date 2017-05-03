@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.Employee.EmployeeController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.employee.EmployeeController">
    <center>
       <SplitPane dividerPositions="0.6354515050167224" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>

@@ -1,4 +1,4 @@
-package com.shyslav.controller.Cook;
+package com.shyslav.controller.cook;
 
 import appmodels._CookOrder;
 

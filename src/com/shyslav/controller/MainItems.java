@@ -30,7 +30,7 @@ public class MainItems {
     private StartApplication main;
 
     public void HomeButton(ActionEvent actionEvent) throws IOException {
-        main.showMainItems();
+        StartApplication.showMainItems();
     }
 
     public void mouseEventReinitialize(Event event) {

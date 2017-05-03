@@ -1,4 +1,4 @@
-package com.shyslav.controller.Employee;
+package com.shyslav.controller.employee;
 
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.alert.LazyConfirmDialog;

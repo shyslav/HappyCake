@@ -1,4 +1,4 @@
-package com.shyslav.controller.Admin;
+package com.shyslav.controller.admin;
 
 import appmodels._GraphReport;
 import appmodels.localmodels.LocalEmployee;

@@ -1,4 +1,4 @@
-package com.shyslav.controller.Employee;
+package com.shyslav.controller.employee;
 
 import com.happycake.sitemodels.Order;
 import com.happycake.sitemodels.OrderDetails;
