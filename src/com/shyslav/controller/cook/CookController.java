@@ -1,7 +1,10 @@
 package com.shyslav.controller.cook;
 
+import com.happycake.sitemodels.DishesList;
+import com.happycake.sitemodels.Order;
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.start.StartApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -33,12 +36,15 @@ public class CookController {
     private WebView webView8;
     ArrayList<WebView> webViews = new ArrayList<>();
     String[] colors = {"#fa9994", "#ffb69e", "#ffd5b3", "#fce0cb", "#fff9c2", "#f6ffa9", "#d6ff8d", "#9bff7c"};
+    private CookModel model;
+    private DishesList dishes;
 
     @FXML
     private void initialize() {
-        if (CookModel.list.size() == 0) {
-            CookModel.initialize();
-        }
+        StartApplication.userEntity.getUserBean().waitLoad();
+        model = new CookModel(this);
+        dishes = StartApplication.userEntity.getUserBean().getDishesList();
+
         webViews.add(webView1);
         webViews.add(webView2);
         webViews.add(webView3);
@@ -51,11 +57,10 @@ public class CookController {
     }
 
     public void updateOrders() {
-        Platform.runLater(() -> generate());
+        Platform.runLater(this::generate);
     }
 
     public void generate() {
-        int listSize = 0;
         String style = "<html><head>" +
                 "<style> \n" +
                 "th, td { \n" +
@@ -73,12 +78,21 @@ public class CookController {
                 "</head> ";
 
         for (int i = 0; i < webViews.size(); i++) {
-            String orderNumber = CookModel.list.size() > listSize ? String.valueOf(CookModel.list.get(listSize).getOrderID()) : "Нет заказа";
-            String order = "<body style='background :" + colors[i] + ";font-size: 30px;text-align:center;'>Замовлення №" + orderNumber + " <hr> </body>";
+            Order orderFromQueue;
+            StringBuilder order = new StringBuilder();
+            order.append("<body style='background :").append(colors[i]).append(";font-size: 30px;text-align:center;'>");
+            if (model.getQueue().size() - 1 < i) {
+                orderFromQueue = null;
+                order.append(" Нет заказа ");
+            } else {
+                orderFromQueue = model.getQueue().get(i);
+                order.append(" Заказ № ").append(String.valueOf(orderFromQueue.getId()));
+            }
+            order.append("</body>");
             String table = "<div align=\"center\">" +
                     "<table style='background :" + colors[i] + ";'>\n" +
                     " <thead>   " +
-                    generateTable(listSize++) +
+                    generateTable(orderFromQueue) +
                     "</tbody>\n" +
                     "</table>" +
                     "</div>" +
@@ -89,40 +103,52 @@ public class CookController {
         }
     }
 
-    private String generateTable(int indf) {
-        if (CookModel.list.size() != 0 && CookModel.list.size() > indf) {
-            String table = "";
-            for (int j = 0; j < CookModel.list.get(indf).getOrderListCooks().size(); j++) {
-                table += "<tr>";
-                table += "<td>" + CookModel.list.get(indf).getOrderListCooks().get(j).getDishName() + "</td>" +
-                        "<td>" + CookModel.list.get(indf).getOrderListCooks().get(j).getAmount() + "</td>";
-                table += "</tr>";
-            }
-            return table;
-        } else {
+    /**
+     * Generate table column by order id
+     *
+     * @param order order
+     * @return table column
+     */
+    private String generateTable(Order order) {
+        if (order == null) {
             return "Пусто";
+        } else {
+            StringBuilder table = new StringBuilder();
+            for (int i = 0; i < order.getOrderDetails().size(); i++) {
+                table.append("<tr>");
+                table.append("<td>")
+                        .append(dishes.getByID(order.getOrderDetails().get(i).getDishID()).getName())
+                        .append("</td>")
+                        .append("<td>")
+                        .append(order.getOrderDetails().get(i).getAmount())
+                        .append("</td>");
+                table.append("</tr>");
+            }
+            return table.toString();
         }
-
     }
 
 
+    /**
+     * Event on mouse click into web view
+     *
+     * @param event action event
+     */
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-//            if (ServerConnect.emp.get(0).getPositionID() == 3) {
-            Object source = event.getSource();
-            WebView clicked = (WebView) source;
-            System.out.println(clicked.getId());
-            int firstNumber = Integer.parseInt(clicked.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
-            System.out.println(firstNumber);
-            if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
-                if (CookModel.list.size() > firstNumber) {
-//                        ServerCommands.cookCompliteOrder(CookModel.list.get(firstNumber).getOrderID());
+            if (StartApplication.userEntity.getEmp().getPositionID() == 3) {
+                WebView source = (WebView) event.getSource();
+                int index = Integer.parseInt(source.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
+
+                if (model.getQueue().size() > index) {
+                    if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                        model.closeOrder(index);
+                        updateOrders();
+                    }
                 } else {
                     LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
                 }
             }
-        } else {
-            LazyJavaFXAlert.ruleError();
         }
     }
 }

@@ -70,9 +70,6 @@ public class StartApplication extends Application {
                 System.out.println("cancel");
                 we.consume();
             } else {
-                if (CookModel.tr != null) {
-                    CookModel.tr.interrupt();
-                }
                 System.out.println("ok");
                 System.exit(0);
             }
