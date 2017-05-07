@@ -49,7 +49,7 @@ public class CookModel {
                 while (!done) {
                     HappyCakeResponse read = client.read();
                     if (read.isSuccess()) {
-                        OrderList orderList = read.getObject(Order.class);
+                        OrderList orderList = read.getObject(OrderList.class);
                         if (orderList != null) {
                             synchronized (queue) {
                                 queue.clear();
