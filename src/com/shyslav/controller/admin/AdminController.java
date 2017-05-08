@@ -24,7 +24,9 @@ import javafx.scene.paint.Color;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -729,27 +731,70 @@ public class AdminController {
         OrderOrderListHandler();
     }
 
+    /**
+     * Load charts by period button click
+     *
+     * @param event income event
+     */
     public void periodMouseClick(Event event) {
+        if (dataPickerStart.getValue() == null || dataPickerEnd.getValue() == null) {
+            LazyJavaFXAlert.alert("Ошибка", null, "Введите приерод для поиска", Alert.AlertType.INFORMATION);
+            return;
+        }
+        //get date from start date picker
+        LocalDate startLocal = dataPickerStart.getValue();
+        Instant startInstant = Instant.from(startLocal.atStartOfDay(ZoneId.systemDefault()));
+        Date startDateUnParse = Date.from(startInstant);
+        Date startDate = LazyCalendar.getDateStartFromDate(startDateUnParse);
+
+        //get date from end date picker
+        LocalDate endLocal = dataPickerEnd.getValue();
+        Instant endInstant = Instant.from(endLocal.atStartOfDay(ZoneId.systemDefault()));
+        Date endDateUnParse = Date.from(endInstant);
+        Date endDate = LazyCalendar.getDateEndFromDate(endDateUnParse);
+
+        //check if date not equals
+        if (endDateUnParse.getTime() == startDateUnParse.getTime()) {
+            LazyJavaFXAlert.alert("Ошибка", null, "Даты не должны совпадать", Alert.AlertType.INFORMATION);
+            return;
+        }
+        //clear charts
         clear();
-        if (lineChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()))) {
-//            barChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
-//            pieChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
-        } else {
+        //load chart
+        if (!pieChartInit((int) (startDate.getTime() / 1000), (int) (endDate.getTime() / 1000))) {
+            LazyJavaFXAlert.alert("Ошибка", "За заданый период ничего не найдено", "Введите другие данные", Alert.AlertType.INFORMATION);
+        }
+        if (!barChartInit((int) (startDate.getTime() / 1000), (int) (endDate.getTime() / 1000))) {
+            LazyJavaFXAlert.alert("Ошибка", "За заданый период ничего не найдено", "Введите другие данные", Alert.AlertType.INFORMATION);
+        }
+        if (!lineChartInit((int) (startDate.getTime() / 1000), (int) (endDate.getTime() / 1000))) {
             LazyJavaFXAlert.alert("Ошибка", "За заданый период ничего не найдено", "Введите другие данные", Alert.AlertType.INFORMATION);
         }
     }
 
+    /**
+     * Mount button mouse click
+     *
+     * @param event income event
+     */
     public void monthMouseClick(Event event) {
         clear();
-        pieChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
-        barChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
-        if (lineChartInit(null, null)) {
-            pieChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
-        } else {
+        if (!pieChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000))) {
+            LazyJavaFXAlert.systemError();
+            return;
+        }
+        if (!barChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000))) {
+            LazyJavaFXAlert.systemError();
+            return;
+        }
+        if (!lineChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000))) {
             LazyJavaFXAlert.systemError();
         }
     }
 
+    /**
+     * Clear charts
+     */
     private void clear() {
         lineChart.getData().clear();
         barChartFirst.getData().clear();
@@ -766,6 +811,7 @@ public class AdminController {
     private boolean pieChartInit(int dateStart, int dateEnd) {
         HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
         if (!happyCakeResponse.isSuccess()) {
+            LazyJavaFXAlert.systemError();
             return false;
         }
         GraphReportList pieChart = happyCakeResponse.getObject(GraphReportList.class);
@@ -786,10 +832,21 @@ public class AdminController {
         return true;
     }
 
-    private boolean lineChartInit(String dateStart, String dateEnd) {
-        ArrayList<GraphReport> tmp = null;
-//        tmp = ServerCommands.getReportsGraph("line", dateStart, dateEnd);
-        if (tmp == null) {
+    /**
+     * Initialize line chart
+     *
+     * @param dateStart date start
+     * @param dateEnd   date end
+     * @return
+     */
+    private boolean lineChartInit(int dateStart, int dateEnd) {
+        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getDateSalesForPeriod(dateStart, dateEnd);
+        if (!happyCakeResponse.isSuccess()) {
+            LazyJavaFXAlert.systemError();
+            return false;
+        }
+        GraphReportList lineReport = happyCakeResponse.getObject(GraphReportList.class);
+        if (lineReport == null) {
             return false;
         }
         final CategoryAxis xAxis = (CategoryAxis) lineChart.getXAxis();
@@ -798,11 +855,15 @@ public class AdminController {
         yAxis.setLabel("Количество");
 
         XYChart.Series series = new XYChart.Series();
-        for (int i = 0; i < tmp.size(); i++) {
-            series.getData().add(new XYChart.Data(tmp.get(i).getName(), tmp.get(i).getAmount()));
+        for (GraphReport aLineReport : lineReport) {
+            series.getData().add(new XYChart.Data(aLineReport.getName(), aLineReport.getAmount()));
         }
         series.setName("За текущий месяц");
-        lineChart.setTitle("График продаж за период c " + dateStart + " по " + dateEnd);
+        lineChart.setTitle("График продаж за период c " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateStart)) +
+                " по " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateEnd))
+        );
         lineChart.getData().add(series);
         return true;
     }
@@ -817,6 +878,7 @@ public class AdminController {
     private boolean barChartInit(int dateStart, int dateEnd) {
         HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
         if (!happyCakeResponse.isSuccess()) {
+            LazyJavaFXAlert.systemError();
             return false;
         }
         GraphReportList barChart = happyCakeResponse.getObject(GraphReportList.class);
