@@ -1,6 +1,7 @@
 package com.shyslav.controller.admin;
 
-import appmodels._GraphReport;
+import appmodels.GraphReport;
+import appmodels.GraphReportList;
 import appmodels.localmodels.LocalEmployee;
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.alert.LazyConfirmDialog;
@@ -8,10 +9,11 @@ import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartApplication;
+import com.shyslav.utils.LazyCalendar;
+import com.shyslav.utils.LazyDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.chart.*;
@@ -21,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -265,6 +268,11 @@ public class AdminController {
     private DatePicker dataPickerStart;
     @FXML
     private DatePicker dataPickerEnd;
+
+    /**
+     * Date format
+     */
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @FXML
     private void initialize() {
@@ -724,8 +732,8 @@ public class AdminController {
     public void periodMouseClick(Event event) {
         clear();
         if (lineChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()))) {
-            barChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
-            pieChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
+//            barChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
+//            pieChartInit(String.valueOf(dataPickerStart.getValue()), String.valueOf(dataPickerEnd.getValue()));
         } else {
             LazyJavaFXAlert.alert("Ошибка", "За заданый период ничего не найдено", "Введите другие данные", Alert.AlertType.INFORMATION);
         }
@@ -733,9 +741,10 @@ public class AdminController {
 
     public void monthMouseClick(Event event) {
         clear();
+        pieChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
+        barChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
         if (lineChartInit(null, null)) {
-            barChartInit(null, null);
-            pieChartInit(null, null);
+            pieChartInit((int) (LazyCalendar.getMonthFirstDay().getTime() / 1000), (int) (LazyCalendar.getMonthLastDay().getTime() / 1000));
         } else {
             LazyJavaFXAlert.systemError();
         }
@@ -747,28 +756,38 @@ public class AdminController {
         pieChart.getData().clear();
     }
 
-    private boolean pieChartInit(String dateStart, String dateEnd) {
-        ArrayList<_GraphReport> tmp = null;
-//        tmp = ServerCommands.getReportsGraph("pie", dateStart, dateEnd);
-        if (tmp == null) {
+    /**
+     * Initialize pie chart
+     *
+     * @param dateStart date start
+     * @param dateEnd   date end
+     * @return true if pie chart success initialized
+     */
+    private boolean pieChartInit(int dateStart, int dateEnd) {
+        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
+        if (!happyCakeResponse.isSuccess()) {
+            return false;
+        }
+        GraphReportList pieChart = happyCakeResponse.getObject(GraphReportList.class);
+        if (pieChart == null) {
             return false;
         }
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        for (int i = 0; i < tmp.size(); i++) {
-            pieChartData.add(new PieChart.Data(tmp.get(i).getName(), tmp.get(i).getAmount()));
+        for (GraphReport aTmp : pieChart) {
+            pieChartData.add(new PieChart.Data(aTmp.getName(), aTmp.getAmount()));
         }
-        if (dateStart == null || dateEnd == null) {
-            pieChart.setTitle("Количество проданых продуктов за месяц");
-        } else {
-            pieChart.setTitle("Количество проданых продуктов за период с " + dateStart + " по " + dateEnd);
-        }
-        pieChart.setLegendSide(Side.LEFT);
-        pieChart.setData(pieChartData);
+        this.pieChart.setTitle("Количество проданых продуктов за период с " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateStart)) +
+                " по " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateEnd))
+        );
+        this.pieChart.setLegendSide(Side.LEFT);
+        this.pieChart.setData(pieChartData);
         return true;
     }
 
     private boolean lineChartInit(String dateStart, String dateEnd) {
-        ArrayList<_GraphReport> tmp = null;
+        ArrayList<GraphReport> tmp = null;
 //        tmp = ServerCommands.getReportsGraph("line", dateStart, dateEnd);
         if (tmp == null) {
             return false;
@@ -783,60 +802,68 @@ public class AdminController {
             series.getData().add(new XYChart.Data(tmp.get(i).getName(), tmp.get(i).getAmount()));
         }
         series.setName("За текущий месяц");
-        if (dateStart == null || dateEnd == null) {
-            lineChart.setTitle("График продаж за месяц");
-        } else {
-            lineChart.setTitle("График продаж за период c " + dateStart + " по " + dateEnd);
-        }
+        lineChart.setTitle("График продаж за период c " + dateStart + " по " + dateEnd);
         lineChart.getData().add(series);
         return true;
     }
 
-    private boolean barChartInit(String dateStart, String dateEnd) {
-        ArrayList<_GraphReport> tmp = null;
-//        tmp = ServerCommands.getReportsGraph("bar", dateStart, dateEnd);
-        if (tmp == null) {
+    /**
+     * Initialize bar chart
+     *
+     * @param dateStart date start
+     * @param dateEnd   date end
+     * @return
+     */
+    private boolean barChartInit(int dateStart, int dateEnd) {
+        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
+        if (!happyCakeResponse.isSuccess()) {
+            return false;
+        }
+        GraphReportList barChart = happyCakeResponse.getObject(GraphReportList.class);
+        if (barChart == null) {
             return false;
         }
         final CategoryAxis xAxis = (CategoryAxis) barChartFirst.getXAxis();
         final NumberAxis yAxis = (NumberAxis) barChartFirst.getYAxis();
         xAxis.setLabel("Продукт");
         yAxis.setLabel("Количество");
-        for (int i = 0; i < tmp.size(); i++) {
+        for (GraphReport aBarChart : barChart) {
             XYChart.Series series = new XYChart.Series();
-            series.setName(tmp.get(i).getName());
-            series.getData().add(new XYChart.Data("Значение", tmp.get(i).getAmount()));
+            series.setName(aBarChart.getName());
+            series.getData().add(new XYChart.Data("Значение", aBarChart.getAmount()));
             barChartFirst.getData().add(series);
         }
-        if (dateStart == null || dateEnd == null) {
-            barChartFirst.setTitle("Продажы за месяц топ продуктов");
-        } else {
-            barChartFirst.setTitle("Продажы за период с " + dateStart + " по " + dateEnd + " топ продуктов");
-        }
+        barChartFirst.setTitle("Продажы за период с " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateStart)) +
+                " по " +
+                dateFormat.format(LazyDate.getDateFromUnixTimeStaimp(dateEnd))
+        );
         return true;
     }
 
+    /**
+     * Pie chart mouse entered event
+     *
+     * @param event income event
+     */
     public void pieChartMouseEntered(Event event) {
         for (final PieChart.Data data : pieChart.getData()) {
             data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            labelPercent.setVisible(true);
-                            labelPercent.setText(String.valueOf(data.getPieValue()) + " шт");
-                        }
+                    e -> {
+                        labelPercent.setVisible(true);
+                        labelPercent.setText(String.valueOf(data.getPieValue()) + " шт");
                     });
             data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent e) {
-                            labelPercent.setVisible(false);
-                        }
-                    });
+                    e -> labelPercent.setVisible(false));
         }
     }
 
-    public void MouseClickBtnAddDishCategory(Event event) {
+    /**
+     * Dish and category table row click
+     *
+     * @param event income event
+     */
+    public void dishAndCategoryAddBtnClick(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
             StartApplication.updateInsertDialog("Добавить Категорию", "category", "insert", cat.getId());
@@ -849,7 +876,6 @@ public class AdminController {
     }
 
     public void MouseClickBtnEditDishCategory(Event event) {
-
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
             StartApplication.updateInsertDialog("Добавить Категорию", "category", "update", cat.getId());

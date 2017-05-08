@@ -260,7 +260,7 @@
                                                                 <AnchorPane>
                                                                     <children>
                                                                         <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#MouseClickBtnAddDishCategory"
+                                                                                onMouseClicked="#dishAndCategoryAddBtnClick"
                                                                                 text="Добавить"
                                                                                 AnchorPane.bottomAnchor="0.0"
                                                                                 AnchorPane.leftAnchor="0.0"
