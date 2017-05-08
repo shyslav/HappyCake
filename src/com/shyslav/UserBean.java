@@ -80,6 +80,13 @@ public class UserBean {
         load = true;
     }
 
+    /**
+     * Reload news list
+     */
+    public void reloadNews() {
+        newsList = clientActions.selectNews().getObject(NewsList.class);
+    }
+
     public Employees getEmp() {
         return emp;
     }

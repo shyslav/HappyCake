@@ -1,12 +1,16 @@
 package com.shyslav.start;
 
+import com.happycake.editablemodel.EditableFieldException;
 import com.shyslav.UserConnection;
 import com.shyslav.controller.admin.AdminController;
+import com.shyslav.controller.dialogs.ISaveDialogComplete;
+import com.shyslav.controller.dialogs.JavaFXSaveDialog;
+import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.controller.cook.CookController;
-import com.shyslav.controller.cook.CookModel;
 import com.shyslav.controller.employee.EmployeeController;
 import com.shyslav.controller.MainItems;
 import com.shyslav.controller.alert.LazyEditUpdate;
+import com.shyslav.mysql.interfaces.DBEntity;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -59,7 +63,7 @@ public class StartApplication extends Application {
         showMainView();
         showMainItems();
         Platform.setImplicitExit(false);
-        //confirm dialog to exit action
+//        confirm dialog to exit action
         primaryStage.setOnCloseRequest((WindowEvent we) ->
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -74,6 +78,11 @@ public class StartApplication extends Application {
                 System.exit(0);
             }
         });
+//        userEntity.login("admin", "admin");
+//        userEntity.getUserBean().waitLoad();
+//        addEditDialog(new News(), completion -> {
+//            System.out.println("finish");
+//        });
     }
 
     /**
@@ -163,6 +172,19 @@ public class StartApplication extends Application {
      */
     public static void updateInsertDialog(String title, String tableName, String command, int id) {
         new LazyEditUpdate(primaryStage, title, tableName, command, id);
+    }
+
+    /**
+     * Open add edit dialog
+     *
+     * @param entity db entity
+     */
+    public static void addEditDialog(DBEntity entity, ISaveDialogComplete completion) {
+        try {
+            new JavaFXSaveDialog(primaryStage, entity, completion);
+        } catch (EditableFieldException e) {
+            LazyJavaFXAlert.systemError();
+        }
     }
 
     public static void main(String[] args) {

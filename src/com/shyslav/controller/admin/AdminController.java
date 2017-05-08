@@ -949,22 +949,45 @@ public class AdminController {
         }
     }
 
+
+    /**
+     * Edit news button click
+     *
+     * @param event income event
+     */
     public void NewsEditBtn(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             News news = (News) newsTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Новость", "news", "update", news.getId());
+            StartApplication.addEditDialog(news, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews();
+                    newsTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
     }
 
+    /**
+     * Add news button click
+     *
+     * @param event income event
+     */
     public void NewsAddBtn(Event event) {
-        if (newsTable.getSelectionModel().getSelectedItem() != null) {
-            News news = (News) newsTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Новость", "news", "insert", news.getId());
-        } else {
-            alertNullValue();
-        }
+        News news = new News();
+        StartApplication.addEditDialog(news, () -> {
+            HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
+            if (response.isSuccess()) {
+                StartApplication.userEntity.getUserBean().reloadNews();
+                newsInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
     }
 
     public void ReservationPreOrderEditBtn(Event event) {
