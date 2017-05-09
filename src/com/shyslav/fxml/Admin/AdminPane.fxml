@@ -778,7 +778,7 @@
                                                                 <AnchorPane>
                                                                     <children>
                                                                         <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#ReviewAddBtn"
+                                                                                onMouseClicked="#reviewAddBtnClick"
                                                                                 text="Добавить"
                                                                                 AnchorPane.bottomAnchor="0.0"
                                                                                 AnchorPane.leftAnchor="0.0"
@@ -793,7 +793,7 @@
                                                                 <AnchorPane GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#ReviewEditBtn"
+                                                                                onMouseClicked="#reviewEditBtnClick"
                                                                                 text="Изменить"
                                                                                 AnchorPane.bottomAnchor="0.0"
                                                                                 AnchorPane.leftAnchor="0.0"

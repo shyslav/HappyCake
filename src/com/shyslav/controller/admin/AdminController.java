@@ -1187,19 +1187,41 @@ public class AdminController {
         }
     }
 
-    public void ReviewAddBtn(Event event) {
-        if (repTable.getSelectionModel().getSelectedItem() != null) {
-            Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить отзыв", "reports", "insert", tmp.getId());
-        } else {
-            alertNullValue();
-        }
+    /**
+     * Add review btn click
+     *
+     * @param event income event
+     */
+    public void reviewAddBtnClick(Event event) {
+        Reports tmp = new Reports();
+        StartApplication.addEditDialog(tmp, () -> {
+            HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+            if (response.isSuccess()) {
+                StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                reportsInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
     }
 
-    public void ReviewEditBtn(Event event) {
+    /**
+     * Review edit btn click
+     *
+     * @param event income event
+     */
+    public void reviewEditBtnClick(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить отзыв", "reports", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                    repTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
