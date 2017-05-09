@@ -1099,31 +1099,89 @@ public class AdminController {
         }
     }
 
-    public void EmployeeAddBtn(Event event) {
+    /**
+     * Employee add btn click
+     *
+     * @param event income event
+     */
+    public void employeeAddBtnClick(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить сотрудника", "employees", "insert", tmp.getId());
+            Employees tmp = new Employees();
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    employeeInitialize();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить вакансию", "positions", "insert", tmp.getId());
+            Position tmp = new Position();
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
+                    positionInitialize();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить новое кафе", "cafecoordinate", "insert", tmp.getId());
+            CafeCoordinate tmp = new CafeCoordinate();
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    cafeCoordinateInitialize();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
     }
 
-    public void EmployeeEditBtn(Event event) {
+    /**
+     * Employee edit btn click
+     *
+     * @param event income event
+     */
+    public void employeeEditBtnClick(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить сотрудника", "employees", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    tableEmployees.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить вакансию", "positions", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
+                    positionTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить кафе", "cafecoordinate", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    cafeCoordinateTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
