@@ -4,6 +4,7 @@ import com.happycake.editablemodel.EditableEntity;
 import com.happycake.editablemodel.EditableFieldException;
 import com.happycake.editablemodel.EditableParser;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.io.IOUtils;
 import com.shyslav.mysql.interfaces.DBEntity;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -15,8 +16,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -27,6 +30,8 @@ import java.util.Date;
  * @author Shyshkin Vladyslav on 08.05.17.
  */
 public class JavaFXSaveDialog {
+    private static final Logger log = Logger.getLogger(JavaFXSaveDialog.class.getName());
+
     private Stage stage = new Stage();
     //link to main stage
     private Stage primaryStage;
@@ -120,18 +125,47 @@ public class JavaFXSaveDialog {
                 case FILEFIELD: {
                     TextField textField = new TextField();
                     //on file change
+                    checkRegex(textField, editableEntity);
                     textField.setOnMouseClicked(event -> {
                         FileChooser fileChooser = new FileChooser();
+                        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image file", "*.png", "*.jpg", "*.jpeg"));
                         File selectedFile = fileChooser.showOpenDialog(null);
                         if (selectedFile != null) {
+                            try {
+                                byte[] bytes = IOUtils.readFile(selectedFile);
+                                editableEntity.setValue(bytes);
+                            } catch (IOException e) {
+                                log.error("Unable to read file bytes " + e.getMessage(), e);
+                            }
                             textField.setText(selectedFile.getAbsolutePath());
                         }
+                        checkRegex(textField, editableEntity);
                     });
                     gridPane.add(textField, columnIndex + 1, rowIndex);
                     break;
                 }
                 case NUMBERFIELD: {
                     TextField textField = new TextField();
+                    //on text change event
+                    checkRegex(textField, editableEntity);
+                    textField.setText(String.valueOf(editableEntity.getValue()));
+                    textField.textProperty().addListener(event -> {
+                        if (editableEntity.getFieldJavaType().equalsIgnoreCase("int")) {
+                            int value = 0;
+                            if (textField.getText().length() != 0) {
+                                value = Integer.parseInt(textField.getText());
+                            }
+                            editableEntity.setValue(value);
+                            checkRegex(textField, editableEntity);
+                        } else if (editableEntity.getFieldJavaType().equalsIgnoreCase("double")) {
+                            double value = 0;
+                            if (textField.getText().length() != 0) {
+                                value = Double.parseDouble(textField.getText());
+                            }
+                            editableEntity.setValue(value);
+                            checkRegex(textField, editableEntity);
+                        }
+                    });
                     gridPane.add(textField, columnIndex + 1, rowIndex);
                     break;
                 }
@@ -156,6 +190,16 @@ public class JavaFXSaveDialog {
                         checkRegex(choiceBox, editableEntity);
                     });
                     gridPane.add(choiceBox, columnIndex + 1, rowIndex);
+                    break;
+                }
+                case CHECKBOX: {
+                    CheckBox checkBox = new CheckBox();
+                    editableEntity.setValue(false);
+                    checkBox.selectedProperty().addListener(event -> {
+                        boolean result = checkBox.selectedProperty().get();
+                        editableEntity.setValue(result);
+                    });
+                    gridPane.add(checkBox, columnIndex + 1, rowIndex);
                     break;
                 }
             }

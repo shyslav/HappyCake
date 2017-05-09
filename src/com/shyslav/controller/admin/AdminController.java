@@ -4,6 +4,7 @@ import appmodels.GraphReport;
 import appmodels.GraphReportList;
 import appmodels.localmodels.LocalEmployee;
 import com.happycake.sitemodels.*;
+import com.shyslav.UserBean;
 import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.defaults.ErrorCodes;
@@ -11,6 +12,7 @@ import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartApplication;
 import com.shyslav.utils.LazyCalendar;
 import com.shyslav.utils.LazyDate;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -103,7 +105,7 @@ public class AdminController {
     @FXML
     private TableColumn<Dish, String> dishImage;
     @FXML
-    private TableColumn<Dish, String> dishReadyOrNot;
+    private TableColumn<Dish, Bool> needCook;
     @FXML
     private TableColumn<Dish, String> dishSell;
     //********************Reservation tabs
@@ -420,7 +422,7 @@ public class AdminController {
         dishAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         dishPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         dishImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-        dishReadyOrNot.setCellValueFactory(new PropertyValueFactory<>("readyORnot"));
+        needCook.setCellValueFactory(new PropertyValueFactory<>("needCook"));
         dishSell.setCellValueFactory(new PropertyValueFactory<>("discount"));
         if (dishList != null) {
             dishTable.setItems(FXCollections.observableList(dishList));
@@ -925,25 +927,66 @@ public class AdminController {
      *
      * @param event income event
      */
-    public void dishAndCategoryAddBtnClick(Event event) {
+    public void addDishOrCategoryBtnClick(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Категорию", "category", "insert", cat.getId());
+            Category cat = new Category();
+            //open add categories dialog
+            StartApplication.addEditDialog(cat, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    categoryInitialize();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить блюдо", "dish", "insert", dish.getId());
+            Dish dish = new Dish();
+            //open add dish dialog
+            StartApplication.addEditDialog(dish, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    dishInitialize(StartApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
     }
 
-    public void MouseClickBtnEditDishCategory(Event event) {
+    /**
+     * Edit dish or category btn click
+     *
+     * @param event income event
+     */
+    public void editDishOrCategoryBtnClick(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Категорию", "category", "update", cat.getId());
+            //open edit categories dialog
+            StartApplication.addEditDialog(cat, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    categoryTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить блюдо", "dish", "update", dish.getId());
+            //open edit dish dialog
+            StartApplication.addEditDialog(dish, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    dishTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
@@ -955,13 +998,13 @@ public class AdminController {
      *
      * @param event income event
      */
-    public void NewsEditBtn(Event event) {
+    public void editNewsBtnClick(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             News news = (News) newsTable.getSelectionModel().getSelectedItem();
             StartApplication.addEditDialog(news, () -> {
                 HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews();
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
                     newsTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -977,12 +1020,12 @@ public class AdminController {
      *
      * @param event income event
      */
-    public void NewsAddBtn(Event event) {
+    public void addNewsBtnClick(Event event) {
         News news = new News();
         StartApplication.addEditDialog(news, () -> {
             HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
             if (response.isSuccess()) {
-                StartApplication.userEntity.getUserBean().reloadNews();
+                StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
                 newsInitialize();
             } else {
                 LazyJavaFXAlert.systemError();

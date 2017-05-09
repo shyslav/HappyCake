@@ -7,6 +7,18 @@ import com.shyslav.controller.actions.ClientActions;
  * @author Shyshkin Vladyslav on 01.05.17.
  */
 public class UserBean {
+    public enum RELOAD_TYPES {
+        NEWS,
+        CATEGORIES,
+        DISHES,
+        PREORDER,
+        EMPLOYEES,
+        REPORTS,
+        CAFECOORDINATE,
+        POSITION,
+        ORDERS
+    }
+
     private final ClientActions clientActions;
     private final Employees emp;
 
@@ -83,8 +95,49 @@ public class UserBean {
     /**
      * Reload news list
      */
-    public void reloadNews() {
-        newsList = clientActions.selectNews().getObject(NewsList.class);
+    public void reloadNews(RELOAD_TYPES reloadType) {
+        switch (reloadType) {
+            case NEWS: {
+                newsList = clientActions.selectNews().getObject(NewsList.class);
+                break;
+            }
+            case DISHES: {
+                dishesList = clientActions.selectDish().getObject(DishesList.class);
+                break;
+            }
+            case REPORTS: {
+                reportsList = clientActions.selectReports().getObject(ReportsList.class);
+                break;
+            }
+            case PREORDER: {
+                preOrderList = clientActions.selectPreOrder().getObject(PreOrderList.class);
+                break;
+            }
+            case EMPLOYEES: {
+                employeesList = clientActions.selectEmployees().getObject(EmployeesList.class);
+                break;
+            }
+            case ORDERS: {
+                orderList = clientActions.selectOrders().getObject(OrderList.class);
+                break;
+            }
+            case CATEGORIES: {
+                categoriesList = clientActions.selectCategories().getObject(CategoriesList.class);
+                break;
+            }
+            case POSITION: {
+                positionsList = clientActions.selectPositions().getObject(PositionsList.class);
+                break;
+            }
+            case CAFECOORDINATE: {
+                cafeCoordinatesList = clientActions.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+                break;
+            }
+            default: {
+                reload();
+                break;
+            }
+        }
     }
 
     public Employees getEmp() {
