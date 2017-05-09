@@ -430,7 +430,7 @@
                                                                 <AnchorPane>
                                                                     <children>
                                                                         <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#ReservationPreOrderAddBtn"
+                                                                                onMouseClicked="#reservationOrPreorderAddBtnClick"
                                                                                 text="Добавить"
                                                                                 AnchorPane.bottomAnchor="0.0"
                                                                                 AnchorPane.leftAnchor="0.0"
@@ -445,7 +445,7 @@
                                                                 <AnchorPane GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#ReservationPreOrderEditBtn"
+                                                                                onMouseClicked="#reservationOrPreorderEditBtnClick"
                                                                                 text="Изменить"
                                                                                 AnchorPane.bottomAnchor="0.0"
                                                                                 AnchorPane.leftAnchor="0.0"

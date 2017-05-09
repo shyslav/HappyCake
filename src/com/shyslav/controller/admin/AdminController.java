@@ -1033,25 +1033,67 @@ public class AdminController {
         });
     }
 
-    public void ReservationPreOrderEditBtn(Event event) {
+    /**
+     * Reservation or preorder edit btn click
+     *
+     * @param event
+     */
+    public void reservationOrPreorderEditBtnClick(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить Резерв", "reservation", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    reservationTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             PreOrder tmp = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Изменить Предзаказ", "preorder", "update", tmp.getId());
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    preorderTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }
     }
 
-    public void ReservationPreOrderAddBtn(Event event) {
+    /**
+     * Reservation or preorder add btn click
+     *
+     * @param event income event
+     */
+    public void reservationOrPreorderAddBtnClick(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Резерв", "reservation", "insert", tmp.getId());
+            Reservation tmp = new Reservation();
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    reservationInitialize();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            PreOrder tmp = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            StartApplication.updateInsertDialog("Добавить Предзаказ", "preorder", "insert", tmp.getId());
+            PreOrder tmp = new PreOrder();
+            StartApplication.addEditDialog(tmp, () -> {
+                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+                if (response.isSuccess()) {
+                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    preorderInitialize(StartApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
         } else {
             alertNullValue();
         }

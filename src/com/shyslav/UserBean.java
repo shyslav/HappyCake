@@ -16,6 +16,7 @@ public class UserBean {
         REPORTS,
         CAFECOORDINATE,
         POSITION,
+        RESERVATION,
         ORDERS
     }
 
@@ -131,6 +132,10 @@ public class UserBean {
             }
             case CAFECOORDINATE: {
                 cafeCoordinatesList = clientActions.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+                break;
+            }
+            case RESERVATION: {
+                reservationList = clientActions.selectReservation().getObject(ReservationList.class);
                 break;
             }
             default: {
