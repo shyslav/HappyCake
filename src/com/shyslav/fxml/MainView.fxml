@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/my.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.MainItems">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/my.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shyslav.controller.MainItemsController">
     <top>
       <StackPane alignment="CENTER_RIGHT">
          <children>
@@ -43,7 +43,7 @@
       </StackPane>
     </top>
     <bottom>
-        <Button fx:id="Home" mnemonicParsing="false" onAction="#HomeButton" text="Домой" BorderPane.alignment="CENTER">
+        <Button fx:id="Home" mnemonicParsing="false" onAction="#homeButtonClick" text="Домой" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="5.0" top="5.0" />
             </BorderPane.margin></Button>

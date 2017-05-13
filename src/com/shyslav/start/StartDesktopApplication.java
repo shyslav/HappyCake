@@ -3,13 +3,12 @@ package com.shyslav.start;
 import com.happycake.editablemodel.EditableFieldException;
 import com.shyslav.UserConnection;
 import com.shyslav.controller.admin.AdminController;
-import com.shyslav.controller.dialogs.ISaveDialogComplete;
+import com.shyslav.controller.dialogs.ISaveDialog;
 import com.shyslav.controller.dialogs.JavaFXSaveDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.controller.cook.CookController;
 import com.shyslav.controller.employee.EmployeeController;
-import com.shyslav.controller.MainItems;
-import com.shyslav.controller.alert.LazyEditUpdate;
+import com.shyslav.controller.MainItemsController;
 import com.shyslav.mysql.interfaces.DBEntity;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,7 +23,7 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.Optional;
 
-public class StartApplication extends Application {
+public class StartDesktopApplication extends Application {
     /**
      * Primary stage
      */
@@ -36,7 +35,7 @@ public class StartApplication extends Application {
     /**
      * Main items controller
      */
-    public static MainItems controllerMainItems;
+    public static MainItemsController controllerMainItems;
     /**
      * Admin pane controller
      */
@@ -56,9 +55,9 @@ public class StartApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StartApplication.primaryStage = primaryStage;
-        StartApplication.primaryStage.setTitle("EmployeeApp");
-        StartApplication.userEntity = new UserConnection();
+        StartDesktopApplication.primaryStage = primaryStage;
+        StartDesktopApplication.primaryStage.setTitle("EmployeeApp");
+        StartDesktopApplication.userEntity = new UserConnection();
 
         showMainView();
         showMainItems();
@@ -80,7 +79,7 @@ public class StartApplication extends Application {
         });
 //        userEntity.login("admin", "admin");
 //        userEntity.getUserBean().waitLoad();
-//        addEditDialog(new News(), completion -> {
+//        openSaveDialog(new News(), completion -> {
 //            System.out.println("finish");
 //        });
     }
@@ -92,7 +91,7 @@ public class StartApplication extends Application {
      */
     private void showMainView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getClass().getResource("/com/shyslav/fxml/MainView.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getClass().getResource("/com/shyslav/fxml/MainView.fxml"));
         mainLayout = loader.load();
         Scene scene = new Scene(mainLayout);
         controllerMainItems = loader.getController();
@@ -107,7 +106,7 @@ public class StartApplication extends Application {
      */
     public static void showMainItems() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/LoginForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/LoginForm.fxml"));
         BorderPane mainItem = loader.load();
         mainLayout.setCenter(mainItem);
     }
@@ -119,7 +118,7 @@ public class StartApplication extends Application {
      */
     public static void chooseScreenEmployee() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Employee/EmployeeForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Employee/EmployeeForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         employeeController = loader.getController();
@@ -132,7 +131,7 @@ public class StartApplication extends Application {
      */
     public static void chooseScreenCook() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Cook/CookForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Cook/CookForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         cookConroller = loader.getController();
@@ -145,7 +144,7 @@ public class StartApplication extends Application {
      */
     public static void chooseScreenAdmin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/Admin/AdminPane.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Admin/AdminPane.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         controllerAdminItems = loader.getController();
@@ -159,19 +158,7 @@ public class StartApplication extends Application {
      * @throws IOException
      */
     public static void alertEnterDialog(String title, String message) throws IOException {
-        new EnterDialogStart(primaryStage, title, message);
-    }
-
-    /**
-     * Update insert dialog
-     *
-     * @param title     insert dialog title
-     * @param tableName table name
-     * @param command   command
-     * @param id        id of element
-     */
-    public static void updateInsertDialog(String title, String tableName, String command, int id) {
-        new LazyEditUpdate(primaryStage, title, tableName, command, id);
+        new EnterDialogLoader(primaryStage, title, message);
     }
 
     /**
@@ -179,7 +166,7 @@ public class StartApplication extends Application {
      *
      * @param entity db entity
      */
-    public static void addEditDialog(DBEntity entity, ISaveDialogComplete completion) {
+    public static void openSaveDialog(DBEntity entity, ISaveDialog completion) {
         try {
             new JavaFXSaveDialog(primaryStage, entity, completion);
         } catch (EditableFieldException e) {

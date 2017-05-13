@@ -1,10 +1,9 @@
 package com.shyslav.controller.employee;
 
 import com.happycake.sitemodels.*;
-import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.defaults.HappyCakeResponse;
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -29,7 +28,7 @@ import java.util.Map;
 public class EmployeeController {
     private Map<Dish, TextField> mapTextFields = new HashMap<>();
     private ArrayList<TreeItem> treeItems = new ArrayList<>();
-    private final PurchaserOrderList purchaserOrder = new PurchaserOrderList();
+    private final PurchaseOrderList purchaserOrder = new PurchaseOrderList();
     private Employees employees;
     private DishesList dishesList;
     private GridPane gridPane = new GridPane();
@@ -74,11 +73,11 @@ public class EmployeeController {
      */
     @FXML
     private void initialize() {
-        StartApplication.userEntity.getUserBean().waitLoad();
+        StartDesktopApplication.userEntity.getUserBean().waitLoad();
 
-        this.employees = StartApplication.userEntity.getEmp();
-        CategoriesList categories = StartApplication.userEntity.getUserBean().getCategoriesList();
-        this.dishesList = StartApplication.userEntity.getUserBean().getDishesList();
+        this.employees = StartDesktopApplication.userEntity.getEmp();
+        CategoriesList categories = StartDesktopApplication.userEntity.getUserBean().getCategoriesList();
+        this.dishesList = StartDesktopApplication.userEntity.getUserBean().getDishesList();
 
         if (employees == null) {
             LazyJavaFXAlert.connectionError();
@@ -127,10 +126,10 @@ public class EmployeeController {
                 TreeItem item = (TreeItem) treeView.getSelectionModel().getSelectedItem();
                 item.setExpanded(true);
                 if (item.getValue().equals("Удалить блюдо")) {
-                    for (PurchaserOrder order : purchaserOrder) {
+                    for (PurchaseOrder order : purchaserOrder) {
                         //check if dish name equal root node
                         if (order.getDish().getName().equals(item.getParent().getValue())) {
-                            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы действиетельно хотите удалить " + item.getParent().getValue() + " из заказа", "Действие не возвратимо")) {
+                            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы действиетельно хотите удалить " + item.getParent().getValue() + " из заказа", "Действие не возвратимо")) {
                                 //remove order
                                 purchaserOrder.remove(order);
                                 //addCount tree
@@ -150,7 +149,7 @@ public class EmployeeController {
     private void addToTree() {
         treeItems.clear();
         TreeItem<String> root = new TreeItem<>("Заказ");
-        for (PurchaserOrder element : purchaserOrder) {
+        for (PurchaseOrder element : purchaserOrder) {
             TreeItem<String> itemTreeRoot = new TreeItem<>(element.getDish().getName());
             itemTreeRoot.getChildren().addAll(new TreeItem<>("Количество: " + element.getCount()),
                     new TreeItem<>("Цена: " + element.getSum()),
@@ -243,7 +242,7 @@ public class EmployeeController {
         Button btnSubmit = new Button(name);
         btnSubmit.setOnAction(event -> {
             int count = Integer.parseInt(mapTextFields.get(dish).getText());
-            purchaserOrder.add(new PurchaserOrder(dish, count));
+            purchaserOrder.add(new PurchaseOrder(dish, count));
             addToTree();
         });
         btnSubmit.setPrefHeight(30);
@@ -316,7 +315,7 @@ public class EmployeeController {
     public void checkClose(Event event) {
         if (purchaserOrder.size() != 0) {
             StringBuilder message = new StringBuilder();
-            for (PurchaserOrder order : purchaserOrder) {
+            for (PurchaseOrder order : purchaserOrder) {
                 message
                         .append(order.getDish().getName())
                         .append(" - ");
@@ -330,12 +329,12 @@ public class EmployeeController {
             }
             double sum = purchaserOrder.getTotalSum();
             message.append("Сумма заказа ").append(sum).append(" гривен");
-            if (LazyConfirmDialog.confirmAlert("Подтвердить заказ на сумму " + sum + " гривен", "Заказ верный?", message.toString())) {
+            if (LazyJavaFXAlert.confirmAlert("Подтвердить заказ на сумму " + sum + " гривен", "Заказ верный?", message.toString())) {
                 Order order = purchaserOrder.generateOrder(employees.getId());
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().saveOrderWithDetails(order);
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().saveOrderWithDetails(order);
                 if (response.isSuccess()) {
                     String msg = getMessage();
-                    LazyConfirmDialog.fifthSecondAlert(" Заказ принят ", msg);
+                    LazyJavaFXAlert.alert(" Заказ принят ", null, msg, Alert.AlertType.INFORMATION);
                     purchaserOrder.clear();
                     addToTree();
                     reinitializeDishesList(0);
@@ -364,7 +363,7 @@ public class EmployeeController {
      */
     public String getMessage() {
         StringBuilder builder = new StringBuilder();
-        for (PurchaserOrder order : purchaserOrder) {
+        for (PurchaseOrder order : purchaserOrder) {
             if (order.getDish().isNeedCook()) {
                 builder.append(" Блюдо ").append(order.getDish().getName()).append(" нужно говотовить ").append("\n");
             }

@@ -1,6 +1,9 @@
 package com.shyslav.controller.alert;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 /**
  * @author Shyshkin Vladyslav on 28.03.2016.
@@ -33,5 +36,15 @@ public class LazyJavaFXAlert {
     public static void connectionError() {
         alert("Ошибка", "Сервер не отвечает, попробуйте позже", "Обратитесь к администратору или разработчикам", Alert.AlertType.ERROR);
         System.exit(0);
+    }
+
+    public static boolean confirmAlert(String title, String headerText, String question) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(question);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
     }
 }

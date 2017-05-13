@@ -37,9 +37,9 @@ public class JavaFXSaveDialog {
     private Stage primaryStage;
     private final EditableParser editableParser;
     private final DBEntity entity;
-    private final ISaveDialogComplete dialogComplete;
+    private final ISaveDialog dialogComplete;
 
-    public JavaFXSaveDialog(Stage primaryStage, DBEntity entity, ISaveDialogComplete dialogComplete) throws EditableFieldException {
+    public JavaFXSaveDialog(Stage primaryStage, DBEntity entity, ISaveDialog dialogComplete) throws EditableFieldException {
         this.primaryStage = primaryStage;
         this.entity = entity;
         this.dialogComplete = dialogComplete;

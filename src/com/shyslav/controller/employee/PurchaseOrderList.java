@@ -10,13 +10,13 @@ import java.util.HashMap;
 /**
  * @author Shyshkin Vladyslav on 02.05.17.
  */
-public class PurchaserOrderList extends ArrayList<PurchaserOrder> {
-    private HashMap<Integer, PurchaserOrder> map = new HashMap<>();
+public class PurchaseOrderList extends ArrayList<PurchaseOrder> {
+    private HashMap<Integer, PurchaseOrder> map = new HashMap<>();
 
     @Override
-    public boolean add(PurchaserOrder purchaserOrder) {
+    public boolean add(PurchaseOrder purchaserOrder) {
         if (map.containsKey(purchaserOrder.getDish().getId())) {
-            PurchaserOrder order = map.get(purchaserOrder.getDish().getId());
+            PurchaseOrder order = map.get(purchaserOrder.getDish().getId());
             order.addCount(purchaserOrder.getCount());
             return true;
         }
@@ -26,7 +26,7 @@ public class PurchaserOrderList extends ArrayList<PurchaserOrder> {
 
     @Override
     public boolean remove(Object o) {
-        map.remove(((PurchaserOrder) o).getDish().getId());
+        map.remove(((PurchaseOrder) o).getDish().getId());
         return super.remove(o);
     }
 
@@ -37,7 +37,7 @@ public class PurchaserOrderList extends ArrayList<PurchaserOrder> {
      */
     public double getTotalSum() {
         double sum = 0;
-        for (PurchaserOrder order : this) {
+        for (PurchaseOrder order : this) {
             sum += order.getSum();
         }
         return sum;
@@ -64,7 +64,7 @@ public class PurchaserOrderList extends ArrayList<PurchaserOrder> {
         order.setFullPrice(getTotalSum());
 
         OrderDetailsList list = new OrderDetailsList();
-        for (PurchaserOrder purchaserOrder : this) {
+        for (PurchaseOrder purchaserOrder : this) {
             OrderDetails orderDetails = new OrderDetails();
             orderDetails.setAmount(purchaserOrder.getCount());
             orderDetails.setDishID(purchaserOrder.getDish().getId());

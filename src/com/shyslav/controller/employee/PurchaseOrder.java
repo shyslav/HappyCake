@@ -5,12 +5,12 @@ import com.happycake.sitemodels.Dish;
 /**
  * @author Shyshkin Vladyslav on 02.05.17.
  */
-public class PurchaserOrder {
+public class PurchaseOrder {
     private final Dish dish;
     private double sum;
     private int count;
 
-    public PurchaserOrder(Dish dish, int count) {
+    public PurchaseOrder(Dish dish, int count) {
         this.dish = dish;
         this.sum = dish.getPrice() * count;
         this.count = count;

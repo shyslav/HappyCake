@@ -2,9 +2,8 @@ package com.shyslav.controller.cook;
 
 import com.happycake.sitemodels.DishesList;
 import com.happycake.sitemodels.Order;
-import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -36,14 +35,14 @@ public class CookController {
     private WebView webView8;
     ArrayList<WebView> webViews = new ArrayList<>();
     String[] colors = {"#fa9994", "#ffb69e", "#ffd5b3", "#fce0cb", "#fff9c2", "#f6ffa9", "#d6ff8d", "#9bff7c"};
-    private CookModel model;
+    private CookActionHelper model;
     private DishesList dishes;
 
     @FXML
     private void initialize() {
-        StartApplication.userEntity.getUserBean().waitLoad();
-        model = new CookModel(this);
-        dishes = StartApplication.userEntity.getUserBean().getDishesList();
+        StartDesktopApplication.userEntity.getUserBean().waitLoad();
+        model = new CookActionHelper(this);
+        dishes = StartDesktopApplication.userEntity.getUserBean().getDishesList();
 
         webViews.add(webView1);
         webViews.add(webView2);
@@ -136,12 +135,12 @@ public class CookController {
      */
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            if (StartApplication.userEntity.getEmp().getPositionID() == 3) {
+            if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 3) {
                 WebView source = (WebView) event.getSource();
                 int index = Integer.parseInt(source.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
 
                 if (model.getQueue().size() > index) {
-                    if (LazyConfirmDialog.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                    if (LazyJavaFXAlert.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
                         model.closeOrder(index);
                         updateOrders();
                     }

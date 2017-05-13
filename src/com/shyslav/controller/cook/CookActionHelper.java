@@ -6,7 +6,7 @@ import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import javafx.scene.control.Alert;
 import org.apache.log4j.Logger;
 
@@ -18,22 +18,25 @@ import java.util.ArrayList;
 /**
  * @author Shyshkin Vladyslav on 25.05.2016.
  */
-public class CookModel {
-    private static final Logger log = Logger.getLogger(CookModel.class.getName());
+public class CookActionHelper {
+    private static final Logger log = Logger.getLogger(CookActionHelper.class.getName());
     public static boolean done = false;
     private final ServerClient client;
     private final ArrayList<Order> queue;
     private final CookController cookController;
 
-    public CookModel(CookController cookController) {
-        this.client = StartApplication.userEntity.getUserBean().getClientActions().getClient();
+    public CookActionHelper(CookController cookController) {
+        this.client = StartDesktopApplication.userEntity.getUserBean().getClientActions().getClient();
         this.queue = new ArrayList<>();
         this.cookController = cookController;
-        newDishThread();
+        updateDishThread();
     }
 
-    private void newDishThread() {
-        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().selectOrderForCook();
+    /**
+     * Start dish thread
+     */
+    private void updateDishThread() {
+        HappyCakeResponse happyCakeResponse = StartDesktopApplication.userEntity.getUserBean().getClientActions().selectOrderForCook();
         if (happyCakeResponse.isSuccess()) {
             OrderList orderList = happyCakeResponse.getObject(OrderList.class);
             synchronized (queue) {
@@ -44,7 +47,7 @@ public class CookModel {
             System.exit(0);
         }
 
-        if (StartApplication.userEntity.getEmp().getPositionID() == 3) {
+        if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 3) {
             Thread thread = new Thread(() -> {
                 while (!done) {
                     HappyCakeResponse read = client.read();

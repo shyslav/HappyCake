@@ -12,12 +12,12 @@ import java.io.IOException;
 /**
  * @author Shyshkin Vladyslav on 07.03.2016.
  */
-public class EnterDialogStart {
+public class EnterDialogLoader {
     private String title;
     private String message;
     private Stage primaryStage;
 
-    public EnterDialogStart(Stage primaryStage, String title, String message) throws IOException {
+    public EnterDialogLoader(Stage primaryStage, String title, String message) throws IOException {
         this.primaryStage = primaryStage;
         this.title = title;
         this.message = message;
@@ -26,7 +26,7 @@ public class EnterDialogStart {
 
     public void start() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartApplication.class.getResource("/com/shyslav/fxml/alerts/EnterDialog.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/alerts/EnterDialog.fxml"));
         VBox passwordAlert = loader.load();
         EnterFrameController controller = loader.getController();
         Stage enterFormStage = new Stage();

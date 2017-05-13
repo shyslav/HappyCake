@@ -1,6 +1,6 @@
 package com.shyslav.controller.alert;
 
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -45,8 +45,8 @@ public class EnterFrameController {
         if (txtFieldPassword.getLength() < 3 || txtFieldUsername.getLength() < 4) {
             LazyJavaFXAlert.alert("Ошибка", null, "Все поля обязательны для ввода", Alert.AlertType.WARNING);
         } else {
-            if (StartApplication.userEntity.login(txtFieldUsername.getText(), txtFieldPassword.getText())) {
-                StartApplication.controllerMainItems.setBtnExit(true);
+            if (StartDesktopApplication.userEntity.login(txtFieldUsername.getText(), txtFieldPassword.getText())) {
+                StartDesktopApplication.controllerMainItems.setBtnExit(true);
                 actionCancel(event);
             } else {
                 LazyJavaFXAlert.alert("Ошибка входа", null, "Не правильный пароль или логин", Alert.AlertType.ERROR);

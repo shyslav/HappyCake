@@ -1,14 +1,14 @@
 package com.shyslav.controller;
 
 import com.shyslav.controller.alert.LazyJavaFXAlert;
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-public class MainController {
+public class MainMiddleController {
     @FXML
     private ImageView imgAdmin;
     @FXML
@@ -27,26 +27,26 @@ public class MainController {
         if (!(source instanceof ImageView)) {
             return;
         }
-        if (!StartApplication.userEntity.isLogin()) {
-            StartApplication.alertEnterDialog("Entered Form", "Enter your password and username please");
+        if (!StartDesktopApplication.userEntity.isLogin()) {
+            StartDesktopApplication.alertEnterDialog("Entered Form", "Enter your password and username please");
             return;
         }
         ImageView mouseClicked = (ImageView) source;
         switch (mouseClicked.getId()) {
             case "imgAdmin":
-                if (StartApplication.userEntity.getEmp().getPositionID() == 1) {
-                    StartApplication.chooseScreenAdmin();
+                if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 1) {
+                    StartDesktopApplication.chooseScreenAdmin();
                 } else {
                     LazyJavaFXAlert.ruleError();
                 }
                 break;
             case "imgCook":
-                StartApplication.chooseScreenCook();
+                StartDesktopApplication.chooseScreenCook();
                 break;
             case "imgEmployee":
-                if (StartApplication.userEntity.getEmp().getPositionID() == 2
-                        || StartApplication.userEntity.getEmp().getPositionID() == 1) {
-                    StartApplication.chooseScreenEmployee();
+                if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 2
+                        || StartDesktopApplication.userEntity.getEmp().getPositionID() == 1) {
+                    StartDesktopApplication.chooseScreenEmployee();
                 } else {
                     LazyJavaFXAlert.ruleError();
                 }

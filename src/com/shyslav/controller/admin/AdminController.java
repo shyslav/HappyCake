@@ -5,11 +5,10 @@ import appmodels.GraphReportList;
 import appmodels.localmodels.LocalEmployee;
 import com.happycake.sitemodels.*;
 import com.shyslav.UserBean;
-import com.shyslav.controller.alert.LazyConfirmDialog;
 import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
-import com.shyslav.start.StartApplication;
+import com.shyslav.start.StartDesktopApplication;
 import com.shyslav.utils.LazyCalendar;
 import com.shyslav.utils.LazyDate;
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -175,7 +174,7 @@ public class AdminController {
      * Initialize cafe coordinates table
      */
     private void cafeCoordinateInitialize() {
-        CafeCoordinateList cl = StartApplication.userEntity.getUserBean().getCafeCoordinatesList();
+        CafeCoordinateList cl = StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList();
         coordId.setCellValueFactory(new PropertyValueFactory<>("id"));
         coordAdrs.setCellValueFactory(new PropertyValueFactory<>("address"));
         coordPhone.setCellValueFactory(new PropertyValueFactory<>("mobilePhone"));
@@ -197,7 +196,7 @@ public class AdminController {
      * Initialize position
      */
     private void positionInitialize() {
-        PositionsList pl = StartApplication.userEntity.getUserBean().getPositionsList();
+        PositionsList pl = StartDesktopApplication.userEntity.getUserBean().getPositionsList();
         posID.setCellValueFactory(new PropertyValueFactory<>("id"));
         posName.setCellValueFactory(new PropertyValueFactory<>("name"));
         posSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
@@ -222,7 +221,7 @@ public class AdminController {
      * Initialize orders
      */
     private void ordersInitialize() {
-        OrderList order = StartApplication.userEntity.getUserBean().getOrderList();
+        OrderList order = StartDesktopApplication.userEntity.getUserBean().getOrderList();
         ordID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
@@ -280,11 +279,11 @@ public class AdminController {
 
     @FXML
     private void initialize() {
-        StartApplication.userEntity.getUserBean().waitLoad();
+        StartDesktopApplication.userEntity.getUserBean().waitLoad();
         labelPercent.setTextFill(Color.DARKORANGE);
         labelPercent.setStyle("-fx-font: 24 arial;");
         labelPercent.setVisible(false);
-        StartApplication.controllerMainItems.setBtnReinitializeAdmin(true);
+        StartDesktopApplication.controllerMainItems.setBtnReinitializeAdmin(true);
         ReInit();
     }
 
@@ -368,7 +367,7 @@ public class AdminController {
      * Initialize employee table
      */
     private void employeeInitialize() {
-        EmployeesList el = StartApplication.userEntity.getUserBean().getEmployeesList();
+        EmployeesList el = StartDesktopApplication.userEntity.getUserBean().getEmployeesList();
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         positionID.setCellValueFactory(new PropertyValueFactory<>("positionID"));
         cafeID.setCellValueFactory(new PropertyValueFactory<>("cafeID"));
@@ -385,7 +384,7 @@ public class AdminController {
      * Initialize news table
      */
     private void newsInitialize() {
-        NewsList nl = StartApplication.userEntity.getUserBean().getNewsList();
+        NewsList nl = StartDesktopApplication.userEntity.getUserBean().getNewsList();
         ncID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ncAuthorID.setCellValueFactory(new PropertyValueFactory<>("authorID"));
         ncNews.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -401,7 +400,7 @@ public class AdminController {
      * Initialize category table
      */
     private void categoryInitialize() {
-        CategoriesList cl = StartApplication.userEntity.getUserBean().getCategoriesList();
+        CategoriesList cl = StartDesktopApplication.userEntity.getUserBean().getCategoriesList();
         categoryId.setCellValueFactory(new PropertyValueFactory<>("id"));
         categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -435,7 +434,7 @@ public class AdminController {
      * Initialize reservation table
      */
     private void reservationInitialize() {
-        ReservationList rl = StartApplication.userEntity.getUserBean().getReservationList();
+        ReservationList rl = StartDesktopApplication.userEntity.getUserBean().getReservationList();
         reservationID.setCellValueFactory(new PropertyValueFactory<>("id"));
         reservationCafeID.setCellValueFactory(new PropertyValueFactory<>("cafeId"));
         reservationClientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -470,7 +469,7 @@ public class AdminController {
      * Initialize reports
      */
     private void reportsInitialize() {
-        ReportsList rl = StartApplication.userEntity.getUserBean().getReportsList();
+        ReportsList rl = StartDesktopApplication.userEntity.getUserBean().getReportsList();
         repID.setCellValueFactory(new PropertyValueFactory<>("id"));
         repAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         repText.setCellValueFactory(new PropertyValueFactory<>("text"));
@@ -490,7 +489,7 @@ public class AdminController {
         if (event.getClickCount() == 2) {
             Reservation res = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
             //TODO переделать по аналогу orders
-            preorderInitialize(StartApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(res.getId()));
+            preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(res.getId()));
         }
     }
 
@@ -515,7 +514,7 @@ public class AdminController {
         if (event.getClickCount() == 2) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
             //TODO нужно переделать по аналогу orders
-            dishInitialize(StartApplication.userEntity.getUserBean().getDishesList().getByCategoryId(cat.getId()));
+            dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(cat.getId()));
         }
     }
 
@@ -528,12 +527,12 @@ public class AdminController {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             //get reservation entity
             Reservation res = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteReservation(res.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReservation(res.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getReservationList().removeById(res.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getReservationList().removeById(res.getId());
                     reservationInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -543,13 +542,13 @@ public class AdminController {
         } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             //get preorder entity
             PreOrder preOrder = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deletePreOrder(preOrder.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deletePreOrder(preOrder.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getPreOrderList().removeById(preOrder.getId());
-                    preorderInitialize(StartApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(preOrder.getReservationID()));
+                    StartDesktopApplication.userEntity.getUserBean().getPreOrderList().removeById(preOrder.getId());
+                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(preOrder.getReservationID()));
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить элемент предзаказа", Alert.AlertType.ERROR);
@@ -571,16 +570,16 @@ public class AdminController {
             //get selected employee
             Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
             //check if user try to delete himself
-            if (tmp.getId() == StartApplication.userEntity.getEmp().getId()) {
+            if (tmp.getId() == StartDesktopApplication.userEntity.getEmp().getId()) {
                 LazyJavaFXAlert.alert("Ошибка", "Ошибка удаления", "Вы не моежете удалить самого себя", Alert.AlertType.ERROR);
                 return;
             }
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteEmployees(tmp.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteEmployees(tmp.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getEmployeesList().removeById(tmp.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getEmployeesList().removeById(tmp.getId());
                     employeeInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -590,12 +589,12 @@ public class AdminController {
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             //get selected position
             Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deletePositions(tmp.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deletePositions(tmp.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getPositionsList().removeById(tmp.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getPositionsList().removeById(tmp.getId());
                     positionInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -605,12 +604,12 @@ public class AdminController {
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             //get selected cafe coordinate
             CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteCafeCoordinate(tmp.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCafeCoordinate(tmp.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getCafeCoordinatesList().removeById(tmp.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList().removeById(tmp.getId());
                     cafeCoordinateInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -630,12 +629,12 @@ public class AdminController {
     public void btnEventReviewDelete(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             Reports rep = (Reports) repTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteReports(rep.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReports(rep.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
-                    StartApplication.userEntity.getUserBean().getReportsList().removeById(rep.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getReportsList().removeById(rep.getId());
                     reportsInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -655,12 +654,12 @@ public class AdminController {
     public void btnEventCategoryDishDelete(Event event) {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category category = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteCategories(category.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCategories(category.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
-                    StartApplication.userEntity.getUserBean().getCategoriesList().removeById(category.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getCategoriesList().removeById(category.getId());
                     categoryInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -669,13 +668,13 @@ public class AdminController {
             }
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteDish(dish.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteDish(dish.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
-                    StartApplication.userEntity.getUserBean().getDishesList().removeById(dish.getId());
-                    dishInitialize(StartApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+                    StartDesktopApplication.userEntity.getUserBean().getDishesList().removeById(dish.getId());
+                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
@@ -694,12 +693,12 @@ public class AdminController {
     public void btnEventNewsDelete(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             News news = (News) newsTable.getSelectionModel().getSelectedItem();
-            if (LazyConfirmDialog.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().deleteNews(news.getId());
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteNews(news.getId());
                 //check if server return success
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
-                    StartApplication.userEntity.getUserBean().getNewsList().removeById(news.getId());
+                    StartDesktopApplication.userEntity.getUserBean().getNewsList().removeById(news.getId());
                     newsInitialize();
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
@@ -811,7 +810,7 @@ public class AdminController {
      * @return true if pie chart success initialized
      */
     private boolean pieChartInit(int dateStart, int dateEnd) {
-        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
+        HappyCakeResponse happyCakeResponse = StartDesktopApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
         if (!happyCakeResponse.isSuccess()) {
             LazyJavaFXAlert.systemError();
             return false;
@@ -842,7 +841,7 @@ public class AdminController {
      * @return
      */
     private boolean lineChartInit(int dateStart, int dateEnd) {
-        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getDateSalesForPeriod(dateStart, dateEnd);
+        HappyCakeResponse happyCakeResponse = StartDesktopApplication.userEntity.getUserBean().getClientActions().getDateSalesForPeriod(dateStart, dateEnd);
         if (!happyCakeResponse.isSuccess()) {
             LazyJavaFXAlert.systemError();
             return false;
@@ -878,7 +877,7 @@ public class AdminController {
      * @return
      */
     private boolean barChartInit(int dateStart, int dateEnd) {
-        HappyCakeResponse happyCakeResponse = StartApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
+        HappyCakeResponse happyCakeResponse = StartDesktopApplication.userEntity.getUserBean().getClientActions().getSalesForPeriod(dateStart, dateEnd);
         if (!happyCakeResponse.isSuccess()) {
             LazyJavaFXAlert.systemError();
             return false;
@@ -931,10 +930,10 @@ public class AdminController {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category cat = new Category();
             //open add categories dialog
-            StartApplication.addEditDialog(cat, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+            StartDesktopApplication.openSaveDialog(cat, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
                     categoryInitialize();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -943,11 +942,11 @@ public class AdminController {
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             Dish dish = new Dish();
             //open add dish dialog
-            StartApplication.addEditDialog(dish, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+            StartDesktopApplication.openSaveDialog(dish, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
-                    dishInitialize(StartApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
                 } else {
                     LazyJavaFXAlert.systemError();
                 }
@@ -966,10 +965,10 @@ public class AdminController {
         if (categoryTable.getSelectionModel().getSelectedItem() != null) {
             Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
             //open edit categories dialog
-            StartApplication.addEditDialog(cat, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+            StartDesktopApplication.openSaveDialog(cat, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
                     categoryTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -978,10 +977,10 @@ public class AdminController {
         } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
             Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
             //open edit dish dialog
-            StartApplication.addEditDialog(dish, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+            StartDesktopApplication.openSaveDialog(dish, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
                     dishTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1001,10 +1000,10 @@ public class AdminController {
     public void editNewsBtnClick(Event event) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             News news = (News) newsTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(news, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
+            StartDesktopApplication.openSaveDialog(news, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addNews(news);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
                     newsTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1022,10 +1021,10 @@ public class AdminController {
      */
     public void addNewsBtnClick(Event event) {
         News news = new News();
-        StartApplication.addEditDialog(news, () -> {
-            HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addNews(news);
+        StartDesktopApplication.openSaveDialog(news, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addNews(news);
             if (response.isSuccess()) {
-                StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
                 newsInitialize();
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1041,10 +1040,10 @@ public class AdminController {
     public void reservationOrPreorderEditBtnClick(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
                     reservationTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1052,10 +1051,10 @@ public class AdminController {
             });
         } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             PreOrder tmp = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
                     preorderTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1074,10 +1073,10 @@ public class AdminController {
     public void reservationOrPreorderAddBtnClick(Event event) {
         if (reservationTable.getSelectionModel().getSelectedItem() != null) {
             Reservation tmp = new Reservation();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
                     reservationInitialize();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1085,11 +1084,11 @@ public class AdminController {
             });
         } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
             PreOrder tmp = new PreOrder();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
-                    preorderInitialize(StartApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
                 } else {
                     LazyJavaFXAlert.systemError();
                 }
@@ -1107,10 +1106,10 @@ public class AdminController {
     public void employeeAddBtnClick(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             Employees tmp = new Employees();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
                     employeeInitialize();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1118,10 +1117,10 @@ public class AdminController {
             });
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             Position tmp = new Position();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
                     positionInitialize();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1129,10 +1128,10 @@ public class AdminController {
             });
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             CafeCoordinate tmp = new CafeCoordinate();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
                     cafeCoordinateInitialize();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1151,10 +1150,10 @@ public class AdminController {
     public void employeeEditBtnClick(Event event) {
         if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
             Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
                     tableEmployees.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1162,10 +1161,10 @@ public class AdminController {
             });
         } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
             Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
                     positionTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1173,10 +1172,10 @@ public class AdminController {
             });
         } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
             CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
                     cafeCoordinateTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1194,10 +1193,10 @@ public class AdminController {
      */
     public void reviewAddBtnClick(Event event) {
         Reports tmp = new Reports();
-        StartApplication.addEditDialog(tmp, () -> {
-            HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
             if (response.isSuccess()) {
-                StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
                 reportsInitialize();
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1213,10 +1212,10 @@ public class AdminController {
     public void reviewEditBtnClick(Event event) {
         if (repTable.getSelectionModel().getSelectedItem() != null) {
             Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
-            StartApplication.addEditDialog(tmp, () -> {
-                HappyCakeResponse response = StartApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
                 if (response.isSuccess()) {
-                    StartApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
                     repTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
