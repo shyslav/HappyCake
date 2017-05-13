@@ -520,48 +520,6 @@ public class AdminController {
     }
 
     /**
-     * Delete reservation data
-     *
-     * @param event income event
-     */
-    public void btnEventReservationDelete(Event event) {
-        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            //get reservation entity
-            Reservation res = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReservation(res.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getReservationList().removeById(res.getId());
-                    reservationInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить резерв", Alert.AlertType.ERROR);
-                }
-            }
-        } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            //get preorder entity
-            PreOrder preOrder = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deletePreOrder(preOrder.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getPreOrderList().removeById(preOrder.getId());
-                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(preOrder.getReservationID()));
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить элемент предзаказа", Alert.AlertType.ERROR);
-                }
-                reservationInitialize();
-            }
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
      * Employees tab pane delete button click
      *
      * @param event income event
@@ -924,72 +882,6 @@ public class AdminController {
     }
 
     /**
-     * Reservation or preorder edit btn click
-     *
-     * @param event
-     */
-    public void reservationOrPreorderEditBtnClick(Event event) {
-        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
-                    reservationTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            PreOrder tmp = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
-                    preorderTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
-     * Reservation or preorder add btn click
-     *
-     * @param event income event
-     */
-    public void reservationOrPreorderAddBtnClick(Event event) {
-        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            Reservation tmp = new Reservation();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
-                    reservationInitialize();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (preorderTable.getSelectionModel().getSelectedItem() != null) {
-            PreOrder tmp = new PreOrder();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
-                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
      * Employee add btn click
      *
      * @param event income event
@@ -1245,6 +1137,140 @@ public class AdminController {
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+
+    /**
+     * Reservation add button click
+     *
+     * @param actionEvent income event
+     */
+    public void addReservationBtnClick(ActionEvent actionEvent) {
+        Reservation tmp = new Reservation();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                reservationInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Reservation edit button click
+     *
+     * @param actionEvent income event
+     */
+    public void editReservationBtnClick(ActionEvent actionEvent) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    reservationTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Pre order add button click
+     *
+     * @param actionEvent income event
+     */
+    public void addPreOrderBtnClick(ActionEvent actionEvent) {
+        PreOrder tmp = new PreOrder();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Edit pre order button click
+     *
+     * @param actionEvent
+     */
+    public void editPreOrderBtnClick(ActionEvent actionEvent) {
+        if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            PreOrder tmp = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    preorderTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Delete pre order data
+     *
+     * @param actionEvent income event
+     */
+    public void deletePreOrderBtnClick(ActionEvent actionEvent) {
+        if (preorderTable.getSelectionModel().getSelectedItem() != null) {
+            //get preorder entity
+            PreOrder preOrder = (PreOrder) preorderTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deletePreOrder(preOrder.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove reservation
+                    StartDesktopApplication.userEntity.getUserBean().getPreOrderList().removeById(preOrder.getId());
+                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(preOrder.getReservationID()));
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить элемент предзаказа", Alert.AlertType.ERROR);
+                }
+                reservationInitialize();
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Delete reservation data
+     *
+     * @param actionEvent income event
+     */
+    public void deleteReservationBtnClick(ActionEvent actionEvent) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            //get reservation entity
+            Reservation res = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReservation(res.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove reservation
+                    StartDesktopApplication.userEntity.getUserBean().getReservationList().removeById(res.getId());
+                    reservationInitialize();
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить резерв", Alert.AlertType.ERROR);
                 }
             }
         } else {
