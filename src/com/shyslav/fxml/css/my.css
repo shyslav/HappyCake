@@ -11,7 +11,7 @@
 }
 .toolBar
 {
-    -fx-background-image: url("/data/img/header.jpg");
+    -fx-background-image: url("/img/header.jpg");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
@@ -122,26 +122,26 @@ Button:hover
 }
 
 .button-admin-add {
-     -fx-background-image: url(/data/img/icons/add.png);
+     -fx-background-image: url(/img/icons/add.png);
      -fx-background-size: stretch;
  }
 .button-admin-add:hover{
-    -fx-background-image: url(/data/img/icons/add_hover.png);
+    -fx-background-image: url(/img/icons/add_hover.png);
     -fx-background-size: stretch;
 }
 .button-admin-delete {
-     -fx-background-image: url(/data/img/icons/delete.png);
+     -fx-background-image: url(/img/icons/delete.png);
      -fx-background-size: stretch;
  }
 .button-admin-delete:hover{
-    -fx-background-image: url(/data/img/icons/delete-hover.png);
+    -fx-background-image: url(/img/icons/delete-hover.png);
     -fx-background-size: stretch;
 }
 .button-admin-edit {
-    -fx-background-image: url(/data/img/icons/edit.png);
+    -fx-background-image: url(/img/icons/edit.png);
     -fx-background-size: stretch;
 }
 .button-admin-edit:hover{
-    -fx-background-image: url(/data/img/icons/edit-hover.png);
+    -fx-background-image: url(/img/icons/edit-hover.png);
     -fx-background-size: stretch;
 }
