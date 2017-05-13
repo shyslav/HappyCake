@@ -14,6 +14,7 @@ import com.shyslav.utils.LazyDate;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
@@ -647,50 +648,11 @@ public class AdminController {
     }
 
     /**
-     * Dish delete event
-     *
-     * @param event income event
-     */
-    public void btnEventCategoryDishDelete(Event event) {
-        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Category category = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCategories(category.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove news
-                    StartDesktopApplication.userEntity.getUserBean().getCategoriesList().removeById(category.getId());
-                    categoryInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить категорию", Alert.AlertType.ERROR);
-                }
-            }
-        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteDish(dish.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove news
-                    StartDesktopApplication.userEntity.getUserBean().getDishesList().removeById(dish.getId());
-                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
-                }
-            }
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
      * Delete news button click
      *
-     * @param event income event
+     * @param actionEvent income event
      */
-    public void btnEventNewsDelete(Event event) {
+    public void deleteNewsBtnClick(ActionEvent actionEvent) {
         if (newsTable.getSelectionModel().getSelectedItem() != null) {
             News news = (News) newsTable.getSelectionModel().getSelectedItem();
             if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
@@ -922,77 +884,6 @@ public class AdminController {
     }
 
     /**
-     * Dish and category table row click
-     *
-     * @param event income event
-     */
-    public void addDishOrCategoryBtnClick(Event event) {
-        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Category cat = new Category();
-            //open add categories dialog
-            StartDesktopApplication.openSaveDialog(cat, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
-                    categoryInitialize();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Dish dish = new Dish();
-            //open add dish dialog
-            StartDesktopApplication.openSaveDialog(dish, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
-                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
-     * Edit dish or category btn click
-     *
-     * @param event income event
-     */
-    public void editDishOrCategoryBtnClick(Event event) {
-        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
-            Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
-            //open edit categories dialog
-            StartDesktopApplication.openSaveDialog(cat, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
-                    categoryTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (dishTable.getSelectionModel().getSelectedItem() != null) {
-            Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
-            //open edit dish dialog
-            StartDesktopApplication.openSaveDialog(dish, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
-                    dishTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
-
-    /**
      * Edit news button click
      *
      * @param event income event
@@ -1221,6 +1112,141 @@ public class AdminController {
                     LazyJavaFXAlert.systemError();
                 }
             });
+        } else {
+            alertNullValue();
+        }
+    }
+
+
+    /**
+     * Add category button click
+     *
+     * @param actionEvent income event
+     */
+    public void addCategoryBtnClick(ActionEvent actionEvent) {
+        Category cat = new Category();
+        //open add categories dialog
+        StartDesktopApplication.openSaveDialog(cat, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                categoryInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Add dish button click
+     *
+     * @param actionEvent income event
+     */
+    public void addDishBtnClick(ActionEvent actionEvent) {
+        Dish dish = new Dish();
+        //open add dish dialog
+        StartDesktopApplication.openSaveDialog(dish, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Edit category btn click
+     *
+     * @param actionEvent income event
+     */
+    public void editCategoryBtnClick(ActionEvent actionEvent) {
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            Category cat = (Category) categoryTable.getSelectionModel().getSelectedItem();
+            //open edit categories dialog
+            StartDesktopApplication.openSaveDialog(cat, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    categoryTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Edit dish btn click
+     *
+     * @param actionEvent income event
+     */
+    public void editDishBtnClick(ActionEvent actionEvent) {
+        if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
+            //open edit dish dialog
+            StartDesktopApplication.openSaveDialog(dish, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    dishTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Category delete button click
+     *
+     * @param actionEvent income event
+     */
+    public void deleteCategoryBtnClick(ActionEvent actionEvent) {
+        if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+            Category category = (Category) categoryTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCategories(category.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove news
+                    StartDesktopApplication.userEntity.getUserBean().getCategoriesList().removeById(category.getId());
+                    categoryInitialize();
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить категорию", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Dish delete button click
+     *
+     * @param actionEvent income event
+     */
+    public void deleteDishBtnClick(ActionEvent actionEvent) {
+        if (dishTable.getSelectionModel().getSelectedItem() != null) {
+            Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteDish(dish.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove news
+                    StartDesktopApplication.userEntity.getUserBean().getDishesList().removeById(dish.getId());
+                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
+                }
+            }
         } else {
             alertNullValue();
         }
