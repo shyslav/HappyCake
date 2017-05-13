@@ -2,7 +2,7 @@ package com.shyslav.controller.cook;
 
 import com.happycake.sitemodels.DishesList;
 import com.happycake.sitemodels.Order;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.start.StartDesktopApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

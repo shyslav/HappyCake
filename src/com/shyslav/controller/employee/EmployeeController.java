@@ -1,7 +1,7 @@
 package com.shyslav.controller.employee;
 
 import com.happycake.sitemodels.*;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;
 import javafx.event.Event;

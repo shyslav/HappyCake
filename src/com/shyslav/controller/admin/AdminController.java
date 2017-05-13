@@ -5,7 +5,7 @@ import appmodels.GraphReportList;
 import appmodels.localmodels.LocalEmployee;
 import com.happycake.sitemodels.*;
 import com.shyslav.UserBean;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;

@@ -3,7 +3,7 @@ package com.shyslav.controller.cook;
 import com.happycake.sitemodels.Order;
 import com.happycake.sitemodels.OrderList;
 import com.shyslav.controller.ServerClient;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;

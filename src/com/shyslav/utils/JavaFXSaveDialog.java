@@ -1,9 +1,8 @@
-package com.shyslav.controller.dialogs;
+package com.shyslav.utils;
 
 import com.happycake.editablemodel.EditableEntity;
 import com.happycake.editablemodel.EditableFieldException;
 import com.happycake.editablemodel.EditableParser;
-import com.shyslav.controller.alert.LazyJavaFXAlert;
 import com.shyslav.io.IOUtils;
 import com.shyslav.mysql.interfaces.DBEntity;
 import javafx.collections.FXCollections;

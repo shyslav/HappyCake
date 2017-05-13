@@ -1,4 +1,4 @@
-package com.shyslav.controller.alert;
+package com.shyslav.utils;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

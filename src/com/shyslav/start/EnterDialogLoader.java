@@ -1,6 +1,6 @@
 package com.shyslav.start;
 
-import com.shyslav.controller.alert.EnterFrameController;
+import com.shyslav.controller.EnterFrameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;

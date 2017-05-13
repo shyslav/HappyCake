@@ -1,6 +1,6 @@
 package com.shyslav.controller;
 
-import com.shyslav.controller.alert.LazyJavaFXAlert;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.start.StartDesktopApplication;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
