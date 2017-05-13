@@ -80,7 +80,7 @@ public class CookActionHelper {
             try {
                 Clip clip = AudioSystem.getClip();
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                        CookController.class.getResourceAsStream("cookMusic.wav"));
+                        CookController.class.getResourceAsStream("/sounds/cookMusic.wav"));
                 clip.open(inputStream);
                 clip.start();
             } catch (Exception e) {
