@@ -77,11 +77,6 @@ public class StartDesktopApplication extends Application {
                 System.exit(0);
             }
         });
-//        userEntity.login("admin", "admin");
-//        userEntity.getUserBean().waitLoad();
-//        openSaveDialog(new News(), completion -> {
-//            System.out.println("finish");
-//        });
     }
 
     /**
@@ -91,7 +86,7 @@ public class StartDesktopApplication extends Application {
      */
     private void showMainView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartDesktopApplication.class.getClass().getResource("/com/shyslav/fxml/MainView.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getClass().getResource("/fxml/MainView.fxml"));
         mainLayout = loader.load();
         Scene scene = new Scene(mainLayout);
         controllerMainItems = loader.getController();
@@ -106,7 +101,7 @@ public class StartDesktopApplication extends Application {
      */
     public static void showMainItems() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/LoginForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/fxml/LoginForm.fxml"));
         BorderPane mainItem = loader.load();
         mainLayout.setCenter(mainItem);
     }
@@ -118,7 +113,7 @@ public class StartDesktopApplication extends Application {
      */
     public static void chooseScreenEmployee() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Employee/EmployeeForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/fxml/employee/EmployeeForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         employeeController = loader.getController();
@@ -131,7 +126,7 @@ public class StartDesktopApplication extends Application {
      */
     public static void chooseScreenCook() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Cook/CookForm.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/fxml/cook/CookForm.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         cookConroller = loader.getController();
@@ -144,7 +139,7 @@ public class StartDesktopApplication extends Application {
      */
     public static void chooseScreenAdmin() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(StartDesktopApplication.class.getResource("/com/shyslav/fxml/Admin/AdminPane.fxml"));
+        loader.setLocation(StartDesktopApplication.class.getResource("/fxml/admin/AdminPane.fxml"));
         BorderPane employeeItem = loader.load();
         mainLayout.setCenter(employeeItem);
         controllerAdminItems = loader.getController();
