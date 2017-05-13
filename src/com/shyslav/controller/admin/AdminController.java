@@ -183,27 +183,6 @@ public class AdminController {
         cafeCoordinateTable.setItems(FXCollections.observableList(cl));
     }
 
-    //*******Position
-    @FXML
-    private TableView positionTable;
-    @FXML
-    private TableColumn<Position, Integer> posID;
-    @FXML
-    private TableColumn<Position, String> posName;
-    @FXML
-    private TableColumn<Position, Double> posSalary;
-
-    /**
-     * Initialize position
-     */
-    private void positionInitialize() {
-        PositionsList pl = StartDesktopApplication.userEntity.getUserBean().getPositionsList();
-        posID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        posName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        posSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        positionTable.setItems(FXCollections.observableList(pl));
-    }
-
     //*************Orders
     @FXML
     private TableView OrdersTable;
@@ -318,31 +297,6 @@ public class AdminController {
         OrdersTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 ordersOrderTable.getSelectionModel().clearSelection();
-            }
-        }));
-    }
-
-    /**
-     * Select employee, cafe coordinate and position handler
-     * This handler disable selected elements in other table in one tab in tabpane
-     */
-    private void EmployeeCafeeCoordinatePositionHandler() {
-        cafeCoordinateTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                tableEmployees.getSelectionModel().clearSelection();
-                positionTable.getSelectionModel().clearSelection();
-            }
-        }));
-        tableEmployees.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                cafeCoordinateTable.getSelectionModel().clearSelection();
-                positionTable.getSelectionModel().clearSelection();
-            }
-        }));
-        positionTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                tableEmployees.getSelectionModel().clearSelection();
-                cafeCoordinateTable.getSelectionModel().clearSelection();
             }
         }));
     }
@@ -520,67 +474,6 @@ public class AdminController {
     }
 
     /**
-     * Employees tab pane delete button click
-     *
-     * @param event income event
-     */
-    public void btnEventEmployeeDelete(Event event) {
-        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            //get selected employee
-            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
-            //check if user try to delete himself
-            if (tmp.getId() == StartDesktopApplication.userEntity.getEmp().getId()) {
-                LazyJavaFXAlert.alert("Ошибка", "Ошибка удаления", "Вы не моежете удалить самого себя", Alert.AlertType.ERROR);
-                return;
-            }
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteEmployees(tmp.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getEmployeesList().removeById(tmp.getId());
-                    employeeInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить сотрудника", Alert.AlertType.ERROR);
-                }
-            }
-        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            //get selected position
-            Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deletePositions(tmp.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getPositionsList().removeById(tmp.getId());
-                    positionInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить должность. Она используется.", Alert.AlertType.ERROR);
-                }
-            }
-        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            //get selected cafe coordinate
-            CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCafeCoordinate(tmp.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList().removeById(tmp.getId());
-                    cafeCoordinateInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить координаты кафе", Alert.AlertType.ERROR);
-                }
-            }
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
      * Report delete button click
      *
      * @param event income event
@@ -605,35 +498,13 @@ public class AdminController {
         }
     }
 
-    /**
-     * Delete news button click
-     *
-     * @param actionEvent income event
-     */
-    public void deleteNewsBtnClick(ActionEvent actionEvent) {
-        if (newsTable.getSelectionModel().getSelectedItem() != null) {
-            News news = (News) newsTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteNews(news.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove news
-                    StartDesktopApplication.userEntity.getUserBean().getNewsList().removeById(news.getId());
-                    newsInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
-                }
-            }
-        } else {
-            alertNullValue();
-        }
-    }
-
     private void alertNullValue() {
         LazyJavaFXAlert.alert("Ошибка", null, "Выберите элемент таблицы для добавления, правки или удаления", Alert.AlertType.WARNING);
     }
 
+    /**
+     * Reinitialize all tables
+     */
     public void ReInit() {
         employeeInitialize();
         newsInitialize();
@@ -643,9 +514,7 @@ public class AdminController {
         preorderInitialize(new PreOrderList());
         reportsInitialize();
         cafeCoordinateInitialize();
-        positionInitialize();
         CategoryDishHandler();
-        EmployeeCafeeCoordinatePositionHandler();
         reservationHandler();
         ordersInitialize();
         orderListInitialize(new OrderDetailsList());
@@ -882,88 +751,25 @@ public class AdminController {
     }
 
     /**
-     * Employee add btn click
+     * Delete news button click
      *
-     * @param event income event
+     * @param actionEvent income event
      */
-    public void employeeAddBtnClick(Event event) {
-        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            Employees tmp = new Employees();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
-                    employeeInitialize();
+    public void deleteNewsBtnClick(ActionEvent actionEvent) {
+        if (newsTable.getSelectionModel().getSelectedItem() != null) {
+            News news = (News) newsTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteNews(news.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove news
+                    StartDesktopApplication.userEntity.getUserBean().getNewsList().removeById(news.getId());
+                    newsInitialize();
                 } else {
-                    LazyJavaFXAlert.systemError();
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
                 }
-            });
-        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            Position tmp = new Position();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
-                    positionInitialize();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            CafeCoordinate tmp = new CafeCoordinate();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
-                    cafeCoordinateInitialize();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
-     * Employee edit btn click
-     *
-     * @param event income event
-     */
-    public void employeeEditBtnClick(Event event) {
-        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
-                    tableEmployees.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (positionTable.getSelectionModel().getSelectedItem() != null) {
-            Position tmp = (Position) positionTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPosition(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.POSITION);
-                    positionTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
-            CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
-                    cafeCoordinateTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
+            }
         } else {
             alertNullValue();
         }
@@ -1144,47 +950,6 @@ public class AdminController {
         }
     }
 
-
-    /**
-     * Reservation add button click
-     *
-     * @param actionEvent income event
-     */
-    public void addReservationBtnClick(ActionEvent actionEvent) {
-        Reservation tmp = new Reservation();
-        StartDesktopApplication.openSaveDialog(tmp, () -> {
-            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
-            if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
-                reservationInitialize();
-            } else {
-                LazyJavaFXAlert.systemError();
-            }
-        });
-    }
-
-    /**
-     * Reservation edit button click
-     *
-     * @param actionEvent income event
-     */
-    public void editReservationBtnClick(ActionEvent actionEvent) {
-        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
-            Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
-                    reservationTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
-        } else {
-            alertNullValue();
-        }
-    }
-
     /**
      * Pre order add button click
      *
@@ -1253,6 +1018,46 @@ public class AdminController {
     }
 
     /**
+     * Reservation add button click
+     *
+     * @param actionEvent income event
+     */
+    public void addReservationBtnClick(ActionEvent actionEvent) {
+        Reservation tmp = new Reservation();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                reservationInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Reservation edit button click
+     *
+     * @param actionEvent income event
+     */
+    public void editReservationBtnClick(ActionEvent actionEvent) {
+        if (reservationTable.getSelectionModel().getSelectedItem() != null) {
+            Reservation tmp = (Reservation) reservationTable.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    reservationTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
      * Delete reservation data
      *
      * @param actionEvent income event
@@ -1271,6 +1076,143 @@ public class AdminController {
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить резерв", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Add cafe btn click
+     *
+     * @param actionEvent income event
+     */
+    public void addCafeBtnClick(ActionEvent actionEvent) {
+        CafeCoordinate tmp = new CafeCoordinate();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                cafeCoordinateInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Edit cafe btn click
+     *
+     * @param actionEvent income event
+     */
+    public void editCafeBtnClick(ActionEvent actionEvent) {
+        if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
+            CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    cafeCoordinateTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Delete cafe btn click
+     *
+     * @param actionEvent income event
+     */
+    public void deleteCafeBtnClick(ActionEvent actionEvent) {
+        if (cafeCoordinateTable.getSelectionModel().getSelectedItem() != null) {
+            //get selected cafe coordinate
+            CafeCoordinate tmp = (CafeCoordinate) cafeCoordinateTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteCafeCoordinate(tmp.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove reservation
+                    StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList().removeById(tmp.getId());
+                    cafeCoordinateInitialize();
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить координаты кафе", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Add employee btn click
+     *
+     * @param actionEvent income event
+     */
+    public void addEmployeeBtnClick(ActionEvent actionEvent) {
+        Employees tmp = new Employees();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                employeeInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Edit employee btn click
+     *
+     * @param actionEvent income event
+     */
+    public void editEmployeeBtnClick(ActionEvent actionEvent) {
+        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    tableEmployees.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Delete employee btn click
+     *
+     * @param actionEvent income event
+     */
+    public void deleteEmployeeBtnClick(ActionEvent actionEvent) {
+        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+            //get selected employee
+            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
+            //check if user try to delete himself
+            if (tmp.getId() == StartDesktopApplication.userEntity.getEmp().getId()) {
+                LazyJavaFXAlert.alert("Ошибка", "Ошибка удаления", "Вы не моежете удалить самого себя", Alert.AlertType.ERROR);
+                return;
+            }
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteEmployees(tmp.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove reservation
+                    StartDesktopApplication.userEntity.getUserBean().getEmployeesList().removeById(tmp.getId());
+                    employeeInitialize();
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить сотрудника", Alert.AlertType.ERROR);
                 }
             }
         } else {
