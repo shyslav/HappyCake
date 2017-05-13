@@ -474,30 +474,8 @@ public class AdminController {
     }
 
     /**
-     * Report delete button click
-     *
-     * @param event income event
+     * Element in table hasn't selected
      */
-    public void btnEventReviewDelete(Event event) {
-        if (repTable.getSelectionModel().getSelectedItem() != null) {
-            Reports rep = (Reports) repTable.getSelectionModel().getSelectedItem();
-            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReports(rep.getId());
-                //check if server return success
-                if (response.getCode() == ErrorCodes.SUCCESS) {
-                    //locally remove reservation
-                    StartDesktopApplication.userEntity.getUserBean().getReportsList().removeById(rep.getId());
-                    reportsInitialize();
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка", response
-                            .getMessageText(), "Невозможно удалить отзыв", Alert.AlertType.ERROR);
-                }
-            }
-        } else {
-            alertNullValue();
-        }
-    }
-
     private void alertNullValue() {
         LazyJavaFXAlert.alert("Ошибка", null, "Выберите элемент таблицы для добавления, правки или удаления", Alert.AlertType.WARNING);
     }
@@ -770,46 +748,6 @@ public class AdminController {
                             .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
                 }
             }
-        } else {
-            alertNullValue();
-        }
-    }
-
-    /**
-     * Add review btn click
-     *
-     * @param event income event
-     */
-    public void reviewAddBtnClick(Event event) {
-        Reports tmp = new Reports();
-        StartDesktopApplication.openSaveDialog(tmp, () -> {
-            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
-            if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
-                reportsInitialize();
-            } else {
-                LazyJavaFXAlert.systemError();
-            }
-        });
-    }
-
-    /**
-     * Review edit btn click
-     *
-     * @param event income event
-     */
-    public void reviewEditBtnClick(Event event) {
-        if (repTable.getSelectionModel().getSelectedItem() != null) {
-            Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
-            StartDesktopApplication.openSaveDialog(tmp, () -> {
-                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
-                if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
-                    repTable.refresh();
-                } else {
-                    LazyJavaFXAlert.systemError();
-                }
-            });
         } else {
             alertNullValue();
         }
@@ -1213,6 +1151,71 @@ public class AdminController {
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить сотрудника", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Review add button click
+     *
+     * @param actionEvent income event
+     */
+    public void addReviewBtnClick(ActionEvent actionEvent) {
+        Reports tmp = new Reports();
+        StartDesktopApplication.openSaveDialog(tmp, () -> {
+            HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+            if (response.isSuccess()) {
+                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                reportsInitialize();
+            } else {
+                LazyJavaFXAlert.systemError();
+            }
+        });
+    }
+
+    /**
+     * Review edit btn click
+     *
+     * @param actionEvent income event
+     */
+    public void editReviewBtnClick(ActionEvent actionEvent) {
+        if (repTable.getSelectionModel().getSelectedItem() != null) {
+            Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
+            StartDesktopApplication.openSaveDialog(tmp, () -> {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
+                if (response.isSuccess()) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                    repTable.refresh();
+                } else {
+                    LazyJavaFXAlert.systemError();
+                }
+            });
+        } else {
+            alertNullValue();
+        }
+    }
+
+    /**
+     * Review delete button click
+     *
+     * @param actionEvent income event
+     */
+    public void deleteReviewBtnClick(ActionEvent actionEvent) {
+        if (repTable.getSelectionModel().getSelectedItem() != null) {
+            Reports rep = (Reports) repTable.getSelectionModel().getSelectedItem();
+            if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
+                HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReports(rep.getId());
+                //check if server return success
+                if (response.getCode() == ErrorCodes.SUCCESS) {
+                    //locally remove reservation
+                    StartDesktopApplication.userEntity.getUserBean().getReportsList().removeById(rep.getId());
+                    reportsInitialize();
+                } else {
+                    LazyJavaFXAlert.alert("Ошибка", response
+                            .getMessageText(), "Невозможно удалить отзыв", Alert.AlertType.ERROR);
                 }
             }
         } else {
