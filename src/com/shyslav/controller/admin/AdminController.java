@@ -5,12 +5,12 @@ import appmodels.GraphReportList;
 import appmodels.localmodels.LocalEmployee;
 import com.happycake.sitemodels.*;
 import com.shyslav.UserBean;
-import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;
 import com.shyslav.utils.LazyCalendar;
 import com.shyslav.utils.LazyDate;
+import com.shyslav.utils.LazyJavaFXAlert;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,6 +76,8 @@ public class AdminController {
     private TableColumn<News, String> ncImageView;
     @FXML
     private TableColumn<News, Integer> ncID;
+    @FXML
+    public TextField newsSearchField;
     //*********Category tabs
     @FXML
     private TableView categoryTable;
@@ -265,7 +267,30 @@ public class AdminController {
         labelPercent.setVisible(false);
         StartDesktopApplication.controllerMainItems.setBtnReinitializeAdmin(true);
         ReInit();
+        initializeSearchFields();
     }
+
+    /**
+     * Initialize search fields
+     */
+    private void initializeSearchFields() {
+        //news search field
+        newsSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            NewsList resultList = new NewsList();
+            NewsList newsList = StartDesktopApplication.userEntity.getUserBean().getNewsList();
+            for (News news : newsList) {
+                if (news.getName().contains(newValue)) {
+                    resultList.add(news);
+                } else if (news.getText().contains(newValue)) {
+                    resultList.add(news);
+                } else if (news.getTags().contains(newValue)) {
+                    resultList.add(news);
+                }
+            }
+            newsInitialize(resultList);
+        });
+    }
+
 
     /**
      * Select category and dish handler
@@ -338,8 +363,7 @@ public class AdminController {
     /**
      * Initialize news table
      */
-    private void newsInitialize() {
-        NewsList nl = StartDesktopApplication.userEntity.getUserBean().getNewsList();
+    private void newsInitialize(NewsList list) {
         ncID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ncAuthorID.setCellValueFactory(new PropertyValueFactory<>("authorID"));
         ncNews.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -348,7 +372,7 @@ public class AdminController {
         ncViews.setCellValueFactory(new PropertyValueFactory<>("view"));
         ncTegs.setCellValueFactory(new PropertyValueFactory<>("tags"));
         ncImageView.setCellValueFactory(new PropertyValueFactory<>("imageLink"));
-        newsTable.setItems(FXCollections.observableList(nl));
+        newsTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -485,7 +509,7 @@ public class AdminController {
      */
     public void ReInit() {
         employeeInitialize();
-        newsInitialize();
+        newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
         categoryInitialize();
         dishInitialize(new DishesList());
         reservationInitialize();
@@ -721,7 +745,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addNews(news);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
-                newsInitialize();
+                newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -742,7 +766,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
                     StartDesktopApplication.userEntity.getUserBean().getNewsList().removeById(news.getId());
-                    newsInitialize();
+                    newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
