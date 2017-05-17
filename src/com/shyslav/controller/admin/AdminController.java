@@ -211,18 +211,21 @@ public class AdminController {
     private TableColumn<Order, String> ordDate;
     @FXML
     private TableColumn<Order, String> ordCompliteORnot;
+    @FXML
+    public DatePicker orderDatePickerField;
+    @FXML
+    public TextField orderSearchFields;
 
     /**
      * Initialize orders
      */
-    private void ordersInitialize() {
-        OrderList order = StartDesktopApplication.userEntity.getUserBean().getOrderList();
+    private void ordersInitialize(OrderList list) {
         ordID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
         ordDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         ordCompliteORnot.setCellValueFactory(new PropertyValueFactory<>("compliteOrNot"));
-        OrdersTable.setItems(FXCollections.observableList(order));
+        OrdersTable.setItems(FXCollections.observableList(list));
     }
 
     //********OrdersList
@@ -433,6 +436,48 @@ public class AdminController {
                 }
             }
             reportsInitialize(result);
+        });
+
+        orderSearchFields.textProperty().addListener((observable, oldValue, newValue) -> {
+            OrderList result = new OrderList();
+            OrderList orderList = StartDesktopApplication.userEntity.getUserBean().getOrderList();
+            if (newValue.isEmpty()) {
+                ordersInitialize(orderList);
+                return;
+            }
+            for (Order order : orderList) {
+                if (String.valueOf(order.getEmployeeId()).equals(newValue)) {
+                    result.add(order);
+                    continue;
+                }
+                //search by data
+                for (OrderDetails orderDetails : order.getOrderDetails()) {
+                    if (String.valueOf(orderDetails.getDishID()).equals(newValue)) {
+                        result.add(order);
+                    } else if (String.valueOf(orderDetails.getPrice()).equals(newValue)) {
+                        result.add(order);
+                    }
+                }
+            }
+            ordersInitialize(result);
+        });
+
+        orderDatePickerField.valueProperty().addListener((observable, oldValue, newValue) -> {
+            OrderList result = new OrderList();
+            OrderList orderList = StartDesktopApplication.userEntity.getUserBean().getOrderList();
+            if (newValue == null) {
+                ordersInitialize(orderList);
+                return;
+            }
+            Date date = Date.from(newValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            int startTime = (int) (LazyCalendar.getDateStartFromDate(date).getTime() / 1000);
+            int endTime = (int) (LazyCalendar.getDateEndFromDate(date).getTime() / 1000);
+            for (Order order : orderList) {
+                if (order.getDate() >= startTime && order.getDate() <= endTime) {
+                    result.add(order);
+                }
+            }
+            ordersInitialize(result);
         });
     }
 
@@ -649,6 +694,22 @@ public class AdminController {
      * Reinitialize all tables
      */
     public void initializeTableData() {
+        //tab 1
+        newsSearchField.clear();
+        //tab 2
+        categorySearchField.clear();
+        dishSearchField.clear();
+        //tab 3
+        reservationSearchField.clear();
+        //tab 4
+        employeeSearchField.clear();
+        cafeCoordinateSearchField.clear();
+        //tab 5
+        reviewSearchField.clear();
+        //tab 6
+        orderSearchFields.clear();
+        orderDatePickerField.setValue(null);
+
         employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
         newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
         categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
@@ -659,7 +720,7 @@ public class AdminController {
         cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
         CategoryDishHandler();
         reservationHandler();
-        ordersInitialize();
+        ordersInitialize(StartDesktopApplication.userEntity.getUserBean().getOrderList());
         orderListInitialize(new OrderDetailsList());
         OrderOrderListHandler();
     }
@@ -1386,6 +1447,9 @@ public class AdminController {
         } else {
             alertNullValue();
         }
+    }
+
+    public void showDishNames(ActionEvent actionEvent) {
     }
 }
 
