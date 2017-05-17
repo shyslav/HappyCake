@@ -21,6 +21,7 @@ import javafx.geometry.Side;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -275,6 +276,8 @@ public class AdminController {
         StartDesktopApplication.controllerMainItems.setBtnReinitializeAdmin(true);
         initializeTableData();
         initializeSearchFields();
+        categoryRightClickMenuInitialize();
+        dishRightClickMenuInitialize();
     }
 
     /**
@@ -429,6 +432,7 @@ public class AdminController {
             reportsInitialize(result);
         });
 
+        //orders search
         orderSearchFields.textProperty().addListener((observable, oldValue, newValue) -> {
             OrderList result = new OrderList();
             OrderList orderList = StartDesktopApplication.userEntity.getUserBean().getOrderList();
@@ -453,6 +457,7 @@ public class AdminController {
             ordersInitialize(result);
         });
 
+        //order date search
         orderDatePickerField.valueProperty().addListener((observable, oldValue, newValue) -> {
             OrderList result = new OrderList();
             OrderList orderList = StartDesktopApplication.userEntity.getUserBean().getOrderList();
@@ -565,6 +570,30 @@ public class AdminController {
     }
 
     /**
+     * On category table right button click show menu
+     */
+    private void categoryRightClickMenuInitialize() {
+        ContextMenu cm = new ContextMenu();
+        MenuItem menuItem = new MenuItem("Show image");
+        cm.getItems().add(menuItem);
+
+        menuItem.setOnAction(event -> {
+            if (categoryTable.getSelectionModel().getSelectedItem() != null) {
+                Category category = (Category) categoryTable.getSelectionModel().getSelectedItem();
+                StartDesktopApplication.showImage(category.getImage());
+            } else {
+                alertNullValue();
+            }
+        });
+
+        categoryTable.addEventHandler(MouseEvent.MOUSE_CLICKED, t -> {
+            if (t.getButton() == MouseButton.SECONDARY) {
+                cm.show(categoryTable, t.getScreenX(), t.getScreenY());
+            }
+        });
+    }
+
+    /**
      * Initialize dishes table for category
      *
      * @param dishList dish for category
@@ -583,6 +612,30 @@ public class AdminController {
         } else {
             LazyJavaFXAlert.alert("Внимание", "В данной категории нет блюд", "Попробуйте выбрать другой предзаказ", Alert.AlertType.WARNING);
         }
+    }
+
+    /**
+     * On dish table right button click show menu
+     */
+    private void dishRightClickMenuInitialize() {
+        ContextMenu cm = new ContextMenu();
+        MenuItem menuItem = new MenuItem("Show image");
+        cm.getItems().add(menuItem);
+
+        menuItem.setOnAction(event -> {
+            if (dishTable.getSelectionModel().getSelectedItem() != null) {
+                Dish dish = (Dish) dishTable.getSelectionModel().getSelectedItem();
+                StartDesktopApplication.showImage(dish.getImage());
+            } else {
+                alertNullValue();
+            }
+        });
+
+        dishTable.addEventHandler(MouseEvent.MOUSE_CLICKED, t -> {
+            if (t.getButton() == MouseButton.SECONDARY) {
+                cm.show(dishTable, t.getScreenX(), t.getScreenY());
+            }
+        });
     }
 
     /**

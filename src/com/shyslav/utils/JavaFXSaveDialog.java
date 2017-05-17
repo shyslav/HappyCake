@@ -31,17 +31,16 @@ import java.util.Date;
 public class JavaFXSaveDialog {
     private static final Logger log = Logger.getLogger(JavaFXSaveDialog.class.getName());
 
-    private Stage stage = new Stage();
+    private Stage stage;
     //link to main stage
     private Stage primaryStage;
     private final EditableParser editableParser;
-    private final DBEntity entity;
     private final ISaveDialog dialogComplete;
 
     public JavaFXSaveDialog(Stage primaryStage, DBEntity entity, ISaveDialog dialogComplete) throws EditableFieldException {
         this.primaryStage = primaryStage;
-        this.entity = entity;
         this.dialogComplete = dialogComplete;
+        this.stage = new Stage();
         try {
             this.editableParser = new EditableParser(entity);
         } catch (EditableFieldException e) {
@@ -123,12 +122,13 @@ public class JavaFXSaveDialog {
                 }
                 case FILEFIELD: {
                     TextField textField = new TextField();
+                    textField.setPromptText("Click to upload image file");
                     //on file change
                     checkRegex(textField, editableEntity);
                     textField.setOnMouseClicked(event -> {
                         FileChooser fileChooser = new FileChooser();
                         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image file", "*.png", "*.jpg", "*.jpeg"));
-                        File selectedFile = fileChooser.showOpenDialog(null);
+                        File selectedFile = fileChooser.showOpenDialog(stage);
                         if (selectedFile != null) {
                             try {
                                 byte[] bytes = IOUtils.readFile(selectedFile);

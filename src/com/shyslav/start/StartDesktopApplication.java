@@ -5,6 +5,7 @@ import com.shyslav.UserConnection;
 import com.shyslav.controller.admin.AdminController;
 import com.shyslav.utils.ISaveDialog;
 import com.shyslav.utils.JavaFXSaveDialog;
+import com.shyslav.utils.LazyImageDialog;
 import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.controller.cook.CookController;
 import com.shyslav.controller.employee.EmployeeController;
@@ -154,6 +155,15 @@ public class StartDesktopApplication extends Application {
      */
     public static void alertEnterDialog(String title, String message) throws IOException {
         new EnterDialogLoader(primaryStage, title, message);
+    }
+
+    /**
+     * Show image
+     *
+     * @param image image bytes array
+     */
+    public static void showImage(byte[] image) {
+        new LazyImageDialog(primaryStage, image);
     }
 
     /**
