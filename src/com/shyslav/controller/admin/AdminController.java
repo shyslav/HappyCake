@@ -24,7 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -52,8 +51,6 @@ public class AdminController {
     @FXML
     private TableColumn<News, String> ncTegs;
     @FXML
-    private TableColumn<News, String> ncImageView;
-    @FXML
     private TableColumn<News, Integer> ncID;
     @FXML
     public TextField newsSearchField;
@@ -66,8 +63,6 @@ public class AdminController {
     private TableColumn<Category, String> categoryName;
     @FXML
     private TableColumn<Category, String> categoryDescription;
-    @FXML
-    private TableColumn<Category, String> categoryImage;
     @FXML
     public TextField categorySearchField;
 
@@ -87,8 +82,6 @@ public class AdminController {
     @FXML
     private TableColumn<Dish, Double> dishPrice;
     @FXML
-    private TableColumn<Dish, String> dishImage;
-    @FXML
     private TableColumn<Dish, Bool> needCook;
     @FXML
     private TableColumn<Dish, String> dishSell;
@@ -107,8 +100,6 @@ public class AdminController {
     private TableColumn<Reservation, String> reservationClientPhone;
     @FXML
     private TableColumn<Reservation, Date> reservationDate;
-    @FXML
-    private TableColumn<Reservation, Time> reservationTime;
     @FXML
     private TableColumn<Reservation, String> reservationStatus;
     @FXML
@@ -170,7 +161,7 @@ public class AdminController {
         coordId.setCellValueFactory(new PropertyValueFactory<>("id"));
         coordAdrs.setCellValueFactory(new PropertyValueFactory<>("address"));
         coordPhone.setCellValueFactory(new PropertyValueFactory<>("mobilePhone"));
-        coordMail.setCellValueFactory(new PropertyValueFactory<>("cafeemail"));
+        coordMail.setCellValueFactory(new PropertyValueFactory<>("email"));
         cafeCoordinateTable.setItems(FXCollections.observableList(list));
     }
 
@@ -224,23 +215,23 @@ public class AdminController {
         ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
         ordDate.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
-        ordCompliteORnot.setCellValueFactory(new PropertyValueFactory<>("compliteOrNot"));
+        ordCompliteORnot.setCellValueFactory(new PropertyValueFactory<>("complite"));
         ordersTable.setItems(FXCollections.observableList(list));
     }
 
     //********OrdersList
     @FXML
-    private TableView ordersOrderTable;
+    private TableView orderDetailsTable;
     @FXML
-    private TableColumn<OrderDetails, Integer> ordlistId;
+    private TableColumn<OrderDetails, Integer> orderDetailsIDColumn;
     @FXML
-    private TableColumn<OrderDetails, Integer> ordlistOrdId;
+    private TableColumn<OrderDetails, Integer> orderDetailsOrderIdColumn;
     @FXML
-    private TableColumn<OrderDetails, String> ordlistDish;
+    private TableColumn<OrderDetails, String> orderDetailsDishIdColumn;
     @FXML
-    private TableColumn<OrderDetails, Integer> ordlistAmount;
+    private TableColumn<OrderDetails, Integer> orderDetailsAmountColumn;
     @FXML
-    private TableColumn<OrderDetails, Double> ordlistPrice;
+    private TableColumn<OrderDetails, Double> orderDetailsPriceColumn;
 
     /**
      * Initialize order details table
@@ -248,12 +239,12 @@ public class AdminController {
      * @param details order details
      */
     private void orderListInitialize(OrderDetailsList details) {
-        ordlistId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ordlistOrdId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
-        ordlistDish.setCellValueFactory(new PropertyValueFactory<>("dishName"));
-        ordlistAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        ordlistPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        ordersOrderTable.setItems(FXCollections.observableList(details));
+        orderDetailsIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        orderDetailsOrderIdColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+        orderDetailsDishIdColumn.setCellValueFactory(new PropertyValueFactory<>("dishID"));
+        orderDetailsAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        orderDetailsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        orderDetailsTable.setItems(FXCollections.observableList(details));
     }
 
     //**************Reports
@@ -504,14 +495,14 @@ public class AdminController {
      * This handler disable selected elements in other table in one tab in tabpane
      */
     private void OrderOrderListHandler() {
-        ordersOrderTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+        orderDetailsTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 ordersTable.getSelectionModel().clearSelection();
             }
         }));
         ordersTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                ordersOrderTable.getSelectionModel().clearSelection();
+                orderDetailsTable.getSelectionModel().clearSelection();
             }
         }));
     }
@@ -544,8 +535,8 @@ public class AdminController {
         lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         birthdayDay.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
-        empLogin.setCellValueFactory(new PropertyValueFactory<>("elogin"));
-        empPass.setCellValueFactory(new PropertyValueFactory<>("epassword"));
+        empLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+        empPass.setCellValueFactory(new PropertyValueFactory<>("password"));
         employeesTable.setItems(FXCollections.observableList(list));
     }
 
@@ -560,7 +551,6 @@ public class AdminController {
         ncDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         ncViews.setCellValueFactory(new PropertyValueFactory<>("view"));
         ncTegs.setCellValueFactory(new PropertyValueFactory<>("tags"));
-        ncImageView.setCellValueFactory(new PropertyValueFactory<>("imageLink"));
         newsTable.setItems(FXCollections.observableList(list));
     }
 
@@ -571,7 +561,6 @@ public class AdminController {
         categoryId.setCellValueFactory(new PropertyValueFactory<>("id"));
         categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        categoryImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         categoryTable.setItems(FXCollections.observableList(list));
     }
 
@@ -587,7 +576,6 @@ public class AdminController {
         dishDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         dishAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         dishPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        dishImage.setCellValueFactory(new PropertyValueFactory<>("image"));
         needCook.setCellValueFactory(new PropertyValueFactory<>("needCook"));
         dishSell.setCellValueFactory(new PropertyValueFactory<>("discount"));
         if (dishList != null) {
@@ -606,7 +594,7 @@ public class AdminController {
         reservationClientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         reservationClientPhone.setCellValueFactory(new PropertyValueFactory<>("clientPhone"));
         reservationDate.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
-        reservationStatus.setCellValueFactory(new PropertyValueFactory<>("confirmORnot"));
+        reservationStatus.setCellValueFactory(new PropertyValueFactory<>("confirm"));
         reservationAmountPeople.setCellValueFactory(new PropertyValueFactory<>("amountPeople"));
         reservationDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         reservationTable.setItems(FXCollections.observableList(list));
