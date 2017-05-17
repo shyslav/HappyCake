@@ -132,7 +132,7 @@ public class AdminController {
     private TableColumn<PreOrder, Integer> preOrderID;
     //**************************REPORTS TABS
     @FXML
-    private TableView repTable;
+    private TableView reportsTable;
     @FXML
     private TableColumn<Reports, Integer> repID;
     @FXML
@@ -176,7 +176,7 @@ public class AdminController {
 
     //******Employee tabs
     @FXML
-    private TableView tableEmployees;
+    private TableView employeesTable;
     @FXML
     private TableColumn<LocalEmployee, Integer> id;
     @FXML
@@ -200,7 +200,7 @@ public class AdminController {
 
     //*************Orders
     @FXML
-    private TableView OrdersTable;
+    private TableView ordersTable;
     @FXML
     private TableColumn<Order, Integer> ordID;
     @FXML
@@ -223,9 +223,9 @@ public class AdminController {
         ordID.setCellValueFactory(new PropertyValueFactory<>("id"));
         ordEmployeeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         orderFullPrice.setCellValueFactory(new PropertyValueFactory<>("fullPrice"));
-        ordDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+        ordDate.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
         ordCompliteORnot.setCellValueFactory(new PropertyValueFactory<>("compliteOrNot"));
-        OrdersTable.setItems(FXCollections.observableList(list));
+        ordersTable.setItems(FXCollections.observableList(list));
     }
 
     //********OrdersList
@@ -506,10 +506,10 @@ public class AdminController {
     private void OrderOrderListHandler() {
         ordersOrderTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                OrdersTable.getSelectionModel().clearSelection();
+                ordersTable.getSelectionModel().clearSelection();
             }
         }));
-        OrdersTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+        ordersTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 ordersOrderTable.getSelectionModel().clearSelection();
             }
@@ -543,10 +543,10 @@ public class AdminController {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        birthdayDay.setCellValueFactory(new PropertyValueFactory<>("birthdayDay"));
+        birthdayDay.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
         empLogin.setCellValueFactory(new PropertyValueFactory<>("elogin"));
         empPass.setCellValueFactory(new PropertyValueFactory<>("epassword"));
-        tableEmployees.setItems(FXCollections.observableList(list));
+        employeesTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -605,8 +605,7 @@ public class AdminController {
         reservationCafeID.setCellValueFactory(new PropertyValueFactory<>("cafeId"));
         reservationClientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         reservationClientPhone.setCellValueFactory(new PropertyValueFactory<>("clientPhone"));
-        reservationDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        reservationTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        reservationDate.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
         reservationStatus.setCellValueFactory(new PropertyValueFactory<>("confirmORnot"));
         reservationAmountPeople.setCellValueFactory(new PropertyValueFactory<>("amountPeople"));
         reservationDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -638,11 +637,11 @@ public class AdminController {
         repID.setCellValueFactory(new PropertyValueFactory<>("id"));
         repAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         repText.setCellValueFactory(new PropertyValueFactory<>("text"));
-        repDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        repDate.setCellValueFactory(new PropertyValueFactory<>("dateFromUnix"));
         repMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         repPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         repVision.setCellValueFactory(new PropertyValueFactory<>("vision"));
-        repTable.setItems(FXCollections.observableList(list));
+        reportsTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -665,7 +664,7 @@ public class AdminController {
      */
     public void mouseOrdersClick(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            Order ord = (Order) OrdersTable.getSelectionModel().getSelectedItem();
+            Order ord = (Order) ordersTable.getSelectionModel().getSelectedItem();
             orderListInitialize(ord.getOrderDetails());
         }
     }
@@ -1103,7 +1102,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
                     StartDesktopApplication.userEntity.getUserBean().getDishesList().removeById(dish.getId());
-                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
+                    dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить новость", Alert.AlertType.ERROR);
@@ -1125,7 +1124,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
-                preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(tmp.getId()));
+                preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -1169,7 +1168,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
                     StartDesktopApplication.userEntity.getUserBean().getPreOrderList().removeById(preOrder.getId());
-                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList().getByOrderID(preOrder.getReservationID()));
+                    preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить элемент предзаказа", Alert.AlertType.ERROR);
@@ -1337,13 +1336,13 @@ public class AdminController {
      * @param actionEvent income event
      */
     public void editEmployeeBtnClick(ActionEvent actionEvent) {
-        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
-            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
+        if (employeesTable.getSelectionModel().getSelectedItem() != null) {
+            Employees tmp = (Employees) employeesTable.getSelectionModel().getSelectedItem();
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
                 if (response.isSuccess()) {
                     StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
-                    tableEmployees.refresh();
+                    employeesTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
                 }
@@ -1359,9 +1358,9 @@ public class AdminController {
      * @param actionEvent income event
      */
     public void deleteEmployeeBtnClick(ActionEvent actionEvent) {
-        if (tableEmployees.getSelectionModel().getSelectedItem() != null) {
+        if (employeesTable.getSelectionModel().getSelectedItem() != null) {
             //get selected employee
-            Employees tmp = (Employees) tableEmployees.getSelectionModel().getSelectedItem();
+            Employees tmp = (Employees) employeesTable.getSelectionModel().getSelectedItem();
             //check if user try to delete himself
             if (tmp.getId() == StartDesktopApplication.userEntity.getEmp().getId()) {
                 LazyJavaFXAlert.alert("Ошибка", "Ошибка удаления", "Вы не моежете удалить самого себя", Alert.AlertType.ERROR);
@@ -1408,13 +1407,13 @@ public class AdminController {
      * @param actionEvent income event
      */
     public void editReviewBtnClick(ActionEvent actionEvent) {
-        if (repTable.getSelectionModel().getSelectedItem() != null) {
-            Reports tmp = (Reports) repTable.getSelectionModel().getSelectedItem();
+        if (reportsTable.getSelectionModel().getSelectedItem() != null) {
+            Reports tmp = (Reports) reportsTable.getSelectionModel().getSelectedItem();
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
                 if (response.isSuccess()) {
                     StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
-                    repTable.refresh();
+                    reportsTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
                 }
@@ -1430,8 +1429,8 @@ public class AdminController {
      * @param actionEvent income event
      */
     public void deleteReviewBtnClick(ActionEvent actionEvent) {
-        if (repTable.getSelectionModel().getSelectedItem() != null) {
-            Reports rep = (Reports) repTable.getSelectionModel().getSelectedItem();
+        if (reportsTable.getSelectionModel().getSelectedItem() != null) {
+            Reports rep = (Reports) reportsTable.getSelectionModel().getSelectedItem();
             if (LazyJavaFXAlert.confirmAlert("Удаление", "Вы уверены что хотите удалить запись?", "Действие не возратимо, запись будет удалена навсегда")) {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().deleteReports(rep.getId());
                 //check if server return success
