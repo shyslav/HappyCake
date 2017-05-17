@@ -107,14 +107,14 @@
                                 <Button mnemonicParsing="false" onAction="#editCategoryBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteCategoryBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="categorySearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                             <ToolBar GridPane.rowIndex="2">
                                 <Button mnemonicParsing="false" onAction="#addDishBtnClick" text="Add" />
                                 <Button mnemonicParsing="false" onAction="#editDishBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteDishBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="dishSearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                         </GridPane>
                     </AnchorPane>
@@ -136,7 +136,7 @@
                                 <Button mnemonicParsing="false" onAction="#editReservationBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteReservationBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="reservationSearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                             <TableView fx:id="preorderTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                                 <columns>
@@ -155,7 +155,6 @@
                                 <Button mnemonicParsing="false" onAction="#editPreOrderBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deletePreOrderBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                             <TableView fx:id="reservationTable" onMouseClicked="#mouseReservationClick" prefHeight="351.0" prefWidth="295.0" GridPane.rowIndex="1">
                                 <columnResizePolicy>
@@ -220,14 +219,14 @@
                                 <Button mnemonicParsing="false" onAction="#editCafeBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteCafeBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="cafeCoordinateSearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                             <ToolBar>
                                 <Button mnemonicParsing="false" onAction="#addEmployeeBtnClick" text="Add" />
                                 <Button mnemonicParsing="false" onAction="#editEmployeeBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteEmployeeBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="employeeSearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                         </GridPane>
                     </AnchorPane>
@@ -261,7 +260,7 @@
                                 <Button mnemonicParsing="false" onAction="#editReviewBtnClick" text="Edit" />
                                 <Button mnemonicParsing="false" onAction="#deleteReviewBtnClick" text="Delete" />
                                 <Pane HBox.hgrow="ALWAYS" />
-                                <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
+                                <TextField fx:id="reviewSearchField" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Search" />
                             </ToolBar>
                         </GridPane>
                     </AnchorPane>

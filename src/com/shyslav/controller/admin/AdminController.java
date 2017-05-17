@@ -36,27 +36,6 @@ import java.util.Date;
  */
 @SuppressWarnings("unused")
 public class AdminController {
-    //******Employee tabs
-    @FXML
-    private TableView tableEmployees;
-    @FXML
-    private TableColumn<LocalEmployee, Integer> id;
-    @FXML
-    private TableColumn<LocalEmployee, String> positionID;
-    @FXML
-    private TableColumn<LocalEmployee, String> cafeID;
-    @FXML
-    private TableColumn<LocalEmployee, String> name;
-    @FXML
-    private TableColumn<LocalEmployee, String> lastname;
-    @FXML
-    private TableColumn<LocalEmployee, String> address;
-    @FXML
-    private TableColumn<LocalEmployee, Date> birthdayDay;
-    @FXML
-    private TableColumn<LocalEmployee, String> empLogin;
-    @FXML
-    private TableColumn<LocalEmployee, String> empPass;
     //*******News tabs
     @FXML
     private TableView newsTable;
@@ -89,6 +68,9 @@ public class AdminController {
     private TableColumn<Category, String> categoryDescription;
     @FXML
     private TableColumn<Category, String> categoryImage;
+    @FXML
+    public TextField categorySearchField;
+
     //**********Dish tabs
     @FXML
     private TableView dishTable;
@@ -110,6 +92,8 @@ public class AdminController {
     private TableColumn<Dish, Bool> needCook;
     @FXML
     private TableColumn<Dish, String> dishSell;
+    @FXML
+    public TextField dishSearchField;
     //********************Reservation tabs
     @FXML
     private TableView reservationTable;
@@ -131,6 +115,8 @@ public class AdminController {
     private TableColumn<Reservation, Integer> reservationAmountPeople;
     @FXML
     private TableColumn<Reservation, String> reservationDescription;
+    @FXML
+    public TextField reservationSearchField;
     //**************************PREORDER TABS
     @FXML
     private TableView preorderTable;
@@ -161,6 +147,8 @@ public class AdminController {
     private TableColumn<Reports, String> repPhone;
     @FXML
     private TableColumn<Reports, String> repVision;
+    @FXML
+    public TextField reviewSearchField;
     //*******CafeCoordinate
     @FXML
     private TableView cafeCoordinateTable;
@@ -172,18 +160,43 @@ public class AdminController {
     private TableColumn<CafeCoordinate, String> coordPhone;
     @FXML
     private TableColumn<CafeCoordinate, String> coordMail;
+    @FXML
+    public TextField cafeCoordinateSearchField;
 
     /**
      * Initialize cafe coordinates table
      */
-    private void cafeCoordinateInitialize() {
-        CafeCoordinateList cl = StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList();
+    private void cafeCoordinateInitialize(CafeCoordinateList list) {
         coordId.setCellValueFactory(new PropertyValueFactory<>("id"));
         coordAdrs.setCellValueFactory(new PropertyValueFactory<>("address"));
         coordPhone.setCellValueFactory(new PropertyValueFactory<>("mobilePhone"));
         coordMail.setCellValueFactory(new PropertyValueFactory<>("cafeemail"));
-        cafeCoordinateTable.setItems(FXCollections.observableList(cl));
+        cafeCoordinateTable.setItems(FXCollections.observableList(list));
     }
+
+    //******Employee tabs
+    @FXML
+    private TableView tableEmployees;
+    @FXML
+    private TableColumn<LocalEmployee, Integer> id;
+    @FXML
+    private TableColumn<LocalEmployee, String> positionID;
+    @FXML
+    private TableColumn<LocalEmployee, String> cafeID;
+    @FXML
+    private TableColumn<LocalEmployee, String> name;
+    @FXML
+    private TableColumn<LocalEmployee, String> lastname;
+    @FXML
+    private TableColumn<LocalEmployee, String> address;
+    @FXML
+    private TableColumn<LocalEmployee, Date> birthdayDay;
+    @FXML
+    private TableColumn<LocalEmployee, String> empLogin;
+    @FXML
+    private TableColumn<LocalEmployee, String> empPass;
+    @FXML
+    public TextField employeeSearchField;
 
     //*************Orders
     @FXML
@@ -266,7 +279,7 @@ public class AdminController {
         labelPercent.setStyle("-fx-font: 24 arial;");
         labelPercent.setVisible(false);
         StartDesktopApplication.controllerMainItems.setBtnReinitializeAdmin(true);
-        ReInit();
+        initializeTableData();
         initializeSearchFields();
     }
 
@@ -274,10 +287,14 @@ public class AdminController {
      * Initialize search fields
      */
     private void initializeSearchFields() {
-        //news search field
+        //Search in news table
         newsSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
             NewsList resultList = new NewsList();
             NewsList newsList = StartDesktopApplication.userEntity.getUserBean().getNewsList();
+            if (newValue.isEmpty()) {
+                newsInitialize(newsList);
+                return;
+            }
             for (News news : newsList) {
                 if (news.getName().contains(newValue)) {
                     resultList.add(news);
@@ -288,6 +305,134 @@ public class AdminController {
                 }
             }
             newsInitialize(resultList);
+        });
+
+        //Search in category table
+        categorySearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            CategoriesList result = new CategoriesList();
+            CategoriesList categoriesList = StartDesktopApplication.userEntity.getUserBean().getCategoriesList();
+            if (newValue.isEmpty()) {
+                categoryInitialize(categoriesList);
+                return;
+            }
+            for (Category category : categoriesList) {
+                if (String.valueOf(category.getId()).equals(newValue)) {
+                    result.add(category);
+                } else if (category.getDescription().contains(newValue)) {
+                    result.add(category);
+                } else if (category.getName().contains(newValue)) {
+                    result.add(category);
+                }
+            }
+            categoryInitialize(result);
+        });
+
+        //Search in dish table
+        dishSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            DishesList result = new DishesList();
+            DishesList dishesList = StartDesktopApplication.userEntity.getUserBean().getDishesList();
+            if (newValue.isEmpty()) {
+                dishInitialize(dishesList);
+                return;
+            }
+            for (Dish dish : dishesList) {
+                if (String.valueOf(dish.getId()).equals(newValue)) {
+                    result.add(dish);
+                } else if (dish.getDescription().contains(newValue)) {
+                    result.add(dish);
+                } else if (dish.getName().contains(newValue)) {
+                    result.add(dish);
+                } else if (String.valueOf(dish.getCategoryId()).equals(newValue)) {
+                    result.add(dish);
+                } else if (String.valueOf(dish.getDiscount()).equals(newValue)) {
+                    result.add(dish);
+                }
+            }
+            dishInitialize(result);
+        });
+
+        //Reservation search
+        reservationSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            ReservationList result = new ReservationList();
+            ReservationList reservationList = StartDesktopApplication.userEntity.getUserBean().getReservationList();
+            if (newValue.isEmpty()) {
+                reservationInitialize(reservationList);
+                return;
+            }
+            for (Reservation reservation : reservationList) {
+                if (reservation.getClientName().contains(newValue)) {
+                    result.add(reservation);
+                } else if (reservation.getClientPhone().contains(newValue)) {
+                    result.add(reservation);
+                } else if (reservation.getDescription().contains(newValue)) {
+                    result.add(reservation);
+                }
+            }
+            reservationInitialize(result);
+        });
+
+        //Employees search
+        employeeSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            EmployeesList result = new EmployeesList();
+            EmployeesList employeesList = StartDesktopApplication.userEntity.getUserBean().getEmployeesList();
+            if (newValue.isEmpty()) {
+                employeeInitialize(employeesList);
+                return;
+            }
+            for (Employees employees : employeesList) {
+                if (employees.getAddress().contains(newValue)) {
+                    result.add(employees);
+                } else if (employees.getLastname().contains(newValue)) {
+                    result.add(employees);
+                } else if (employees.getLogin().contains(newValue)) {
+                    result.add(employees);
+                } else if (employees.getName().contains(newValue)) {
+                    result.add(employees);
+                }
+            }
+            employeeInitialize(result);
+        });
+
+        //Cafe coordinate search
+        cafeCoordinateSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            CafeCoordinateList result = new CafeCoordinateList();
+            CafeCoordinateList cafesList = StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList();
+            if (newValue.isEmpty()) {
+                cafeCoordinateInitialize(cafesList);
+                return;
+            }
+            for (CafeCoordinate cafeCoordinate : cafesList) {
+                if (cafeCoordinate.getAddress().contains(newValue)) {
+                    result.add(cafeCoordinate);
+                } else if (cafeCoordinate.getEmail().contains(newValue)) {
+                    result.add(cafeCoordinate);
+                } else if (cafeCoordinate.getMobilePhone().contains(newValue)) {
+                    result.add(cafeCoordinate);
+                }
+            }
+            cafeCoordinateInitialize(result);
+        });
+
+        //Reports search
+        reviewSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            ReportsList result = new ReportsList();
+            ReportsList reportsList = StartDesktopApplication.userEntity.getUserBean().getReportsList();
+            if (newValue.isEmpty()) {
+                reportsInitialize(reportsList);
+                return;
+            }
+            for (Reports reports : reportsList) {
+                if (reports.getAuthor().contains(newValue)) {
+                    result.add(reports);
+                } else if (reports.getMail().contains(newValue)) {
+                    result.add(reports);
+                } else if (reports.getPhone().contains(newValue)) {
+                    result.add(reports);
+                } else if (reports.getText().contains(newValue)) {
+                    result.add(reports);
+                }
+            }
+            reportsInitialize(result);
         });
     }
 
@@ -346,8 +491,7 @@ public class AdminController {
     /**
      * Initialize employee table
      */
-    private void employeeInitialize() {
-        EmployeesList el = StartDesktopApplication.userEntity.getUserBean().getEmployeesList();
+    private void employeeInitialize(EmployeesList list) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         positionID.setCellValueFactory(new PropertyValueFactory<>("positionID"));
         cafeID.setCellValueFactory(new PropertyValueFactory<>("cafeID"));
@@ -357,7 +501,7 @@ public class AdminController {
         birthdayDay.setCellValueFactory(new PropertyValueFactory<>("birthdayDay"));
         empLogin.setCellValueFactory(new PropertyValueFactory<>("elogin"));
         empPass.setCellValueFactory(new PropertyValueFactory<>("epassword"));
-        tableEmployees.setItems(FXCollections.observableList(el));
+        tableEmployees.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -378,13 +522,12 @@ public class AdminController {
     /**
      * Initialize category table
      */
-    private void categoryInitialize() {
-        CategoriesList cl = StartDesktopApplication.userEntity.getUserBean().getCategoriesList();
+    private void categoryInitialize(CategoriesList list) {
         categoryId.setCellValueFactory(new PropertyValueFactory<>("id"));
         categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         categoryImage.setCellValueFactory(new PropertyValueFactory<>("image"));
-        categoryTable.setItems(FXCollections.observableList(cl));
+        categoryTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -412,8 +555,7 @@ public class AdminController {
     /**
      * Initialize reservation table
      */
-    private void reservationInitialize() {
-        ReservationList rl = StartDesktopApplication.userEntity.getUserBean().getReservationList();
+    private void reservationInitialize(ReservationList list) {
         reservationID.setCellValueFactory(new PropertyValueFactory<>("id"));
         reservationCafeID.setCellValueFactory(new PropertyValueFactory<>("cafeId"));
         reservationClientName.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -423,7 +565,7 @@ public class AdminController {
         reservationStatus.setCellValueFactory(new PropertyValueFactory<>("confirmORnot"));
         reservationAmountPeople.setCellValueFactory(new PropertyValueFactory<>("amountPeople"));
         reservationDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        reservationTable.setItems(FXCollections.observableList(rl));
+        reservationTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -447,8 +589,7 @@ public class AdminController {
     /**
      * Initialize reports
      */
-    private void reportsInitialize() {
-        ReportsList rl = StartDesktopApplication.userEntity.getUserBean().getReportsList();
+    private void reportsInitialize(ReportsList list) {
         repID.setCellValueFactory(new PropertyValueFactory<>("id"));
         repAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         repText.setCellValueFactory(new PropertyValueFactory<>("text"));
@@ -456,7 +597,7 @@ public class AdminController {
         repMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         repPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         repVision.setCellValueFactory(new PropertyValueFactory<>("vision"));
-        repTable.setItems(FXCollections.observableList(rl));
+        repTable.setItems(FXCollections.observableList(list));
     }
 
     /**
@@ -507,15 +648,15 @@ public class AdminController {
     /**
      * Reinitialize all tables
      */
-    public void ReInit() {
-        employeeInitialize();
+    public void initializeTableData() {
+        employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
         newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
-        categoryInitialize();
-        dishInitialize(new DishesList());
-        reservationInitialize();
+        categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
+        dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList());
+        reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
         preorderInitialize(new PreOrderList());
-        reportsInitialize();
-        cafeCoordinateInitialize();
+        reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
+        cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
         CategoryDishHandler();
         reservationHandler();
         ordersInitialize();
@@ -790,7 +931,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
-                categoryInitialize();
+                categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -876,7 +1017,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove news
                     StartDesktopApplication.userEntity.getUserBean().getCategoriesList().removeById(category.getId());
-                    categoryInitialize();
+                    categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить категорию", Alert.AlertType.ERROR);
@@ -972,7 +1113,7 @@ public class AdminController {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить элемент предзаказа", Alert.AlertType.ERROR);
                 }
-                reservationInitialize();
+                reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
             }
         } else {
             alertNullValue();
@@ -990,7 +1131,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
-                reservationInitialize();
+                reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -1034,7 +1175,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
                     StartDesktopApplication.userEntity.getUserBean().getReservationList().removeById(res.getId());
-                    reservationInitialize();
+                    reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить резерв", Alert.AlertType.ERROR);
@@ -1056,7 +1197,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
-                cafeCoordinateInitialize();
+                cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -1100,7 +1241,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
                     StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList().removeById(tmp.getId());
-                    cafeCoordinateInitialize();
+                    cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить координаты кафе", Alert.AlertType.ERROR);
@@ -1122,7 +1263,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
-                employeeInitialize();
+                employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -1171,7 +1312,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
                     StartDesktopApplication.userEntity.getUserBean().getEmployeesList().removeById(tmp.getId());
-                    employeeInitialize();
+                    employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить сотрудника", Alert.AlertType.ERROR);
@@ -1193,7 +1334,7 @@ public class AdminController {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
             if (response.isSuccess()) {
                 StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
-                reportsInitialize();
+                reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
             } else {
                 LazyJavaFXAlert.systemError();
             }
@@ -1236,7 +1377,7 @@ public class AdminController {
                 if (response.getCode() == ErrorCodes.SUCCESS) {
                     //locally remove reservation
                     StartDesktopApplication.userEntity.getUserBean().getReportsList().removeById(rep.getId());
-                    reportsInitialize();
+                    reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
                 } else {
                     LazyJavaFXAlert.alert("Ошибка", response
                             .getMessageText(), "Невозможно удалить отзыв", Alert.AlertType.ERROR);

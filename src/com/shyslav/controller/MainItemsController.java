@@ -44,7 +44,7 @@ public class MainItemsController {
      * @param event income event
      */
     public void mouseEventReinitialize(Event event) {
-        StartDesktopApplication.controllerAdminItems.ReInit();
+        StartDesktopApplication.controllerAdminItems.initializeTableData();
     }
 
     /**
