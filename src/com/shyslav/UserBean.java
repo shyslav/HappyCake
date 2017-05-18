@@ -1,5 +1,6 @@
 package com.shyslav;
 
+import appmodels.IMTDataList;
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.actions.ClientActions;
 
@@ -91,6 +92,15 @@ public class UserBean {
         orderList = clientActions.selectOrders().getObject(OrderList.class);
 
         load = true;
+    }
+
+    /**
+     * Get imt data list
+     *
+     * @return list for imt algorithm
+     */
+    public IMTDataList getIMTDataList(int[] dishIDS) {
+        return clientActions.getDataForIMTAlgo(dishIDS).getObject(IMTDataList.class);
     }
 
     /**

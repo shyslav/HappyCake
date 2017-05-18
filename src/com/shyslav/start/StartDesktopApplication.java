@@ -2,15 +2,17 @@ package com.shyslav.start;
 
 import com.happycake.editablemodel.EditableFieldException;
 import com.shyslav.UserConnection;
+import com.shyslav.controller.MainItemsController;
 import com.shyslav.controller.admin.AdminController;
+import com.shyslav.controller.admin.IMTTableValues;
+import com.shyslav.controller.admin.IMTTableValuesList;
+import com.shyslav.controller.cook.CookController;
+import com.shyslav.controller.employee.EmployeeController;
+import com.shyslav.mysql.interfaces.DBEntity;
 import com.shyslav.utils.ISaveDialog;
 import com.shyslav.utils.JavaFXSaveDialog;
 import com.shyslav.utils.LazyImageDialog;
 import com.shyslav.utils.LazyJavaFXAlert;
-import com.shyslav.controller.cook.CookController;
-import com.shyslav.controller.employee.EmployeeController;
-import com.shyslav.controller.MainItemsController;
-import com.shyslav.mysql.interfaces.DBEntity;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import starter.IMTModalWindow;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -78,6 +81,28 @@ public class StartDesktopApplication extends Application {
                 System.exit(0);
             }
         });
+//        loadIMTForm();
+    }
+
+    /**
+     * Load imt form
+     *
+     * @throws IOException
+     */
+    public static void loadIMTForm(IMTTableValuesList tableValues) throws IOException {
+//        userEntity.login("admin", "admin");
+//        userEntity.getUserBean().waitLoad();
+        int[] dishIDS = new int[tableValues.size()];
+        int index = 0;
+        for (IMTTableValues tableValue : tableValues) {
+            dishIDS[index++] = tableValue.getDishID();
+        }
+        IMTTableValues imtTableValues = tableValues.get(0);
+        new IMTModalWindow(
+                primaryStage,
+                userEntity.getUserBean().getIMTDataList(dishIDS),
+                (int) imtTableValues.getStorageCost(),
+                (int) imtTableValues.getShippingCost());
     }
 
     /**

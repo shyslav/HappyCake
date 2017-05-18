@@ -25,6 +25,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -749,6 +750,9 @@ public class AdminController {
         //tab 6
         orderSearchFields.clear();
         orderDatePickerField.setValue(null);
+
+        //tab 7
+        initializeIMT();
 
         employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
         newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
@@ -1489,7 +1493,100 @@ public class AdminController {
         }
     }
 
-    public void showDishNames(ActionEvent actionEvent) {
+
+    //----IMT
+    public TextField IMTStorageCost;
+    public TextField IMTShippingCost;
+    public ChoiceBox IMTDishSelectBox;
+
+    //imt table
+    public TableView IMTTable;
+    public TableColumn imtDishIDColumn;
+    public TableColumn imtDishNameColumn;
+    public TableColumn imtStorageCostColumn;
+    public TableColumn imtShippingCostColumn;
+
+    /**
+     * Initialize imt tab
+     */
+    private void initializeIMT() {
+        initializeIMTTable();
+        initializeIMTDishChoiceBox();
+    }
+
+    /**
+     * Initialize imt table
+     */
+    private void initializeIMTTable() {
+        imtDishIDColumn.setCellValueFactory(new PropertyValueFactory<>("dishID"));
+        imtDishNameColumn.setCellValueFactory(new PropertyValueFactory<>("dishName"));
+        imtStorageCostColumn.setCellValueFactory(new PropertyValueFactory<>("storageCost"));
+        imtShippingCostColumn.setCellValueFactory(new PropertyValueFactory<>("shippingCost"));
+
+        // заполняем таблицу данными
+        IMTTable.setItems(FXCollections.observableList(new IMTTableValuesList()));
+    }
+
+    /**
+     * Initialize dish choose box
+     */
+    private void initializeIMTDishChoiceBox() {
+        IMTDishSelectBox.setItems(FXCollections.observableList(StartDesktopApplication.userEntity.getUserBean().getDishesList().getDishNames()));
+    }
+
+    /**
+     * On imt start button click
+     *
+     * @param mouseEvent income event
+     */
+    public void onIMTStartButtonClick(MouseEvent mouseEvent) {
+        if (IMTTable.getItems().size() == 0) {
+            LazyJavaFXAlert.alert("Ошибка", "Данные не вибранны", "Данные для анализа алгоритма не указаны", Alert.AlertType.ERROR);
+            return;
+        } else if (IMTTable.getItems().size() != 1) {
+            LazyJavaFXAlert.alert("Ошибка", "Укажите как минимум 3 блюда", null, Alert.AlertType.ERROR);
+            return;
+        }
+        try {
+            IMTTableValuesList list = new IMTTableValuesList();
+            ObservableList items = IMTTable.getItems();
+            for (Object item : items) {
+                list.add((IMTTableValues) item);
+            }
+            StartDesktopApplication.loadIMTForm(list);
+        } catch (IOException e) {
+            LazyJavaFXAlert.systemError();
+        }
+    }
+
+    /**
+     * On imt add button click
+     *
+     * @param mouseEvent income event
+     */
+    public void onIMTAddButtonClick(MouseEvent mouseEvent) {
+        if (IMTStorageCost.getText().isEmpty()) {
+            LazyJavaFXAlert.alert("Ошибка", "Ошибка добавления", "Затраты на хранения не могут быть нулевые", Alert.AlertType.ERROR);
+            return;
+        } else if (IMTShippingCost.getText().isEmpty()) {
+            LazyJavaFXAlert.alert("Ошибка", "Ошибка добавления", "Затраты на доставку не могут быть нулевые", Alert.AlertType.ERROR);
+            return;
+        } else if (IMTDishSelectBox.getValue() == null) {
+            LazyJavaFXAlert.alert("Ошибка", "Ошибка добавления", "Выберите блюдо", Alert.AlertType.ERROR);
+            return;
+        }
+        String value = (String) IMTDishSelectBox.getValue();
+        int dishID = DishesList.getSelectableMap().get(value);
+        Dish dish = StartDesktopApplication.userEntity.getUserBean().getDishesList().getByID(dishID);
+        IMTTable.getItems().add(
+                new IMTTableValues(dish.getId(),
+                        dish.getName(),
+                        Double.parseDouble(IMTStorageCost.getText()),
+                        Double.parseDouble(IMTShippingCost.getText())));
+
+        IMTDishSelectBox.setValue(null);
+        IMTStorageCost.clear();
+        IMTShippingCost.clear();
     }
 }
 
