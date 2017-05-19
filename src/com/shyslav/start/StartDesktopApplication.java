@@ -81,7 +81,6 @@ public class StartDesktopApplication extends Application {
                 System.exit(0);
             }
         });
-//        loadIMTForm();
     }
 
     /**
@@ -90,8 +89,6 @@ public class StartDesktopApplication extends Application {
      * @throws IOException
      */
     public static void loadIMTForm(IMTTableValuesList tableValues) throws IOException {
-//        userEntity.login("admin", "admin");
-//        userEntity.getUserBean().waitLoad();
         int[] dishIDS = new int[tableValues.size()];
         int index = 0;
         for (IMTTableValues tableValue : tableValues) {
