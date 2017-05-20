@@ -1668,7 +1668,9 @@ public class AdminController {
             LazyJavaFXAlert.alert("Ошибка", null, "Введите текст для отправки сообщения", Alert.AlertType.ERROR);
             return;
         }
-        StartDesktopApplication.userEntity.getUserBean().getClientActions().sendMessage((String) messengerRoleChoiceBox.getValue(), messengerText.getText());
+        StartDesktopApplication.userEntity.getUserBean().getClientActions().sendMessage(
+                messengerRoleChoiceBox.getValue().toString(),
+                messengerText.getText());
         messengerText.clear();
     }
 }

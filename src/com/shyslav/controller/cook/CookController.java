@@ -136,18 +136,16 @@ public class CookController {
      */
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.COOK) {
-                WebView source = (WebView) event.getSource();
-                int index = Integer.parseInt(source.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
+            WebView source = (WebView) event.getSource();
+            int index = Integer.parseInt(source.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
 
-                if (model.getQueue().size() > index) {
-                    if (LazyJavaFXAlert.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
-                        model.closeOrder(index);
-                        updateOrders();
-                    }
-                } else {
-                    LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
+            if (model.getQueue().size() > index) {
+                if (LazyJavaFXAlert.confirmAlert("Подтверждение закрытия", "Ваша зарплата не безгранична", "Вы точно выполнили этот заказ?")) {
+                    model.closeOrder(index);
+                    updateOrders();
                 }
+            } else {
+                LazyJavaFXAlert.alert("Ошибка действия", "Не возможно закрыть пустой заказ", null, Alert.AlertType.ERROR);
             }
         }
     }
