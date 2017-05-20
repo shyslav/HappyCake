@@ -10,6 +10,8 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -17,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
@@ -120,9 +123,21 @@ public class JavaFXSaveDialog {
                     });
                     break;
                 }
-                case FILEFIELD: {
+                case IMAGEFIELD: {
+                    VBox vBox = new VBox();
+
+                    //generate image
+                    final ImageView imageView = new ImageView();
+                    imageView.setFitWidth(rightColumn.getPrefWidth());
+                    imageView.setFitHeight(150);
+                    if (editableEntity.getValue() != null && editableEntity.getValue() instanceof byte[]) {
+                        imageView.setImage(initializeImageFromBytes((byte[]) editableEntity.getValue()));
+                    }
+                    vBox.getChildren().add(imageView);
+
                     TextField textField = new TextField();
                     textField.setPromptText("Click to upload image file");
+                    vBox.getChildren().add(textField);
                     //on file change
                     checkRegex(textField, editableEntity);
                     textField.setOnMouseClicked(event -> {
@@ -132,6 +147,7 @@ public class JavaFXSaveDialog {
                         if (selectedFile != null) {
                             try {
                                 byte[] bytes = IOUtils.readFile(selectedFile);
+                                imageView.setImage(initializeImageFromBytes(bytes));
                                 editableEntity.setValue(bytes);
                             } catch (IOException e) {
                                 log.error("Unable to read file bytes " + e.getMessage(), e);
@@ -140,7 +156,7 @@ public class JavaFXSaveDialog {
                         }
                         checkRegex(textField, editableEntity);
                     });
-                    gridPane.add(textField, columnIndex + 1, rowIndex);
+                    gridPane.add(vBox, columnIndex + 1, rowIndex);
                     break;
                 }
                 case NUMBERFIELD: {
@@ -273,5 +289,16 @@ public class JavaFXSaveDialog {
      */
     private void closeStage() {
         stage.close();
+    }
+
+    /**
+     * Generate image
+     *
+     * @param imageBytes image bytes
+     * @return dish image view
+     */
+    private Image initializeImageFromBytes(byte[] imageBytes) {
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
+        return new Image(bis);
     }
 }
