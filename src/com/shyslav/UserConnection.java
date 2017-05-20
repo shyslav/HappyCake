@@ -1,6 +1,7 @@
 package com.shyslav;
 
 import com.happycake.sitemodels.Employees;
+import com.happycake.sitemodels.HappyCakeNotifications;
 import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.controller.pinger.ClientUpdatesPinger;
@@ -49,7 +50,7 @@ public class UserConnection {
             this.employee = login.getObject(Employees.class);
             this.userBean = new UserBean(clientActions, employee);
             this.login = true;
-            this.pinger = new ClientUpdatesPinger(clientActions.getClient());
+            this.pinger = new ClientUpdatesPinger(clientActions);
             registerDefaultsPingerListeners();
             reload();
             return true;
@@ -61,14 +62,13 @@ public class UserConnection {
      * Register default listeners
      */
     private void registerDefaultsPingerListeners() {
-        pinger.addListener("messagetousers", (event) -> {
+        registerPingerListener(HappyCakeNotifications.MESSAGETOUSERS, (event) -> {
             Platform.runLater(() -> LazyJavaFXAlert.alert(
                     "Новое глобнальное сообщение",
                     null,
                     event.getContext(),
                     Alert.AlertType.INFORMATION)
             );
-
         });
     }
 
@@ -78,7 +78,7 @@ public class UserConnection {
      * @param name           url of listener
      * @param pingerListener listener
      */
-    public void registerPingerListener(String name, PingerListener pingerListener) {
+    public void registerPingerListener(HappyCakeNotifications name, PingerListener pingerListener) {
         //register default pinger
         pinger.addListener(name, pingerListener);
     }

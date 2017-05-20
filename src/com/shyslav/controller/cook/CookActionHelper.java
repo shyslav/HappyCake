@@ -1,14 +1,11 @@
 package com.shyslav.controller.cook;
 
-import com.happycake.sitemodels.HappyCakeRoles;
+import com.happycake.sitemodels.HappyCakeNotifications;
 import com.happycake.sitemodels.Order;
 import com.happycake.sitemodels.OrderList;
-import com.shyslav.controller.ServerClient;
-import com.shyslav.utils.LazyJavaFXAlert;
-import com.shyslav.defaults.HappyCakeRequest;
+import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;
-import javafx.scene.control.Alert;
 import org.apache.log4j.Logger;
 
 import javax.sound.sampled.AudioInputStream;
@@ -21,55 +18,41 @@ import java.util.ArrayList;
  */
 public class CookActionHelper {
     private static final Logger log = Logger.getLogger(CookActionHelper.class.getName());
-    public static boolean done = false;
-    private final ServerClient client;
+    private final ClientActions client;
     private final ArrayList<Order> queue;
     private final CookController cookController;
 
     public CookActionHelper(CookController cookController) {
-        this.client = StartDesktopApplication.userEntity.getUserBean().getClientActions().getClient();
+        this.client = StartDesktopApplication.userEntity.getUserBean().getClientActions();
         this.queue = new ArrayList<>();
         this.cookController = cookController;
-        updateDishThread();
+        registerOrderUpdatesNotification();
     }
 
     /**
      * Start dish thread
      */
-    private void updateDishThread() {
+    private void registerOrderUpdatesNotification() {
+        reloadOrders();
+        StartDesktopApplication.userEntity.registerPingerListener(HappyCakeNotifications.UPDATEORDERS, (event) -> reloadOrders());
+    }
+
+    /**
+     * Reload orders
+     */
+    private void reloadOrders() {
         HappyCakeResponse happyCakeResponse = StartDesktopApplication.userEntity.getUserBean().getClientActions().selectOrderForCook();
         if (happyCakeResponse.isSuccess()) {
             OrderList orderList = happyCakeResponse.getObject(OrderList.class);
             synchronized (queue) {
+                queue.clear();
                 queue.addAll(orderList);
+                cookController.updateOrders();
+                playSound();
             }
         } else {
             log.trace("Unable to get orders for cook");
             System.exit(0);
-        }
-
-        if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.COOK) {
-            Thread thread = new Thread(() -> {
-                while (!done) {
-                    HappyCakeResponse read = client.read();
-                    if (read.isSuccess()) {
-                        OrderList orderList = read.getObject(OrderList.class);
-                        if (orderList != null) {
-                            synchronized (queue) {
-                                queue.clear();
-                                queue.addAll(orderList);
-                                cookController.updateOrders();
-                            }
-                        }
-                        playSound();
-                    }
-                }
-            });
-            thread.setName("Cook thread");
-            thread.start();
-        } else {
-            LazyJavaFXAlert.alert("Предупреждение", "Это не ваш раздел но вы имеете доступ к нему",
-                    "Вам не будут приходить новые уведомления, Вы видите только текущую загруженость данного раздела.", Alert.AlertType.INFORMATION);
         }
     }
 
@@ -110,8 +93,7 @@ public class CookActionHelper {
             Order order = queue.get(index);
             order.setComplite(true);
             queue.remove(index);
-            HappyCakeRequest request = new HappyCakeRequest("addOrder", order);
-            client.write(request);
+            client.addOrder(order);
         }
     }
 }
