@@ -53,7 +53,7 @@ public class JavaFXSaveDialog {
     /**
      * Load grid pane by parsed object
      */
-    private void start() {
+    private void start() throws EditableFieldException {
         GridPane gridPane = new GridPane();
         //set element padding
         gridPane.setPadding(new Insets(5, 5, 5, 5));
@@ -186,6 +186,28 @@ public class JavaFXSaveDialog {
                     choiceBox.valueProperty().addListener(event -> {
                         Object value = choiceBox.getValue();
                         editableEntity.setValue(editableEntity.getSelectableMap().get(value.toString()));
+                        checkRegex(choiceBox, editableEntity);
+                    });
+                    gridPane.add(choiceBox, columnIndex + 1, rowIndex);
+                    break;
+                }
+                case ENUMTOSTRING: {
+                    ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(
+                            editableEntity.getEnumClassValues())
+                    );
+                    choiceBox.setMaxWidth(Double.MAX_VALUE);
+
+                    Object[] enumClassValues = editableEntity.getEnumClassValues();
+                    for (Object enumClassValue : enumClassValues) {
+                        if (enumClassValue.toString().equals(editableEntity.getValue())) {
+                            choiceBox.setValue(enumClassValue);
+                            break;
+                        }
+                    }
+                    checkRegex(choiceBox, editableEntity);
+                    choiceBox.valueProperty().addListener(event -> {
+                        Object value = choiceBox.getValue();
+                        editableEntity.setValue(value.toString());
                         checkRegex(choiceBox, editableEntity);
                     });
                     gridPane.add(choiceBox, columnIndex + 1, rowIndex);
