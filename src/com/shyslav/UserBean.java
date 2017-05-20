@@ -99,7 +99,7 @@ public class UserBean {
     /**
      * Reload news list
      */
-    public void reloadNews(RELOAD_TYPES reloadType) {
+    public void reloadByType(RELOAD_TYPES reloadType) {
         switch (reloadType) {
             case NEWS: {
                 newsList = clientActions.selectNews().getObject(NewsList.class);

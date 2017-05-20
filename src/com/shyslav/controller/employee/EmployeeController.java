@@ -1,9 +1,11 @@
 package com.shyslav.controller.employee;
 
 import com.happycake.sitemodels.*;
+import com.shyslav.UserBean;
 import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.start.StartDesktopApplication;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,6 +25,9 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.happycake.sitemodels.HappyCakeNotifications.UPDATE_CATEGORIES;
+import static com.happycake.sitemodels.HappyCakeNotifications.UPDATE_DISHES;
 
 @SuppressWarnings("unused")
 public class EmployeeController {
@@ -75,6 +80,11 @@ public class EmployeeController {
     private void initialize() {
         StartDesktopApplication.userEntity.getUserBean().waitLoad();
 
+        //reload dishes and categories list
+        StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CATEGORIES);
+        StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.DISHES);
+
+
         this.employees = StartDesktopApplication.userEntity.getEmp();
         CategoriesList categories = StartDesktopApplication.userEntity.getUserBean().getCategoriesList();
         this.dishesList = StartDesktopApplication.userEntity.getUserBean().getDishesList();
@@ -103,6 +113,45 @@ public class EmployeeController {
             btn.setOnAction(event -> reinitializeDishesList(category.getId()));
             categoriesButtonsVbox.getChildren().add(btn);
         }
+
+        initializePingerHandlers();
+    }
+
+    /**
+     * Initialize pinger handlers
+     */
+    private void initializePingerHandlers() {
+        //register update categories listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_CATEGORIES, (event) -> {
+            Platform.runLater(() -> {
+                boolean confirmAlert = LazyJavaFXAlert.confirmAlert(
+                        "Изменились категории",
+                        "Обновсить сейчас?",
+                        "Если вы сейчас осбуливаете клиента, нажмите Отмена. " +
+                                "Сразу после ослуживания нажмите кнопку Домой и зайдите обратно. " +
+                                "Тогда изменения вступят в силу"
+                );
+                if (confirmAlert) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CATEGORIES);
+                    initialize();
+                }
+            });
+        });
+        //register update dishes listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_DISHES, (event) -> {
+            Platform.runLater(() -> {
+                boolean confirmAlert = LazyJavaFXAlert.confirmAlert(
+                        "Изменились блюда",
+                        "Обновсить сейчас?",
+                        "Если вы сейчас осбуливаете клиента, нажмите Отмена. " +
+                                "Сразу после ослуживания нажмите кнопку Домой и зайдите обратно. " +
+                                "Тогда изменения вступят в силу");
+                if (confirmAlert) {
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.DISHES);
+                    initialize();
+                }
+            });
+        });
     }
 
     /**

@@ -304,47 +304,47 @@ public class AdminController {
     private void initializePingerHandlers() {
         //register update news listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_NEWS, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.NEWS);
             newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
         });
         //register update categories listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_CATEGORIES, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CATEGORIES);
             categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
         });
         //register update dishes listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_DISHES, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.DISHES);
             dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList());
         });
         //register update reservation listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_RESERVATION, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.RESERVATION);
             reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
         });
         //register update preorders listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_PREORDER, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.PREORDER);
             preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList());
         });
         //register update employees listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_EMPLOYEES, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.EMPLOYEES);
             employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
         });
         //register update reports listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_REPORTS, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.REPORTS);
             reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
         });
         //register update cafe coordinate listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_CAFECOORDINATE, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CAFECOORDINATE);
             cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
         });
         //register update orders listener
         StartDesktopApplication.userEntity.registerPingerListener(UPDATE_ORDERS, (event) -> {
-            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.ORDERS);
+            StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.ORDERS);
             ordersInitialize(StartDesktopApplication.userEntity.getUserBean().getOrderList());
         });
     }
@@ -1037,7 +1037,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(news, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addNews(news);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.NEWS);
                     newsTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1058,7 +1058,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(news, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addNews(news);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.NEWS);
                 newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1103,7 +1103,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(cat, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CATEGORIES);
                 categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1122,7 +1122,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(dish, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.DISHES);
                 dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList().getByCategoryId(dish.getCategoryId()));
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1142,7 +1142,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(cat, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCategories(cat);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CATEGORIES);
                     categoryTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1165,7 +1165,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(dish, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addDish(dish);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.DISHES);
                     dishTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1236,7 +1236,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(tmp, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.PREORDER);
                 preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1255,7 +1255,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addPreorder(tmp);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.PREORDER);
                     preorderTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1303,7 +1303,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(tmp, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.RESERVATION);
                 reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1322,7 +1322,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReservation(tmp);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.RESERVATION);
                     reservationTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1369,7 +1369,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(tmp, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CAFECOORDINATE);
                 cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1388,7 +1388,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addCafeCoordinate(tmp);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.CAFECOORDINATE);
                     cafeCoordinateTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1435,7 +1435,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(tmp, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.EMPLOYEES);
                 employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1454,7 +1454,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addEmployee(tmp);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.EMPLOYEES);
                     employeesTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
@@ -1506,7 +1506,7 @@ public class AdminController {
         StartDesktopApplication.openSaveDialog(tmp, () -> {
             HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
             if (response.isSuccess()) {
-                StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.REPORTS);
                 reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
             } else {
                 LazyJavaFXAlert.systemError();
@@ -1525,7 +1525,7 @@ public class AdminController {
             StartDesktopApplication.openSaveDialog(tmp, () -> {
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().addReports(tmp);
                 if (response.isSuccess()) {
-                    StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+                    StartDesktopApplication.userEntity.getUserBean().reloadByType(UserBean.RELOAD_TYPES.REPORTS);
                     reportsTable.refresh();
                 } else {
                     LazyJavaFXAlert.systemError();
