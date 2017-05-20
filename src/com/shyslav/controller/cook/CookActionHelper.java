@@ -1,5 +1,6 @@
 package com.shyslav.controller.cook;
 
+import com.happycake.sitemodels.HappyCakeRoles;
 import com.happycake.sitemodels.Order;
 import com.happycake.sitemodels.OrderList;
 import com.shyslav.controller.ServerClient;
@@ -47,7 +48,7 @@ public class CookActionHelper {
             System.exit(0);
         }
 
-        if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 3) {
+        if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.COOK) {
             Thread thread = new Thread(() -> {
                 while (!done) {
                     HappyCakeResponse read = client.read();

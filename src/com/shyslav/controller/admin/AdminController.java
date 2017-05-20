@@ -173,7 +173,7 @@ public class AdminController {
     @FXML
     private TableColumn<LocalEmployee, Integer> id;
     @FXML
-    private TableColumn<LocalEmployee, String> positionID;
+    private TableColumn<LocalEmployee, String> position;
     @FXML
     private TableColumn<LocalEmployee, String> cafeID;
     @FXML
@@ -546,7 +546,7 @@ public class AdminController {
      */
     private void employeeInitialize(EmployeesList list) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        positionID.setCellValueFactory(new PropertyValueFactory<>("positionID"));
+        position.setCellValueFactory(new PropertyValueFactory<>("position"));
         cafeID.setCellValueFactory(new PropertyValueFactory<>("cafeID"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         lastname.setCellValueFactory(new PropertyValueFactory<>("lastname"));

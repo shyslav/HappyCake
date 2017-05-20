@@ -16,7 +16,6 @@ public class UserBean {
         EMPLOYEES,
         REPORTS,
         CAFECOORDINATE,
-        POSITION,
         RESERVATION,
         ORDERS
     }
@@ -62,11 +61,6 @@ public class UserBean {
      */
     private CafeCoordinateList cafeCoordinatesList;
     /**
-     * Positions list
-     */
-    private PositionsList positionsList;
-
-    /**
      * Orders list
      */
     private OrderList orderList;
@@ -88,7 +82,6 @@ public class UserBean {
         employeesList = clientActions.selectEmployees().getObject(EmployeesList.class);
         reportsList = clientActions.selectReports().getObject(ReportsList.class);
         cafeCoordinatesList = clientActions.selectCafeCoordinate().getObject(CafeCoordinateList.class);
-        positionsList = clientActions.selectPositions().getObject(PositionsList.class);
         orderList = clientActions.selectOrders().getObject(OrderList.class);
 
         load = true;
@@ -134,10 +127,6 @@ public class UserBean {
             }
             case CATEGORIES: {
                 categoriesList = clientActions.selectCategories().getObject(CategoriesList.class);
-                break;
-            }
-            case POSITION: {
-                positionsList = clientActions.selectPositions().getObject(PositionsList.class);
                 break;
             }
             case CAFECOORDINATE: {
@@ -189,10 +178,6 @@ public class UserBean {
 
     public CafeCoordinateList getCafeCoordinatesList() {
         return cafeCoordinatesList;
-    }
-
-    public PositionsList getPositionsList() {
-        return positionsList;
     }
 
     public OrderList getOrderList() {

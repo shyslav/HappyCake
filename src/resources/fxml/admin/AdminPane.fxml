@@ -192,7 +192,7 @@
                                 </columnResizePolicy>
                                 <columns>
                                     <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="positionID" prefWidth="75.0" text="Position" />
+                                    <TableColumn fx:id="position" prefWidth="75.0" text="Position" />
                                     <TableColumn fx:id="cafeID" prefWidth="75.0" text="Cafe" />
                                     <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
                                     <TableColumn fx:id="lastname" prefWidth="75.0" text="LastName" />

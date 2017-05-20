@@ -1,6 +1,7 @@
 package com.shyslav.controller.cook;
 
 import com.happycake.sitemodels.DishesList;
+import com.happycake.sitemodels.HappyCakeRoles;
 import com.happycake.sitemodels.Order;
 import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.start.StartDesktopApplication;
@@ -135,7 +136,7 @@ public class CookController {
      */
     public void mouseClickedWeb(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 3) {
+            if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.COOK) {
                 WebView source = (WebView) event.getSource();
                 int index = Integer.parseInt(source.getId().replaceFirst(".*?(\\d+).*", "$1")) - 1;
 

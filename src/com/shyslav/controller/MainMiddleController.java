@@ -1,5 +1,6 @@
 package com.shyslav.controller;
 
+import com.happycake.sitemodels.HappyCakeRoles;
 import com.shyslav.utils.LazyJavaFXAlert;
 import com.shyslav.start.StartDesktopApplication;
 import javafx.event.Event;
@@ -34,7 +35,7 @@ public class MainMiddleController {
         ImageView mouseClicked = (ImageView) source;
         switch (mouseClicked.getId()) {
             case "imgAdmin":
-                if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 1) {
+                if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.ADMIN) {
                     StartDesktopApplication.chooseScreenAdmin();
                 } else {
                     LazyJavaFXAlert.ruleError();
@@ -44,8 +45,8 @@ public class MainMiddleController {
                 StartDesktopApplication.chooseScreenCook();
                 break;
             case "imgEmployee":
-                if (StartDesktopApplication.userEntity.getEmp().getPositionID() == 2
-                        || StartDesktopApplication.userEntity.getEmp().getPositionID() == 1) {
+                if (StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.EMPLOYEES
+                        || StartDesktopApplication.userEntity.getEmp().getPosition() == HappyCakeRoles.ADMIN) {
                     StartDesktopApplication.chooseScreenEmployee();
                 } else {
                     LazyJavaFXAlert.ruleError();
