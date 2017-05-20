@@ -382,8 +382,11 @@ public class EmployeeController {
                 Order order = purchaserOrder.generateOrder(employees.getId());
                 HappyCakeResponse response = StartDesktopApplication.userEntity.getUserBean().getClientActions().saveOrderWithDetails(order);
                 if (response.isSuccess()) {
-                    String msg = getMessage();
-                    LazyJavaFXAlert.alert(" Заказ принят ", null, msg, Alert.AlertType.INFORMATION);
+                    Order ord = response.getObject(Order.class);
+                    //generate html by order
+                    String html = ReceiptGenerator.generateReceipt(ord.getId(), purchaserOrder);
+                    //show receipt
+                    StartDesktopApplication.showWebView(html);
                     purchaserOrder.clear();
                     addToTree();
                     reinitializeDishesList(0);

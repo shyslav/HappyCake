@@ -12,10 +12,7 @@ import com.shyslav.controller.employee.EmployeeController;
 import com.shyslav.models.IMTRequest;
 import com.shyslav.models.IMTRequestList;
 import com.shyslav.mysql.interfaces.DBEntity;
-import com.shyslav.utils.ISaveDialog;
-import com.shyslav.utils.JavaFXSaveDialog;
-import com.shyslav.utils.LazyImageDialog;
-import com.shyslav.utils.LazyJavaFXAlert;
+import com.shyslav.utils.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -214,6 +211,15 @@ public class StartDesktopApplication extends Application {
      */
     public static void showImage(byte[] image) {
         new LazyImageDialog(primaryStage, image);
+    }
+
+    /**
+     * Show web view
+     *
+     * @param html html to web view
+     */
+    public static void showWebView(String html) {
+        new LazyWebViewDialog(primaryStage, html);
     }
 
     /**

@@ -75,4 +75,17 @@ public class PurchaseOrderList extends ArrayList<PurchaseOrder> {
         return order;
     }
 
+    /**
+     * List contains elements to cook
+     *
+     * @return true if contains
+     */
+    public boolean isNeedCook() {
+        for (PurchaseOrder order : this) {
+            if (order.getDish().isNeedCook()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
