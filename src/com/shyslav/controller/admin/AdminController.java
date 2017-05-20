@@ -1543,9 +1543,6 @@ public class AdminController {
         if (IMTTable.getItems().size() == 0) {
             LazyJavaFXAlert.alert("Ошибка", "Данные не вибранны", "Данные для анализа алгоритма не указаны", Alert.AlertType.ERROR);
             return;
-        } else if (IMTTable.getItems().size() != 1) {
-            LazyJavaFXAlert.alert("Ошибка", "Укажите как минимум 3 блюда", null, Alert.AlertType.ERROR);
-            return;
         }
         try {
             IMTTableValuesList list = new IMTTableValuesList();

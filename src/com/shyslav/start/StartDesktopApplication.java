@@ -1,5 +1,6 @@
 package com.shyslav.start;
 
+import appmodels.IMTDataList;
 import com.happycake.editablemodel.EditableFieldException;
 import com.shyslav.UserConnection;
 import com.shyslav.controller.MainItemsController;
@@ -8,6 +9,8 @@ import com.shyslav.controller.admin.IMTTableValues;
 import com.shyslav.controller.admin.IMTTableValuesList;
 import com.shyslav.controller.cook.CookController;
 import com.shyslav.controller.employee.EmployeeController;
+import com.shyslav.models.IMTRequest;
+import com.shyslav.models.IMTRequestList;
 import com.shyslav.mysql.interfaces.DBEntity;
 import com.shyslav.utils.ISaveDialog;
 import com.shyslav.utils.JavaFXSaveDialog;
@@ -89,17 +92,42 @@ public class StartDesktopApplication extends Application {
      * @throws IOException
      */
     public static void loadIMTForm(IMTTableValuesList tableValues) throws IOException {
-        int[] dishIDS = new int[tableValues.size()];
-        int index = 0;
+        int n = 7;
+        IMTRequestList imtRequest = new IMTRequestList();
+
         for (IMTTableValues tableValue : tableValues) {
-            dishIDS[index++] = tableValue.getDishID();
+            IMTRequest request = new IMTRequest();
+            request.setDishName(tableValue.getDishName());
+            request.setDishID(tableValue.getDishID());
+            request.setN(n);
+
+            //load storage cost
+            int[] valueH = new int[n];
+            for (int i = 0; i < n; i++) {
+                valueH[i] = (int) tableValue.getStorageCost();
+            }
+            request.setH(valueH);
+
+            //load shipping cost
+            int[] valueA = new int[n];
+            for (int i = 0; i < n; i++) {
+                valueA[i] = (int) tableValue.getShippingCost();
+            }
+            request.setA(valueA);
+
+            //load demand
+            IMTDataList imtDataList = userEntity.getUserBean().getIMTDataList(new int[]{tableValue.getDishID()});
+            int[] valueD = new int[n];
+            for (int i = 0; i < n; i++) {
+                if (imtDataList.size() > i) {
+                    valueD[i] = imtDataList.get(i).getCount();
+                }
+            }
+            request.setD(valueD);
+
+            imtRequest.add(request);
         }
-        IMTTableValues imtTableValues = tableValues.get(0);
-        new IMTModalWindow(
-                primaryStage,
-                userEntity.getUserBean().getIMTDataList(dishIDS),
-                (int) imtTableValues.getStorageCost(),
-                (int) imtTableValues.getShippingCost());
+        new IMTModalWindow(primaryStage, imtRequest);
     }
 
     /**
