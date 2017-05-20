@@ -32,6 +32,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import static com.happycake.sitemodels.HappyCakeNotifications.*;
+
 /**
  * @author Shyshkin Vladyslav on 28.03.2016.
  */
@@ -286,10 +288,65 @@ public class AdminController {
         categoryRightClickMenuInitialize();
         dishRightClickMenuInitialize();
 
+        //setup messenger tab
         ObservableList<Object> objects = FXCollections.observableArrayList(HappyCakeRoles.values());
         objects.add("ALL");
         messengerRoleChoiceBox.setItems(objects);
         messengerRoleChoiceBox.setValue("ALL");
+
+        //setup listeners
+        initializePingerHandlers();
+    }
+
+    /**
+     * Initialize pinger handlers
+     */
+    private void initializePingerHandlers() {
+        //register update news listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_NEWS, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.NEWS);
+            newsInitialize(StartDesktopApplication.userEntity.getUserBean().getNewsList());
+        });
+        //register update categories listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_CATEGORIES, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CATEGORIES);
+            categoryInitialize(StartDesktopApplication.userEntity.getUserBean().getCategoriesList());
+        });
+        //register update dishes listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_DISHES, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.DISHES);
+            dishInitialize(StartDesktopApplication.userEntity.getUserBean().getDishesList());
+        });
+        //register update reservation listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_RESERVATION, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.RESERVATION);
+            reservationInitialize(StartDesktopApplication.userEntity.getUserBean().getReservationList());
+        });
+        //register update preorders listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_PREORDER, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.PREORDER);
+            preorderInitialize(StartDesktopApplication.userEntity.getUserBean().getPreOrderList());
+        });
+        //register update employees listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_EMPLOYEES, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.EMPLOYEES);
+            employeeInitialize(StartDesktopApplication.userEntity.getUserBean().getEmployeesList());
+        });
+        //register update reports listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_REPORTS, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.REPORTS);
+            reportsInitialize(StartDesktopApplication.userEntity.getUserBean().getReportsList());
+        });
+        //register update cafe coordinate listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_CAFECOORDINATE, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.CAFECOORDINATE);
+            cafeCoordinateInitialize(StartDesktopApplication.userEntity.getUserBean().getCafeCoordinatesList());
+        });
+        //register update orders listener
+        StartDesktopApplication.userEntity.registerPingerListener(UPDATE_ORDERS, (event) -> {
+            StartDesktopApplication.userEntity.getUserBean().reloadNews(UserBean.RELOAD_TYPES.ORDERS);
+            ordersInitialize(StartDesktopApplication.userEntity.getUserBean().getOrderList());
+        });
     }
 
     /**
@@ -671,7 +728,7 @@ public class AdminController {
      * @param preOrderList prorders list
      */
     private void preorderInitialize(PreOrderList preOrderList) {
-        preOrderResID.setCellValueFactory(new PropertyValueFactory<>("reservID"));
+        preOrderResID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         preorderDishName.setCellValueFactory(new PropertyValueFactory<>("dishName"));
         preorderAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         preorderPrice.setCellValueFactory(new PropertyValueFactory<>("price"));

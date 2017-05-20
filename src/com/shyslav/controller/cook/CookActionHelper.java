@@ -34,7 +34,7 @@ public class CookActionHelper {
      */
     private void registerOrderUpdatesNotification() {
         reloadOrders();
-        StartDesktopApplication.userEntity.registerPingerListener(HappyCakeNotifications.UPDATEORDERS, (event) -> reloadOrders());
+        StartDesktopApplication.userEntity.registerPingerListener(HappyCakeNotifications.COOK_UPDATE_ORDERS, (event) -> reloadOrders());
     }
 
     /**

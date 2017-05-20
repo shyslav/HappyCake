@@ -62,7 +62,7 @@ public class UserConnection {
      * Register default listeners
      */
     private void registerDefaultsPingerListeners() {
-        registerPingerListener(HappyCakeNotifications.MESSAGETOUSERS, (event) -> {
+        registerPingerListener(HappyCakeNotifications.MESSAGE_TO_USERS, (event) -> {
             Platform.runLater(() -> LazyJavaFXAlert.alert(
                     "Новое глобнальное сообщение",
                     null,
