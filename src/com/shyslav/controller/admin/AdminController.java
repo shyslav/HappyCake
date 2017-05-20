@@ -263,6 +263,12 @@ public class AdminController {
     @FXML
     private DatePicker dataPickerEnd;
 
+    //******Messenger tab
+    @FXML
+    public TextArea messengerText;
+    @FXML
+    public ChoiceBox messengerRoleChoiceBox;
+
     /**
      * Date format
      */
@@ -279,6 +285,11 @@ public class AdminController {
         initializeSearchFields();
         categoryRightClickMenuInitialize();
         dishRightClickMenuInitialize();
+
+        ObservableList<Object> objects = FXCollections.observableArrayList(HappyCakeRoles.values());
+        objects.add("ALL");
+        messengerRoleChoiceBox.setItems(objects);
+        messengerRoleChoiceBox.setValue("ALL");
     }
 
     /**
@@ -1584,6 +1595,24 @@ public class AdminController {
         IMTDishSelectBox.setValue(null);
         IMTStorageCost.clear();
         IMTShippingCost.clear();
+    }
+
+    /**
+     * Send message button click
+     *
+     * @param actionEvent action event
+     */
+    public void sendMessageButtonClick(ActionEvent actionEvent) {
+        if (messengerRoleChoiceBox.getValue() == null) {
+            LazyJavaFXAlert.alert("Ошибка", null, "Выберите роль для отправки сообщения", Alert.AlertType.ERROR);
+            return;
+        }
+        if (messengerText.getText().isEmpty() || messengerText.getText().length() < 10) {
+            LazyJavaFXAlert.alert("Ошибка", null, "Введите текст для отправки сообщения", Alert.AlertType.ERROR);
+            return;
+        }
+        StartDesktopApplication.userEntity.getUserBean().getClientActions().sendMessage((String) messengerRoleChoiceBox.getValue(), messengerText.getText());
+        messengerText.clear();
     }
 }
 

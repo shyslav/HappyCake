@@ -15,6 +15,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -459,6 +460,14 @@
                                 </AnchorPane>
                             </GridPane>
                         </GridPane>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Messenger">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <TextArea fx:id="messengerText" layoutX="8.0" layoutY="38.0" prefHeight="231.0" prefWidth="578.0" wrapText="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
+                        <Button layoutX="507.0" layoutY="299.0" mnemonicParsing="false" onAction="#sendMessageButtonClick" text="Send message" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                        <Label layoutX="14.0" layoutY="14.0" text="Введите текст сообщения:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+                        <ChoiceBox fx:id="messengerRoleChoiceBox" layoutX="438.0" layoutY="5.0" prefHeight="27.0" prefWidth="250.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                     </AnchorPane>
                 </Tab>
             </TabPane>
