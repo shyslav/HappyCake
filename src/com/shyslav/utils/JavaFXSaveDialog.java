@@ -127,13 +127,26 @@ public class JavaFXSaveDialog {
                     VBox vBox = new VBox();
 
                     //generate image
+                    StackPane stackPane = new StackPane();
                     final ImageView imageView = new ImageView();
                     imageView.setFitWidth(rightColumn.getPrefWidth());
                     imageView.setFitHeight(150);
                     if (editableEntity.getValue() != null && editableEntity.getValue() instanceof byte[]) {
                         imageView.setImage(initializeImageFromBytes((byte[]) editableEntity.getValue()));
+                    } else {
+                        try {
+                            //load default image
+                            byte[] bytes = IOUtils.readFromStream(getClass().getResourceAsStream("/img/image_file.png"));
+                            imageView.setImage(initializeImageFromBytes(bytes));
+                            imageView.setFitHeight(50);
+                            imageView.setFitWidth(50);
+                        } catch (IOException e) {
+                            log.error("Unable to read resource " + e, e);
+                        }
                     }
-                    vBox.getChildren().add(imageView);
+                    //add image to center of vbox
+                    stackPane.getChildren().add(imageView);
+                    vBox.getChildren().add(stackPane);
 
                     TextField textField = new TextField();
                     textField.setPromptText("Click to upload image file");
