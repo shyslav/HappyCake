@@ -35,6 +35,7 @@ public class MainItemsController {
      * @throws IOException
      */
     public void homeButtonClick(ActionEvent actionEvent) throws IOException {
+        StartDesktopApplication.userEntity.unsubscribeAllPingerListeners();
         StartDesktopApplication.showMainItems();
     }
 

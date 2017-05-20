@@ -100,6 +100,14 @@ public class UserConnection {
         pinger.offPingerThread();
     }
 
+    /**
+     * Remove all listeners
+     */
+    public void unsubscribeAllPingerListeners() {
+        pinger.clearListeners();
+        registerDefaultsPingerListeners();
+    }
+
     public UserBean getUserBean() {
         return userBean;
     }
